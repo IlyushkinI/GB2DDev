@@ -1,4 +1,5 @@
-﻿using Tools;
+﻿using Profile.Helpers;
+using Tools;
 using UnityEngine;
 
 public class InputGameController : BaseController
@@ -9,7 +10,7 @@ public class InputGameController : BaseController
         _view.Init(leftMove, rightMove, car.Speed);
     }
 
-    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/StickControl"};
+    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = PathManager.SWIPE_CONTROL};
     private BaseInputView _view;
 
     private BaseInputView LoadView()

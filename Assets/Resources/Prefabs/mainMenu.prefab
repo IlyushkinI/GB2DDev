@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonStart: {fileID: 315532611085353152}
+  _trail: {fileID: 4487249306848272235, guid: cd1545e485a106045ad0258f9071f47f, type: 3}
 --- !u!1 &6888920513732523659
 GameObject:
   m_ObjectHideFlags: 0
