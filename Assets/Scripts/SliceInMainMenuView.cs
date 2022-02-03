@@ -9,7 +9,7 @@ public class SliceInMainMenuView : MonoBehaviour
 {
     [SerializeField] private TrailRenderer _trail;
 
-    private const float WIDTH_OF_TRAIL = 50f;
+    private const float WIDTH_OF_TRAIL = 30f;
     public void Initialize()
     {
         UpdateManager.SubscribeToUpdate(OnUpdate);
