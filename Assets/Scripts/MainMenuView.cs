@@ -12,6 +12,8 @@ public class MainMenuView : MonoBehaviour
         _buttonStart.onClick.AddListener(startGame);
     }
 
+
+
     protected void OnDestroy()
     {
         _buttonStart.onClick.RemoveAllListeners();

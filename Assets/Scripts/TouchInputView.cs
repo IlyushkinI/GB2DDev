@@ -22,7 +22,7 @@ public class TouchInputView : BaseInputView
         {
             var touch = Input.GetTouch(0);
             var halfScreenWidth = Screen.width / 2f;
-
+            
             if (touch.phase == TouchPhase.Began)
             {
                 if (touch.position.x > halfScreenWidth)
