@@ -17,7 +17,7 @@ public class MainMenuController : BaseController
 
     private MainMenuView LoadView(Transform placeForUi)
     {
-        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
+        var objectView = Object.Instantiate(ResourceLoader<GameObject>.LoadPrefab(_viewPath), placeForUi, false);
         AddGameObjects(objectView);
         
         return objectView.GetComponent<MainMenuView>();

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public static class ResourceLoader
+public static class ResourceLoader<T> where T : Object
 {
-    public static GameObject LoadPrefab(ResourcePath path)
+    public static T LoadPrefab(ResourcePath path)
     {
-        return Resources.Load<GameObject>(path.PathResource);
+        return Resources.Load<T>(path.PathResource);
     }
 } 

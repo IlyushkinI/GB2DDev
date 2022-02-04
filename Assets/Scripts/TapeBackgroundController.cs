@@ -34,7 +34,7 @@ public class TapeBackgroundController : BaseController
 
     private TapeBackgroundView LoadView()
     {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
+        var objView = Object.Instantiate(ResourceLoader<GameObject>.LoadPrefab(_viewPath));
         AddGameObjects(objView);
         
         return objView.GetComponent<TapeBackgroundView>();

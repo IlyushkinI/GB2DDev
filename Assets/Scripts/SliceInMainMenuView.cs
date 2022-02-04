@@ -9,12 +9,17 @@ public class SliceInMainMenuView : MonoBehaviour
 {
     [SerializeField] private TrailRenderer _trail;
 
-    private const float WIDTH_OF_TRAIL = 30f;
+    private ResourcePath _path = new ResourcePath() { PathResource = "SliceParametresInMainMenu" };
+    private Vector3 _position;
+
     public void Initialize()
     {
         UpdateManager.SubscribeToUpdate(OnUpdate);
-        _trail.emitting = true;
-        _trail.startWidth = WIDTH_OF_TRAIL;
+        var dataSlice = ResourceLoader<ScriptableSlicer>.LoadPrefab(_path);
+        _trail.gameObject.transform.position = Camera.main.transform.position;
+        _position = _trail.gameObject.transform.position;
+        _trail.widthCurve = dataSlice.animationCurve;
+        _trail.time = dataSlice.time;
     }
 
     private void OnUpdate()
@@ -26,12 +31,14 @@ public class SliceInMainMenuView : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved)
             {
-                _trail.gameObject.transform.position = touch.position;
-                _trail.gameObject.SetActive(true);
+                var pos = Camera.main.ScreenToWorldPoint(touch.position);
+                _position.Set(pos.x, pos.y, 0);
+                _trail.gameObject.transform.position = _position;
+                _trail.enabled = true;
             }
-            if(touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended)
             {
-                _trail.gameObject.SetActive(false);
+                _trail.enabled = false;
             }
         }
     }
