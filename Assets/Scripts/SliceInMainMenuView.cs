@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using JoostenProductions;
 using Tools;
-using UnityEngine;
 
 public class SliceInMainMenuView : MonoBehaviour
 {
