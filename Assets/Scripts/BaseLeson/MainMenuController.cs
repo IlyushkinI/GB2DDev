@@ -19,6 +19,7 @@ public class MainMenuController : BaseController
         _ads = ads;
         _view = LoadView(placeForUi);
         _view.Init(StartGame);
+        _view.GetComponent<SliceInMainMenuView>().Initialize();
     }
 
     private MainMenuView LoadView(Transform placeForUi)
