@@ -27,7 +27,6 @@ public class SliceInMainMenuView : MonoBehaviour
         if (Input.touchCount > 0)
         {
             var touch = Input.GetTouch(0);
-            var halfScreenWidth = Screen.width / 2f;
 
             if (touch.phase == TouchPhase.Moved)
             {
