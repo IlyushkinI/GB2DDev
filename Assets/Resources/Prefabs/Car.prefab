@@ -91,8 +91,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5109029306926099540}
   - component: {fileID: 5778486962821058484}
-  - component: {fileID: 8284261109683692318}
   - component: {fileID: 7505918905754310465}
+  - component: {fileID: 3582476556197456204}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -166,18 +166,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8284261109683692318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7951267984111405525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29390b7e9f32f334ea9f7cd2e672464a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7505918905754310465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +176,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1d69a2a01d793e40b0ba2845c47710c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3582476556197456204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951267984111405525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257d10c630edce54f818502d7f7051bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8451805597918948043
