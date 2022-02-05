@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class ResourceLoader<T> where T : Object
+public static class ResourceLoader<T> where T: Object
 {
     public static T LoadPrefab(ResourcePath path)
     {
