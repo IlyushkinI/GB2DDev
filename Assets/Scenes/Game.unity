@@ -361,6 +361,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 693758133}
   _ads: {fileID: 1002511160}
+  _shopProducts:
+  - Id: Money
+    CurrentProductType: 0
 --- !u!1 &1165112438
 GameObject:
   m_ObjectHideFlags: 0

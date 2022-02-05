@@ -1,7 +1,7 @@
 ﻿using Tools;
 namespace Model.Shop
 {
-    internal interface IShop
+    public interface IShop
     {
         void Buy(string id);
         string GetCost(string productID);
