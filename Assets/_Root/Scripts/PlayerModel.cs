@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Game.Tools.Reactive;
 
 internal class PlayerModel
 {
-    public GameState GameState { get; set; }
-    public CarModel Car { get; set; }
+    public SubscriptionProperty<GameState> GameStatus { get; private set; }
+    public CarModel Car { get; private set; }
 
     public PlayerModel()
     {
-        GameState = GameState.None;
+        GameStatus = new SubscriptionProperty<GameState>();
+        GameStatus.Value = GameState.None;
         Car = new CarModel(5);
     }
 
