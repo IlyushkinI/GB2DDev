@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
+    [SerializeField]
+    private Transform placeForUI;
+
     private PlayerModel playerModel;
     private MainController mainController;
     void Start()
     {
         playerModel = new PlayerModel();
-        mainController = new MainController(playerModel);
+        playerModel.GameStatus.Value = GameState.Menu;
+        mainController = new MainController(playerModel, placeForUI);
     }
 
     private void OnDestroy()
     {
-        playerModel = null;
-        mainController.Dispose();
-        mainController = null;
+        mainController?.Dispose();
     }
 }
