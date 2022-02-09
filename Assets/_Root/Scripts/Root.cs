@@ -1,6 +1,4 @@
 ﻿using RaceMobile.Base;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Root : MonoBehaviour
@@ -8,11 +6,11 @@ public class Root : MonoBehaviour
     [SerializeField]
     private Transform placeForUI;
 
-    private PlayerModel playerModel;
+    private ProfilePlayer playerModel;
     private MainController mainController;
     void Start()
     {
-        playerModel = new PlayerModel();
+        playerModel = new ProfilePlayer();
         playerModel.GameStatus.Value = GameState.Menu;
         mainController = new MainController(playerModel, placeForUI);
     }

@@ -12,9 +12,11 @@ namespace RaceMobile.Background
         private readonly SubscriptionProperty<float> diff;
         private TapeBackgroundView view;
         private ResourcePath path = new ResourcePath() { PathResource = "Prefabs/background" };
+        private readonly float speed;
 
-        public TapeBackgroundController(IReadOnlySubscriptionProperty<float> left, IReadOnlySubscriptionProperty<float> right)
+        public TapeBackgroundController(IReadOnlySubscriptionProperty<float> left, IReadOnlySubscriptionProperty<float> right, float speed)
         {
+            this.speed = speed;
             view = LoadView();
             diff = new SubscriptionProperty<float>();
 
@@ -25,7 +27,7 @@ namespace RaceMobile.Background
             rightMove.SubscribeOnChange(Move);
 
             view.Init(diff);
-            
+
         }
 
         private TapeBackgroundView LoadView()
@@ -51,7 +53,7 @@ namespace RaceMobile.Background
 
         private void Move(float value)
         {
-            diff.Value = value;
+            diff.Value = value * speed;
         }
         
     }

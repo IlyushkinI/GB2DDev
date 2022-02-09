@@ -7,11 +7,11 @@ namespace RaceMobile.Menu
 {
     internal class MainMenuController  : BaseController
     {
-        private readonly PlayerModel playerModel;
+        private readonly ProfilePlayer playerModel;
         private readonly MainMenuView view;
         private readonly ResourcePath resourcePath = new ResourcePath() { PathResource = "Prefabs/MainMenu"};
 
-        public MainMenuController(Transform placeForUI, PlayerModel playerModel)
+        public MainMenuController(Transform placeForUI, ProfilePlayer playerModel)
         {
             this.playerModel = playerModel;
             view = LoadView(placeForUI);

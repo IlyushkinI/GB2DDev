@@ -3,7 +3,7 @@ using RaceMobile.Tools.Reactive;
 
 
 
-namespace RaceMobile.Input
+namespace RaceMobile.Inputs
 {
     internal abstract class BaseInputView : MonoBehaviour
     {

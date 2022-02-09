@@ -2,7 +2,8 @@
 using RaceMobile.Tools.Reactive;
 using RaceMobile.Background;
 using RaceMobile.Car;
-using RaceMobile.Input;
+using RaceMobile.Inputs;
+using RaceMobile;
 
 
 namespace RaceMobile
@@ -12,7 +13,7 @@ namespace RaceMobile
         private readonly SubscriptionProperty<float> leftMove;
         private readonly SubscriptionProperty<float> rightMove;
 
-        public GameController()
+        public GameController(ProfilePlayer profilePlayer)
         {
             leftMove = new SubscriptionProperty<float>();
             rightMove = new SubscriptionProperty<float>();
@@ -23,7 +24,7 @@ namespace RaceMobile
             CarController carController = new CarController();
             AddController(carController);
 
-            TapeBackgroundController tapeBackgroundController = new TapeBackgroundController(leftMove, rightMove);
+            TapeBackgroundController tapeBackgroundController = new TapeBackgroundController(leftMove, rightMove, profilePlayer.CurrentCar.Speed);
             AddController(tapeBackgroundController);
         }
     }

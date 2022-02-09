@@ -7,10 +7,10 @@ namespace RaceMobile.Base
     internal class MainController : BaseController
     {
         private readonly Transform placeForUI;
-        private readonly PlayerModel playerModel;
+        private readonly ProfilePlayer playerModel;
         private BaseController currentState;
 
-        public MainController(PlayerModel playerModel, Transform placeForUI)
+        public MainController(ProfilePlayer playerModel, Transform placeForUI)
         {
             this.placeForUI = placeForUI;
             this.playerModel = playerModel;
@@ -32,7 +32,7 @@ namespace RaceMobile.Base
                     break;
                 case GameState.Game:
                     currentState?.Dispose();
-                    currentState = new GameController();
+                    currentState = new GameController(playerModel);
                     AddController(currentState);
                     break;
                 default:

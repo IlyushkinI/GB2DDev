@@ -6,16 +6,18 @@ using UnityEngine;
 
 
 
-namespace RaceMobile.Input
+namespace RaceMobile.Inputs
 {
     internal sealed class InputController : BaseController
     {
-        private readonly ResourcePath path = new ResourcePath { PathResource = "Prefabs/Input" };
+        private readonly ResourcePath path = new ResourcePath { PathResource = "Prefabs/Inputs/JoysticMove" };
         private BaseInputView inputView;
 
         public InputController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove)
         {
+            inputView = LoadView();
             inputView.Init(leftMove, rightMove);
+
         }
 
         private BaseInputView LoadView()

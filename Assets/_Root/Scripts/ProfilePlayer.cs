@@ -1,16 +1,17 @@
 ﻿using RaceMobile.Car;
 using RaceMobile.Tools.Reactive;
 
-internal class PlayerModel
+
+internal class ProfilePlayer
 {
     public SubscriptionProperty<GameState> GameStatus { get; private set; }
-    public CarModel Car { get; private set; }
+    public CarModel CurrentCar { get; private set; }
 
-    public PlayerModel()
+    public ProfilePlayer()
     {
         GameStatus = new SubscriptionProperty<GameState>();
         GameStatus.Value = GameState.None;
-        Car = new CarModel(5);
+        CurrentCar = new CarModel(5);
     }
 
 }
