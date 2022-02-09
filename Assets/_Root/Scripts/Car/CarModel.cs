@@ -1,9 +1,12 @@
-﻿internal sealed class CarModel
+﻿namespace RaceMobile.Car
 {
-    public float Speed { get; set; }
-
-    public CarModel(float speed)
+    internal sealed class CarModel
     {
-        Speed = speed;
+        public float Speed { get; set; }
+
+        public CarModel(float speed)
+        {
+            Speed = speed;
+        }
     }
 }
