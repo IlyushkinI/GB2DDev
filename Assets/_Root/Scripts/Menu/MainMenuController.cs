@@ -9,7 +9,7 @@ namespace RaceMobile.Menu
     {
         private readonly PlayerModel playerModel;
         private readonly MainMenuView view;
-        private readonly ResourcePath resourcePath = new ResourcePath() { PathResource = "Prefabs/mainMenu"};
+        private readonly ResourcePath resourcePath = new ResourcePath() { PathResource = "Prefabs/MainMenu"};
 
         public MainMenuController(Transform placeForUI, PlayerModel playerModel)
         {

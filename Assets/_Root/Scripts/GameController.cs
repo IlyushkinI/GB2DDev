@@ -1,5 +1,7 @@
 ﻿using RaceMobile.Base;
 using RaceMobile.Tools.Reactive;
+using RaceMobile.Background;
+
 
 namespace RaceMobile
 {
@@ -12,17 +14,7 @@ namespace RaceMobile
         {
             //InputController
             //Car
-            BackgroundController backGroundController = new BackgroundController(leftMove, rightMove);
+            TapeBackgroundController backGroundController = new TapeBackgroundController(leftMove, rightMove);
         }
-    }
-
-    internal sealed class BackgroundController : BaseController
-    {
-        public BackgroundController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove)
-        {
-            
-
-        }
-
     }
 }
