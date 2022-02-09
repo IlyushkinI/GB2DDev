@@ -2,6 +2,7 @@
 using RaceMobile.Tools.Reactive;
 using RaceMobile.Background;
 using RaceMobile.Car;
+using RaceMobile.Input;
 
 
 namespace RaceMobile
@@ -15,7 +16,10 @@ namespace RaceMobile
         {
             leftMove = new SubscriptionProperty<float>();
             rightMove = new SubscriptionProperty<float>();
-            //InputController
+
+            InputController inputController = new InputController(leftMove, rightMove);
+            AddController(inputController);
+
             CarController carController = new CarController();
             AddController(carController);
 
