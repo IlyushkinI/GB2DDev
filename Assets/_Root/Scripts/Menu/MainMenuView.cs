@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-namespace Game.Menu
+namespace RaceMobile.Menu
 {
     internal sealed class MainMenuView : MonoBehaviour
     {

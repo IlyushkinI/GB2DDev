@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Game.Base
+namespace RaceMobile.Base
 {
     internal class BaseController : IDisposable
     {

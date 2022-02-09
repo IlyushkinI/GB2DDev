@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Tools.ResourceManagment
+namespace RaceMobile.Tools.ResourceManagment
 {
     internal static class ResourceLoader
     {

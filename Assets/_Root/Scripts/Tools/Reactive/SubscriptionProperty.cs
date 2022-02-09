@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Tools.Reactive
+namespace RaceMobile.Tools.Reactive
 {
     internal class SubscriptionProperty<T> : IReadOnlySubscriptionProperty<T>
     {

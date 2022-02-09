@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using Game.Base;
-using Game.Tools.ResourceManagment;
-using Game;
+using RaceMobile.Base;
+using RaceMobile.Tools.ResourceManagment;
+using RaceMobile;
 
-namespace Game.Menu
+namespace RaceMobile.Menu
 {
     internal class MainMenuController  : BaseController
     {
