@@ -12,6 +12,8 @@ namespace RaceMobile
 
         public GameController()
         {
+            leftMove = new SubscriptionProperty<float>();
+            rightMove = new SubscriptionProperty<float>();
             //InputController
             //Car
             TapeBackgroundController backGroundController = new TapeBackgroundController(leftMove, rightMove);
