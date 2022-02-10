@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using RaceMobile.Base;
 using RaceMobile.Tools.ResourceManagment;
-using RaceMobile;
+using RaceMobile.Tools.Ads;
 
 namespace RaceMobile.Menu
 {
     internal class MainMenuController  : BaseController
     {
-        private readonly ProfilePlayer playerModel;
+        private readonly ProfilePlayer profilePlayer;
         private readonly MainMenuView view;
         private readonly ResourcePath resourcePath = new ResourcePath() { PathResource = "Prefabs/MainMenu"};
+        private readonly IAdsShower adsShower;
 
-        public MainMenuController(Transform placeForUI, ProfilePlayer playerModel)
+        public MainMenuController(Transform placeForUI, ProfilePlayer playerModel, IAdsShower ads)
         {
-            this.playerModel = playerModel;
+            adsShower = ads;
+            this.profilePlayer = playerModel;
             view = LoadView(placeForUI);
             view.Init(StartGame);
+
         }
 
         private MainMenuView LoadView(Transform placeForUI)
@@ -29,7 +32,10 @@ namespace RaceMobile.Menu
 
         private void StartGame()
         {
-            playerModel.GameStatus.Value = GameState.Game;
+
+            profilePlayer.GameStatus.Value = GameState.Game;
+            adsShower.ShowInterstitial();
+
         }
 
     }

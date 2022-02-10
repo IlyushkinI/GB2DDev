@@ -1,6 +1,7 @@
 ﻿using RaceMobile.Menu;
 using System;
 using UnityEngine;
+using RaceMobile.Tools.Ads;
 
 namespace RaceMobile.Base
 {
@@ -8,14 +9,17 @@ namespace RaceMobile.Base
     {
         private readonly Transform placeForUI;
         private readonly ProfilePlayer profilePlayer;
+        private readonly IAdsShower ads;
         private BaseController currentState;
 
-        public MainController(ProfilePlayer playerModel, Transform placeForUI)
+        public MainController(ProfilePlayer playerModel, Transform placeForUI, IAdsShower ads)
         {
+            this.ads = ads;
             this.placeForUI = placeForUI;
             this.profilePlayer = playerModel;
             playerModel.GameStatus.SubscribeOnChange(OnGameStateChange);
             OnGameStateChange(playerModel.GameStatus.Value);
+
         }
 
         private void OnGameStateChange(GameState gameState)
@@ -27,7 +31,7 @@ namespace RaceMobile.Base
                     break;
                 case GameState.Menu:
                     currentState?.Dispose();
-                    currentState = new MainMenuController(placeForUI, profilePlayer);
+                    currentState = new MainMenuController(placeForUI, profilePlayer, ads);
                     AddController(currentState);
                     break;
                 case GameState.Game:

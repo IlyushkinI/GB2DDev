@@ -1,11 +1,15 @@
 ﻿using RaceMobile.Base;
 using UnityEngine;
 using RaceMobile.AnaliticsTools;
+using RaceMobile.Tools.Ads;
 
 public class Root : MonoBehaviour
 {
     [SerializeField]
     private Transform placeForUI;
+
+    [SerializeField]
+    private UnityAdsTools adsShower;
 
     private ProfilePlayer playerModel;
     private MainController mainController;
@@ -15,7 +19,7 @@ public class Root : MonoBehaviour
         analiticTools = new UnityAnaliticTools();
         playerModel = new ProfilePlayer(5, analiticTools);
         playerModel.GameStatus.Value = GameState.Menu;
-        mainController = new MainController(playerModel, placeForUI);
+        mainController = new MainController(playerModel, placeForUI, adsShower);
     }
 
     private void OnDestroy()
