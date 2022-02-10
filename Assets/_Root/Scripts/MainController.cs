@@ -7,13 +7,13 @@ namespace RaceMobile.Base
     internal class MainController : BaseController
     {
         private readonly Transform placeForUI;
-        private readonly ProfilePlayer playerModel;
+        private readonly ProfilePlayer profilePlayer;
         private BaseController currentState;
 
         public MainController(ProfilePlayer playerModel, Transform placeForUI)
         {
             this.placeForUI = placeForUI;
-            this.playerModel = playerModel;
+            this.profilePlayer = playerModel;
             playerModel.GameStatus.SubscribeOnChange(OnGameStateChange);
             OnGameStateChange(playerModel.GameStatus.Value);
         }
@@ -27,12 +27,13 @@ namespace RaceMobile.Base
                     break;
                 case GameState.Menu:
                     currentState?.Dispose();
-                    currentState = new MainMenuController(placeForUI, playerModel);
+                    currentState = new MainMenuController(placeForUI, profilePlayer);
                     AddController(currentState);
                     break;
                 case GameState.Game:
                     currentState?.Dispose();
-                    currentState = new GameController(playerModel);
+                    currentState = new GameController(profilePlayer);
+                    profilePlayer.analiticTools.SendMessage("StartGame");
                     AddController(currentState);
                     break;
                 default:
@@ -42,7 +43,7 @@ namespace RaceMobile.Base
 
         protected override void OnDispose()
         {
-            playerModel.GameStatus.UnsubscribeOnChange(OnGameStateChange);
+            profilePlayer.GameStatus.UnsubscribeOnChange(OnGameStateChange);
             base.OnDispose();
             
         }
