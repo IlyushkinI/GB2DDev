@@ -2,6 +2,7 @@
 using Profile;
 using Tools;
 using Tools.Ads;
+using UnityEngine;
 
 public class ProfilePlayer
 {
@@ -20,5 +21,7 @@ public class ProfilePlayer
     public SubscriptionProperty<GameState> CurrentState { get; }
 
     public Car CurrentCar { get; }
+
+    public Rigidbody2D RigidbodyCar { get; set; }
 }
 

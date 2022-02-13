@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UpgradeHandlerRepository : BaseController
 {
@@ -7,32 +8,33 @@ public class UpgradeHandlerRepository : BaseController
 
     private Dictionary<int, IUpgradeCarHandler> _upgradeItems = new Dictionary<int, IUpgradeCarHandler>();
 
-    public UpgradeHandlerRepository(IReadOnlyList<UpgradeItemConfig> configs)
+    public UpgradeHandlerRepository()
     {
-        PopulateItems(ref _upgradeItems, configs);
     }
 
-    private void PopulateItems(ref Dictionary<int, IUpgradeCarHandler> upgradeItems, IReadOnlyList<UpgradeItemConfig> configs)
+    public void PopulateItems(IReadOnlyList<UpgradeItemConfig> configs, ProfilePlayer car)
     {
         foreach (var config in configs)
         {
-            upgradeItems[config.Id] = CreateHandler(config);
+            if (config.IsEquiped)
+            {
+                _upgradeItems[config.Id] = CreateHandler(config, car);
+            }
+            
         }
     }
 
-    private IUpgradeCarHandler CreateHandler(UpgradeItemConfig config)
+    private IUpgradeCarHandler CreateHandler(UpgradeItemConfig config, ProfilePlayer car)
     {
         switch (config.UpgradeType)
         {
             case UpgradeType.None:
                 return UpgradeHandelrStub.Default;
-                break;
             case UpgradeType.Speed:
                 return new SpeedUpgradeHandler(config);
                 break;
             case UpgradeType.Control:
-                return UpgradeHandelrStub.Default;
-                break;
+                return new JumpUpgradeHandler(config, car);
             default:
                 throw new ArgumentOutOfRangeException();
         }
