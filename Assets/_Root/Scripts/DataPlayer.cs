@@ -7,14 +7,28 @@ internal abstract class DataPlayer
     private int countMoney;
     private int countHealth;
     private int countPower;
+    private int countCrime;
 
     private string titleData;
-    private List<IEnemy> enemies = new List<IEnemy>();
+    private List<IObserver> enemies = new List<IObserver>();
     public string TitleData => titleData; 
 
     protected DataPlayer(string titleData)
     {
         this.titleData = titleData;
+    }
+
+    public int CountCrime
+    {
+        get => countCrime;
+        set
+        {
+            if(countCrime != value)
+            {
+                countCrime = value;
+                Notify(DataType.Crime);
+            }
+        }
     }
 
     public int CountMoney 
@@ -55,17 +69,17 @@ internal abstract class DataPlayer
         }
     }
 
-    public void Attach(IEnemy enemy)
+    public void Attach(IObserver enemy)
     {
         enemies.Add(enemy);
     }
 
-    public void Detach(IEnemy enemy)
+    public void Detach(IObserver enemy)
     {
         enemies.Remove(enemy);
     }
 
-    private void Notify(DataType dataType)
+    public void Notify(DataType dataType)
     {
         foreach (var enemy in enemies)
         {
@@ -93,6 +107,14 @@ internal class Health : DataPlayer
 internal class Power : DataPlayer
 {
     public Power(string title) : base(title)
+    {
+
+    }
+}
+
+internal class Crime : DataPlayer
+{
+    public Crime(string title) : base(title)
     {
 
     }
