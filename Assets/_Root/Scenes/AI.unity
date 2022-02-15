@@ -1541,6 +1541,7 @@ GameObject:
   - component: {fileID: 1227262885}
   - component: {fileID: 1227262884}
   - component: {fileID: 1227262883}
+  - component: {fileID: 1227262887}
   m_Layer: 5
   m_Name: Main Window Canvas
   m_TagString: Untagged
@@ -1638,6 +1639,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1227262887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227262882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8269f7a609f3d544aee60dfcc78957b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMoneyText: {fileID: 593064132}
+  playerHealthText: {fileID: 1634943849}
+  playerPowerText: {fileID: 867201362}
+  enemyPowerText: {fileID: 1317173476}
+  addCoinButton: {fileID: 546940478}
+  minusCoinButton: {fileID: 306569750}
+  addHealthButton: {fileID: 2089413090}
+  minusHealthButton: {fileID: 1699136071}
+  addForceButton: {fileID: 197265624}
+  minusForceButton: {fileID: 1124881920}
+  fightButton: {fileID: 995836253}
 --- !u!1 &1317173474
 GameObject:
   m_ObjectHideFlags: 0

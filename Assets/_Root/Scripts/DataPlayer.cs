@@ -9,7 +9,7 @@ internal class DataPlayer
     private int countPower;
 
     private string titleData;
-    private List<IEnemy> enemies;
+    private List<IEnemy> enemies = new List<IEnemy>();
     public string TitleData { get => titleData; }
 
     public DataPlayer(string titleData)

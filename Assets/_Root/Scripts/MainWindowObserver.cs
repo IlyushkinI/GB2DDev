@@ -1,9 +1,8 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using System;
 
-public class MainWindow : MonoBehaviour
+public class MainWindowObserver : MonoBehaviour
 {
     [SerializeField] private TMP_Text playerMoneyText;
     [SerializeField] private TMP_Text playerHealthText;
@@ -52,8 +51,8 @@ public class MainWindow : MonoBehaviour
     private void Fight()
     {
         Debug.Log(allCountPowerPlayer >= enemy.Power
-            ? "<color = #07FF00>Win!!!</color>"
-            : "<color = #FF0000>Loose!!!</color>");
+            ? "<color=#07FF00>Win!!!</color>"
+            : "<color=#FF0000>Loose!!!</color>");
     }
 
     private void ChangeDataWindow(int countChangeData, DataType dataType)
@@ -75,6 +74,7 @@ public class MainWindow : MonoBehaviour
                 break;
         }
 
+        enemyPowerText.text = $"Count Force {enemy.Power}";
 
     }
 

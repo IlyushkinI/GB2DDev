@@ -41,7 +41,7 @@ internal class Enemy : IEnemy
     {
         get
         {
-            var kHealth = maxHealthPlayer > healthPlayer ? 100 : 10;
+            var kHealth = healthPlayer > maxHealthPlayer? 100 : 10;
             var power = (int)(moneyPlayer / kCoins + kHealth + powerPlayer / kPower);
 
             return power;
