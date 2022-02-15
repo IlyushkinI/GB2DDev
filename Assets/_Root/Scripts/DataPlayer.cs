@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class DataPlayer
+internal abstract class DataPlayer
 {
     private int countMoney;
     private int countHealth;
@@ -10,9 +10,9 @@ internal class DataPlayer
 
     private string titleData;
     private List<IEnemy> enemies = new List<IEnemy>();
-    public string TitleData { get => titleData; }
+    public string TitleData => titleData; 
 
-    public DataPlayer(string titleData)
+    protected DataPlayer(string titleData)
     {
         this.titleData = titleData;
     }
@@ -55,8 +55,6 @@ internal class DataPlayer
         }
     }
 
-
-
     public void Attach(IEnemy enemy)
     {
         enemies.Add(enemy);
@@ -73,5 +71,29 @@ internal class DataPlayer
         {
             enemy.Update(this, dataType);
         }
+    }
+}
+
+internal class Money : DataPlayer
+{
+    public Money(string title) : base(title)
+    {
+
+    }
+}
+
+internal class Health : DataPlayer
+{
+    public Health(string title) : base(title)
+    {
+
+    }
+}
+
+internal class Power : DataPlayer
+{
+    public Power(string title) : base(title)
+    {
+
     }
 }

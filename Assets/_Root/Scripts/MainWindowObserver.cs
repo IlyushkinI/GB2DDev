@@ -24,16 +24,24 @@ public class MainWindowObserver : MonoBehaviour
     private int allCountHealthPlayer;
     private int allCountPowerPlayer;
 
-    private DataPlayer dataPlayer;
+    private Power playerPower;
+    private Health playerHealth;
+    private Money playerMoney;
+
     private Enemy enemy;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        dataPlayer = new DataPlayer("data player");
+        playerHealth = new Health(nameof(Health));
+        playerMoney = new Money(nameof(Money));
+        playerPower = new Power(nameof(Power));
+
         enemy = new Enemy("Enemy Flappy");
-        dataPlayer.Attach(enemy);
+        playerMoney.Attach(enemy);
+        playerHealth.Attach(enemy);
+        playerPower.Attach(enemy);
 
         addCoinButton.onClick.AddListener(() => ChangeMoney(true));
         minusCoinButton.onClick.AddListener(() => ChangeMoney(false));
@@ -46,6 +54,22 @@ public class MainWindowObserver : MonoBehaviour
 
         fightButton.onClick.AddListener(Fight);
         
+    }
+
+    private void OnDestroy()
+    {
+        addCoinButton.onClick.RemoveAllListeners();
+        minusCoinButton.onClick.RemoveAllListeners();
+
+        addForceButton.onClick.RemoveAllListeners();
+        minusForceButton.onClick.RemoveAllListeners();
+
+        addHealthButton.onClick.RemoveAllListeners();
+        minusHealthButton.onClick.RemoveAllListeners();
+
+        playerMoney.Detach(enemy);
+        playerHealth.Detach(enemy);
+        playerPower.Detach(enemy);
     }
 
     private void Fight()
@@ -61,16 +85,16 @@ public class MainWindowObserver : MonoBehaviour
         {
             case DataType.Money:
                 playerMoneyText.text = $"Player Money {countChangeData.ToString()}";
-                dataPlayer.CountMoney = allCountMoneyPlayer;
+                playerMoney.CountMoney = allCountMoneyPlayer;
                 break;
 
             case DataType.Health:
                 playerHealthText.text = $"Player Health {countChangeData.ToString()}";
-                dataPlayer.CountHealth = countChangeData;
+                playerHealth.CountHealth = countChangeData;
                 break;
             case DataType.Power:
                 playerPowerText.text = $"Player Power {countChangeData.ToString()}";
-                dataPlayer.CountPower = countChangeData;
+                playerPower.CountPower = countChangeData;
                 break;
         }
 
