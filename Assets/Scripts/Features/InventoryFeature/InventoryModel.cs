@@ -1,24 +1,30 @@
 ﻿using System.Collections.Generic;
 
-public class InventoryModel : IInventoryModel
+public class InventoryModel : IInventoryModel//, IAbilityInventoryModel
 {
-    private readonly List<IItem> _items = new List<IItem>();
+    private readonly List<IItem> _quippedItems = new List<IItem>();
 
     public IReadOnlyList<IItem> GetEquippedItems()
     {
-        return _items;
+        return _quippedItems;
     }
 
     public void EquipItem(IItem item)
     {
-        if (_items.Contains(item))
+        if (_quippedItems.Contains(item))
             return;
 
-        _items.Add(item);
+        _quippedItems.Add(item);
     }
-
     public void UnEquipItem(IItem item)
     {
-        _items.Remove(item);
+        _quippedItems.Remove(item);
     }
 }
+
+//public interface IAbilityInventoryModel
+//{
+//     IReadOnlyList<AbilityItem> GetAbilities();
+//    void EquipAbility(AbilityItem ability);
+//    void UnEquipAbility(AbilityItem ability);
+//}

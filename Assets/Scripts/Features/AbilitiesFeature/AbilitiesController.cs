@@ -1,4 +1,5 @@
 ﻿using System;
+using Features.AbilitiesFeature;
 using JetBrains.Annotations;
 using Tools;
 
@@ -18,15 +19,14 @@ public class AbilitiesController : BaseController
         _abilityActivator = abilityActivator ?? throw new ArgumentNullException(nameof(abilityActivator));
         _inventoryModel = inventoryModel ?? throw new ArgumentNullException(nameof(inventoryModel));
         _abilityRepository = abilityRepository ?? throw new ArgumentNullException(nameof(abilityRepository));
-        _abilityCollectionView =
-            abilityCollectionView ?? throw new ArgumentNullException(nameof(abilityCollectionView));
+        _abilityCollectionView = abilityCollectionView ?? throw new ArgumentNullException(nameof(abilityCollectionView));
         _abilityCollectionView.UseRequested += OnAbilityUseRequested;
         _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
     }
 
-    private void OnAbilityUseRequested(object sender, IItem e)
+    private void OnAbilityUseRequested(object sender, AbilityItem e)
     {
-        if (_abilityRepository.Content.TryGetValue(e.Id, out var ability))
-            ability.Apply(_abilityActivator);
+        if (_abilityRepository.ItemsMapBuID.TryGetValue(e.ItemID, out var ability))
+            ability.Apply(_abilityActivator, (AbilitiesView) sender);
     }
 }

@@ -6,15 +6,20 @@ namespace Features.AbilitiesFeature
 {
     public class AbilitiesCollectionViewStub : IAbilityCollectionView
     {
-        public event EventHandler<IItem> UseRequested;
-        public void Display(IReadOnlyList<IItem> abilityItems)
+        public event EventHandler<AbilityItem> UseRequested;
+
+        public void Display(IReadOnlyList<IItem> items)
         {
-            foreach (var item in abilityItems)
+            foreach (var item in items)
             {
-                Debug.Log($"Equiped item : {item.Id}");
-                UseRequested?.Invoke(this, item);
+                var abilityProperty = item.GetItemProperty<AbilityItem>();
+                if (abilityProperty != null)
+                {
+                    Debug.Log($"Equiped item : {item.ItemID}");
+                    UseRequested?.Invoke(this, abilityProperty);
+                }
             }
-        }
+        }        
 
         public void Show()
         {
