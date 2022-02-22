@@ -36,7 +36,7 @@ namespace RaceMobile.Base
                     break;
                 case GameState.Game:
                     currentState?.Dispose();
-                    currentState = new GameController(profilePlayer);
+                    currentState = new GameController(profilePlayer, placeForUI);
                     profilePlayer.analiticTools.SendMessage("StartGame");
                     AddController(currentState);
                     break;

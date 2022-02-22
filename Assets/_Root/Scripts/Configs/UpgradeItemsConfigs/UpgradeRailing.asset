@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3d6826e81714b84381c1861c654e96b, type: 3}
-  m_Name: UpgradeItem
+  m_Name: UpgradeRailing
   m_EditorClassIdentifier: 
   itemConfig: {fileID: 0}
   upgradeType: 0
