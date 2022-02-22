@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace RaceMobile.Reward
@@ -8,10 +9,13 @@ namespace RaceMobile.Reward
         [SerializeField] private TMP_Text countSilver;
         [SerializeField] private TMP_Text countGold;
 
-        public void Init()
+        public void RefreshSilverUI(int count)
         {
-
+            countSilver.text = count.ToString();
         }
-
+        public void RefreshGoldUI(int count)
+        {
+            countGold.text = count.ToString();
+        }
     }
 }
