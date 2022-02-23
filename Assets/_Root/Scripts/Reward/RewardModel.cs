@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class RewardModel : MonoBehaviour
+namespace RaceMobile.Reward
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    internal class RewardModel
     {
-        
+        public int Count;
+        public Sprite Icon;
+        public RewardType RewardType;   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
