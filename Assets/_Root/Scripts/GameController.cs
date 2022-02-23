@@ -31,6 +31,9 @@ namespace RaceMobile
 
             CurrencyWindowController currencyWindow = new CurrencyWindowController(placeForUI);
             AddController(currencyWindow);
+
+            DailyRewardController dailyRewardController = new DailyRewardController(placeForUI);
+            AddController(dailyRewardController);
         }
     }
 }
