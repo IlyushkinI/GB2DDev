@@ -39,5 +39,7 @@ namespace RaceMobile.Reward
             AddGameObject(go);
             return go.GetComponent<CurrencyWindowView>();
         }
+
+
     }
 }

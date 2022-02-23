@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 992981200260944620}
   - component: {fileID: 3976470791767778694}
   - component: {fileID: 7003026601988981729}
+  - component: {fileID: -8689664455405019429}
   m_Layer: 0
   m_Name: DailiRewardWindow
   m_TagString: Untagged
@@ -209,6 +210,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-8689664455405019429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992981200260944621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae6d03686f03db40b50a8358a6c2d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RewardTimer: {fileID: 0}
+  GetRewardButton: {fileID: 0}
+  SlotsParent: {fileID: 0}
+  SlotPrefab: {fileID: 0}
 --- !u!1 &5373889429468031005
 GameObject:
   m_ObjectHideFlags: 0
