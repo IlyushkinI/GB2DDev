@@ -9,40 +9,27 @@ namespace RaceMobile.Reward
 {
     internal class CurrencyWindowController : BaseController
     {
+        private CurrencyWindowModel CurrencyWindowModel;
 
-        private readonly CurrencyWindowView currencyWindow;
+        private readonly CurrencyWindowView currencyWindowView;
         private readonly ResourcePath path = new ResourcePath() { PathResource = "Prefabs/Reward/CurrencyWindow" };
-
-        private const string SilverKey = nameof(SilverKey);
-        private const string GoldKey = nameof(GoldKey);
-
-        private int Silver
-        {
-            get => PlayerPrefs.GetInt(SilverKey);
-            set => PlayerPrefs.SetInt(SilverKey, value);
-        }
-
-        private int Gold
-        {
-            get => PlayerPrefs.GetInt(GoldKey);
-            set => PlayerPrefs.SetInt(GoldKey, value);
-        }
+      
 
         public void AddSilver(int count)
         {
-            Silver += count;
-            currencyWindow.RefreshSilverUI(Silver);
+            CurrencyWindowModel.Silver += count;
+            currencyWindowView.RefreshSilverUI(CurrencyWindowModel.Silver);
         }
 
         public void AddGold(int count)
         {
-            Gold += count;
-            currencyWindow.RefreshGoldUI(Gold);
+            CurrencyWindowModel.Gold += count;
+            currencyWindowView.RefreshGoldUI(CurrencyWindowModel.Gold);
         }
 
         public CurrencyWindowController(Transform placeForUI)
         {
-            currencyWindow = LoadView(placeForUI);
+            currencyWindowView = LoadView(placeForUI);
         }
 
         private CurrencyWindowView LoadView(Transform placeForUI)
