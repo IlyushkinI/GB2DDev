@@ -20,7 +20,18 @@ namespace RaceMobile.Reward
             this.placeForUI = placeForUI;
             dailyRewardView = LoadView();
 
+            SubscribeButton();
             InitSlots();
+        }
+
+        private void SubscribeButton()
+        {
+            dailyRewardView.GetRewardButton.onClick.AddListener(GetReward);
+        }
+
+        private void GetReward()
+        {
+            Dispose();
         }
 
         private void InitSlots()
@@ -32,7 +43,6 @@ namespace RaceMobile.Reward
                 var slotInstance = GameObject.Instantiate(dailyRewardView.SlotPrefab, dailyRewardView.SlotsParent, false);
                 slotInstance.SetData(reward, i + 1, false);
                 slotsForRewards.Add(slotInstance);
-
             }
         }
 
