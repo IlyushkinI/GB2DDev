@@ -3,34 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using RaceMobile.Base;
 using RaceMobile.Tools.ResourceManagment;
+using RaceMobile.Tools.Reactive;
 using System;
 
 namespace RaceMobile.Reward
 {
     internal class CurrencyWindowController : BaseController
     {
-        private CurrencyWindowModel CurrencyWindowModel;
+        private CurrencyModel currencyWindowModel;
+        private readonly ProfilePlayer profilePlayer;
 
         private readonly CurrencyWindowView currencyWindowView;
         private readonly ResourcePath path = new ResourcePath() { PathResource = "Prefabs/Reward/CurrencyWindow" };
       
+        public CurrencyWindowController(Transform placeForUI, ProfilePlayer profilePlayer)
+        {
+            this.profilePlayer = profilePlayer;
+            currencyWindowModel = profilePlayer.CurrencyModel;
+            currencyWindowView = LoadView(placeForUI);
+            profilePlayer.CurrencyModel.GoldUpdate += currencyWindowView.RefreshGoldUI;
+            profilePlayer.CurrencyModel.SilverUpdate += currencyWindowView.RefreshSilverUI;
+
+        }
+
+        protected override void OnDispose()
+        {
+            profilePlayer.CurrencyModel.SilverUpdate -= currencyWindowView.RefreshSilverUI;
+            profilePlayer.CurrencyModel.GoldUpdate -= currencyWindowView.RefreshGoldUI;
+
+                        
+        }
 
         public void AddSilver(int count)
         {
-            CurrencyWindowModel.Silver += count;
-            currencyWindowView.RefreshSilverUI(CurrencyWindowModel.Silver);
+            currencyWindowModel.Silver += count;
+            currencyWindowView.RefreshSilverUI(currencyWindowModel.Silver);
         }
 
         public void AddGold(int count)
         {
-            CurrencyWindowModel.Gold += count;
-            currencyWindowView.RefreshGoldUI(CurrencyWindowModel.Gold);
+           currencyWindowModel.Gold += count;
+           currencyWindowView.RefreshGoldUI(currencyWindowModel.Gold);
         }
 
-        public CurrencyWindowController(Transform placeForUI)
-        {
-            currencyWindowView = LoadView(placeForUI);
-        }
 
         private CurrencyWindowView LoadView(Transform placeForUI)
         {

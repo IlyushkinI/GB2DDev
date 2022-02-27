@@ -196,16 +196,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeCooldown: 86400
   TimeDeadline: 172800
-  rewards:
+  Rewards:
   - Count: 100
+    Icon: {fileID: 21300000, guid: 7e082cc2cf2a4433d85e388c6bf94234, type: 3}
+    RewardType: 1
+  - Count: 100
+    Icon: {fileID: 21300000, guid: 53831ffd2c1064d07b3fcc10982b1e0d, type: 3}
+    RewardType: 2
+  - Count: 200
     Icon: {fileID: 21300000, guid: 7e082cc2cf2a4433d85e388c6bf94234, type: 3}
     RewardType: 1
   - Count: 200
     Icon: {fileID: 21300000, guid: 53831ffd2c1064d07b3fcc10982b1e0d, type: 3}
     RewardType: 2
-  - Count: 500
-    Icon: {fileID: 21300000, guid: 7e082cc2cf2a4433d85e388c6bf94234, type: 3}
-    RewardType: 1
   RewardTimer: {fileID: 4825932835663948417}
   GetRewardButton: {fileID: 3226125022387205989}
   SlotsParent: {fileID: 8300984703735354099}

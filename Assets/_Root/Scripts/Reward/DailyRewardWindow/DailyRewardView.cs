@@ -14,7 +14,7 @@ namespace RaceMobile.Reward
         [Space]
 
         [Header("Reward Settings")]
-        [SerializeField] public List<RewardModel> rewards;
+        [SerializeField] public List<RewardModel> Rewards;
 
         [Space]
 

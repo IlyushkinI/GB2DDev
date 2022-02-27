@@ -1,6 +1,7 @@
 ﻿using RaceMobile.Car;
 using RaceMobile.Tools.Reactive;
 using RaceMobile.AnaliticsTools;
+using RaceMobile.Reward;
 
 
 internal class ProfilePlayer
@@ -9,6 +10,7 @@ internal class ProfilePlayer
     public CarModel CurrentCar { get; }
 
     public IAnaliticTools analiticTools { get; }
+    public CurrencyModel CurrencyModel { get; }
 
     public ProfilePlayer(float speed, IAnaliticTools analiticTools)
     {
@@ -16,7 +18,8 @@ internal class ProfilePlayer
         GameStatus.Value = GameState.None;
         CurrentCar = new CarModel(speed);
         this.analiticTools = analiticTools;
-        
+
+        CurrencyModel = new CurrencyModel();
 
     }
 

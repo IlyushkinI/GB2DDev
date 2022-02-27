@@ -19,6 +19,8 @@ namespace RaceMobile.Base
             if (isDisposed)
                 return;
 
+            OnDispose();
+
             isDisposed = true;
 
             foreach (var controller in controllers)
@@ -33,7 +35,7 @@ namespace RaceMobile.Base
             }
             gameObjects.Clear();
 
-            OnDispose();
+
 
         }
 
