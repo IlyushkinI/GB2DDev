@@ -21,6 +21,7 @@ namespace RaceMobile.Reward
         [Header("UI")]
         [SerializeField] public TMP_Text RewardTimer;
         [SerializeField] public Button GetRewardButton;
+        [SerializeField] public Button CloseWindowButton;
         [SerializeField] public Transform SlotsParent;
         [SerializeField] public SlotRewardView SlotPrefab;
 

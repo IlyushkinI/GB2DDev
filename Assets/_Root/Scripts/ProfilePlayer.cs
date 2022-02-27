@@ -11,6 +11,7 @@ internal class ProfilePlayer
 
     public IAnaliticTools analiticTools { get; }
     public CurrencyModel CurrencyModel { get; }
+    public DailyRewardModel dailyRewardModel { get; }
 
     public ProfilePlayer(float speed, IAnaliticTools analiticTools)
     {
@@ -18,6 +19,7 @@ internal class ProfilePlayer
         GameStatus.Value = GameState.None;
         CurrentCar = new CarModel(speed);
         this.analiticTools = analiticTools;
+        dailyRewardModel = new DailyRewardModel();
 
         CurrencyModel = new CurrencyModel();
 

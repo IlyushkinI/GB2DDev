@@ -20,9 +20,8 @@ namespace RaceMobile.Reward
             set
             {
                 PlayerPrefs.SetInt(SilverKey, value);
-                OnGoldUpdate(value);
+                OnSilverUpdate(value);
             }
-            
         }
 
         public int Gold
