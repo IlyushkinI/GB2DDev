@@ -13,7 +13,7 @@ namespace RaceMobile.Reward
             get => PlayerPrefs.GetInt(ActiveSlotKey);
             set => PlayerPrefs.SetInt(ActiveSlotKey, value);
         }
-        public DateTime? LastRewardTime //? Позволяет возвратить Null в структуре (nullable)
+        public DateTime? TimeGetReward //? Позволяет возвратить Null в структуре (nullable)
         {
             get 
             {

@@ -24,6 +24,12 @@ namespace RaceMobile.Reward
         [SerializeField] public Button CloseWindowButton;
         [SerializeField] public Transform SlotsParent;
         [SerializeField] public SlotRewardView SlotPrefab;
+        [SerializeField] public Slider TimeSlider;
+
+        private void Start()
+        {
+            TimeSlider.maxValue = TimeCooldown;
+        }
 
 
 

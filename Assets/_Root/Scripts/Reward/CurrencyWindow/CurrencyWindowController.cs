@@ -24,6 +24,9 @@ namespace RaceMobile.Reward
             profilePlayer.CurrencyModel.GoldUpdate += currencyWindowView.RefreshGoldUI;
             profilePlayer.CurrencyModel.SilverUpdate += currencyWindowView.RefreshSilverUI;
 
+            currencyWindowView.RefreshGoldUI(profilePlayer.CurrencyModel.Gold);
+            currencyWindowView.RefreshSilverUI(profilePlayer.CurrencyModel.Silver);
+
         }
 
         protected override void OnDispose()

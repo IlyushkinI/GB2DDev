@@ -33,7 +33,6 @@ namespace RaceMobile.Reward
             dailyRewardView.StartCoroutine(UpdateCoroutine());
             SubscribeButton();
 
-
         }
 
 
@@ -55,46 +54,60 @@ namespace RaceMobile.Reward
 
         private void RefreshRewardState()
         {
-            rewardReceived = false;
-            if (profilePlayer.dailyRewardModel.LastRewardTime.HasValue)
+            if (profilePlayer.dailyRewardModel.TimeGetReward.HasValue)
             {
-                var timeSpan = DateTime.UtcNow - profilePlayer.dailyRewardModel.LastRewardTime.Value;
+                var timeSpan = DateTime.UtcNow - dailyRewardModel.TimeGetReward.Value;
                 if(timeSpan.Seconds > dailyRewardView.TimeDeadline)
                 {
-                    profilePlayer.dailyRewardModel.LastRewardTime = null;
+                    profilePlayer.dailyRewardModel.TimeGetReward = null;
                     profilePlayer.dailyRewardModel.CurrentActiveSlot = 0;
-                }
-                else if(timeSpan.Seconds < dailyRewardView.TimeCooldown)
-                {
-                    rewardReceived = true;
                 }
             }
         }
+
+        private bool IsRewardReady()
+        {
+            if (!dailyRewardModel.TimeGetReward.HasValue)
+                return true;
+            var time = (DateTime.UtcNow - dailyRewardModel.TimeGetReward.Value).TotalSeconds;
+             bool b = (DateTime.UtcNow - dailyRewardModel.TimeGetReward.Value).TotalSeconds > dailyRewardView.TimeCooldown;
+            return b;
+        }
+
 
         private void RefreshUI()
         {
-            dailyRewardView.GetRewardButton.interactable = !rewardReceived;
+            dailyRewardView.GetRewardButton.interactable = IsRewardReady(); ;
 
             for (int i = 0; i < dailyRewardView.Rewards.Count; i++)
             {
-                slotsForRewards[i].SetData(dailyRewardView.Rewards[i], i + 1, i <= profilePlayer.dailyRewardModel.CurrentActiveSlot);
+                slotsForRewards[i].SetData(dailyRewardView.Rewards[i], i + 1, i == dailyRewardModel.CurrentActiveSlot);
             }
 
-            DateTime nextDailyBonusTime =
-                !dailyRewardModel.LastRewardTime.HasValue
-                ? DateTime.MinValue
-                : dailyRewardModel.LastRewardTime.Value.AddSeconds(dailyRewardView.TimeCooldown);
-            var delta = nextDailyBonusTime - DateTime.UtcNow;
-            if (delta.TotalSeconds < 0)
-                delta = new TimeSpan(0);
-            dailyRewardView.RewardTimer.text = delta.ToString();
+            if (IsRewardReady())
+            {
+                dailyRewardView.RewardTimer.text = "Reward is ready";
+            }
+            else
+            {
+                if (dailyRewardModel.TimeGetReward.HasValue)
+                {
+                    var nextClaimTime = dailyRewardModel.TimeGetReward.Value.AddSeconds(dailyRewardView.TimeCooldown);
+                    var timeNow = DateTime.UtcNow;
+                    var timeLeft = nextClaimTime - timeNow;
+                    var timeText = $"{timeLeft.Days:D2}:{timeLeft.Hours:D2}:{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
+                    dailyRewardView.TimeSlider.value = dailyRewardView.TimeCooldown - (float)timeLeft.TotalSeconds;
 
-
+                    dailyRewardView.RewardTimer.text = timeText.ToString();
+                }
+                
+            }
+            
         }
 
-        private void ClaimReward()
+        private void GetReward()
         {
-            if (rewardReceived)
+            if (!IsRewardReady())
                 return;
             var reward = dailyRewardView.Rewards[profilePlayer.dailyRewardModel.CurrentActiveSlot];
             switch (reward.RewardType)
@@ -111,7 +124,7 @@ namespace RaceMobile.Reward
                     throw new ArgumentOutOfRangeException();
             }
 
-            profilePlayer.dailyRewardModel.LastRewardTime = DateTime.UtcNow;
+            profilePlayer.dailyRewardModel.TimeGetReward = DateTime.UtcNow;
             profilePlayer.dailyRewardModel.CurrentActiveSlot = (profilePlayer.dailyRewardModel.CurrentActiveSlot + 1) % dailyRewardView.Rewards.Count;
             RefreshRewardState();
 
@@ -127,7 +140,7 @@ namespace RaceMobile.Reward
 
         private void SubscribeButton()
         {
-            dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
+            dailyRewardView.GetRewardButton.onClick.AddListener(GetReward);
             dailyRewardView.CloseWindowButton.onClick.AddListener(CloseWindow);
         }
 
