@@ -22,6 +22,7 @@ namespace RaceMobile.Reward
 
         private bool rewardReceived;
 
+        private Sequence activeSecuence;
         private RectTransform windowsContainer;
         private float duration = 2f;
 
@@ -43,16 +44,18 @@ namespace RaceMobile.Reward
 
         private void Show()
         {
+            activeSecuence?.Complete();
             windowsContainer.localScale = Vector3.zero;
-            var seq = DOTween.Sequence();
-            seq.Append(windowsContainer.DOScale(Vector3.one, duration));
+            activeSecuence = DOTween.Sequence();
+            activeSecuence.Append(windowsContainer.DOScale(Vector3.one, duration));
         }
 
         private void Hide()
         {
-            var seq = DOTween.Sequence();
-            seq.Append(windowsContainer.DOScale(Vector3.zero, duration));
-            seq.OnComplete(() => Dispose());
+            activeSecuence?.Complete();
+            activeSecuence = DOTween.Sequence();
+            activeSecuence.Append(windowsContainer.DOScale(Vector3.zero, duration/2f));
+            activeSecuence.OnComplete(() => Dispose());
         }
 
         private IEnumerator UpdateCoroutine()
@@ -147,7 +150,8 @@ namespace RaceMobile.Reward
             profilePlayer.dailyRewardModel.CurrentActiveSlot = (profilePlayer.dailyRewardModel.CurrentActiveSlot + 1) % dailyRewardView.Rewards.Count;
             RefreshRewardState();
 
-            Dispose();
+            Hide();
+            //Dispose();
         }
 
         private void CloseWindow()
