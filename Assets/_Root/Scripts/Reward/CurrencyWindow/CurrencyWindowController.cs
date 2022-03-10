@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 using RaceMobile.Base;
 using RaceMobile.Tools.ResourceManagment;
-using RaceMobile.Tools.Reactive;
-using System;
+
 
 namespace RaceMobile.Reward
 {
@@ -15,6 +13,8 @@ namespace RaceMobile.Reward
 
         private readonly CurrencyWindowView currencyWindowView;
         private readonly ResourcePath path = new ResourcePath() { PathResource = "Prefabs/Reward/CurrencyWindow" };
+
+        private RectTransform rectTransform;
       
         public CurrencyWindowController(Transform placeForUI, ProfilePlayer profilePlayer)
         {
@@ -27,6 +27,13 @@ namespace RaceMobile.Reward
             currencyWindowView.RefreshGoldUI(profilePlayer.CurrencyModel.Gold);
             currencyWindowView.RefreshSilverUI(profilePlayer.CurrencyModel.Silver);
 
+            DoTweening();
+
+        }
+
+        private void DoTweening()
+        {
+            (currencyWindowView.transform as RectTransform).DOShakeRotation(2, 5 * Vector3.forward);
         }
 
         protected override void OnDispose()
