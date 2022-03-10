@@ -1,4 +1,5 @@
-﻿using RaceMobile.Base;
+﻿using DG.Tweening;
+using RaceMobile.Base;
 using RaceMobile.Reward;
 using RaceMobile.Tools.ResourceManagment;
 using System;
@@ -21,12 +22,17 @@ namespace RaceMobile.Reward
 
         private bool rewardReceived;
 
+        private RectTransform windowsContainer;
+        private float duration = 2f;
+
         public DailyRewardController(Transform placeForUI, ProfilePlayer profilePlayer)
         {
             this.profilePlayer = profilePlayer;
             this.placeForUI = placeForUI;
             dailyRewardView = LoadView();
             dailyRewardModel = profilePlayer.dailyRewardModel;
+            windowsContainer = dailyRewardView.GetComponent<RectTransform>();
+            Show();
 
             InitSlots();
             RefreshUI();
@@ -35,6 +41,19 @@ namespace RaceMobile.Reward
 
         }
 
+        private void Show()
+        {
+            windowsContainer.localScale = Vector3.zero;
+            var seq = DOTween.Sequence();
+            seq.Append(windowsContainer.DOScale(Vector3.one, duration));
+        }
+
+        private void Hide()
+        {
+            var seq = DOTween.Sequence();
+            seq.Append(windowsContainer.DOScale(Vector3.zero, duration));
+            seq.OnComplete(() => Dispose());
+        }
 
         private IEnumerator UpdateCoroutine()
         {
@@ -133,7 +152,8 @@ namespace RaceMobile.Reward
 
         private void CloseWindow()
         {
-            Dispose();
+            Hide();
+            //Dispose();
         }
 
 
