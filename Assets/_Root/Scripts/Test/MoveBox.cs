@@ -17,29 +17,32 @@ public class MoveBox : MonoBehaviour
 
     void Start()
     {
-        GameObject spher = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        spher.transform.position = transform.position;
-        Material materialSphere = spher.GetComponent<Renderer>().material;
 
-        var sequence =  DOTween.Sequence();
+
+        transform.DOLocalRotate(new Vector3(1, 1, 0), 5f);
+        //GameObject spher = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //spher.transform.position = transform.position;
+        //Material materialSphere = spher.GetComponent<Renderer>().material;
+
+        //var sequence =  DOTween.Sequence();
         
 
-        foreach (var item in path)
-        {
-            var tween = spher.transform.DOMove(item, duration);
-            sequence.Append(tween);
-            var colorTween = materialSphere.DOColor(Color.red, 2f).SetEase(curve);
-            sequence.Join(colorTween);
-            colorTween = materialSphere.DOColor(Color.white, 2f);
-            sequence.Append(colorTween);
-            sequence.AppendCallback(() => Debug.Log($"Step {item.ToString()} end."));
+        //foreach (var item in path)
+        //{
+        //    var tween = spher.transform.DOMove(item, duration);
+        //    sequence.Append(tween);
+        //    var colorTween = materialSphere.DOColor(Color.red, 2f).SetEase(curve);
+        //    sequence.Join(colorTween);
+        //    colorTween = materialSphere.DOColor(Color.white, 2f);
+        //    sequence.Append(colorTween);
+        //    sequence.AppendCallback(() => Debug.Log($"Step {item.ToString()} end."));
 
 
-            //var tween = transform.DOMove(item, duration);
-            //sequence.Append(tween);
-        }
+        //    //var tween = transform.DOMove(item, duration);
+        //    //sequence.Append(tween);
+        //}
 
-        sequence.Play();
+        //sequence.Play();
 
 
     }

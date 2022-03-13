@@ -15,8 +15,6 @@ namespace RaceMobile
         private readonly SubscriptionProperty<float> leftMove;
         private readonly SubscriptionProperty<float> rightMove;
 
-  
-
         public GameController(ProfilePlayer profilePlayer, Transform placeForUI)
         {
             leftMove = new SubscriptionProperty<float>();
@@ -26,17 +24,19 @@ namespace RaceMobile
             InputController inputController = new InputController(leftMove, rightMove);
             AddController(inputController);
 
-            CarController carController = new CarController();
+            CarController carController = new CarController(leftMove, rightMove, profilePlayer);
             AddController(carController);
 
             TapeBackgroundController tapeBackgroundController = new TapeBackgroundController(leftMove, rightMove, profilePlayer.CurrentCar.Speed);
             AddController(tapeBackgroundController);
 
-            CurrencyWindowController currencyWindow = new CurrencyWindowController(placeForUI, profilePlayer);
-            AddController(currencyWindow);
+            //temp:
+            //CurrencyWindowController currencyWindow = new CurrencyWindowController(placeForUI, profilePlayer);
+            //AddController(currencyWindow);
 
-            DailyRewardController dailyRewardController = new DailyRewardController(placeForUI, profilePlayer);
-            AddController(dailyRewardController);
+            //Temp:
+            //DailyRewardController dailyRewardController = new DailyRewardController(placeForUI, profilePlayer);
+            //AddController(dailyRewardController);
         }
     }
 }

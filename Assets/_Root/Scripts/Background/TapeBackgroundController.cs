@@ -9,9 +9,12 @@ namespace RaceMobile.Background
     {
         private readonly IReadOnlySubscriptionProperty<float> leftMove;
         private readonly IReadOnlySubscriptionProperty<float> rightMove;
+
         private readonly SubscriptionProperty<float> diff;
+
         private TapeBackgroundView view;
         private ResourcePath path = new ResourcePath() { PathResource = "Prefabs/background" };
+
         private readonly float speed;
 
         public TapeBackgroundController(IReadOnlySubscriptionProperty<float> left, IReadOnlySubscriptionProperty<float> right, float speed)

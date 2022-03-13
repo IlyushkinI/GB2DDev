@@ -10,7 +10,7 @@ namespace RaceMobile.Inputs
 {
     internal sealed class InputController : BaseController
     {
-        private readonly ResourcePath path = new ResourcePath { PathResource = "Prefabs/Inputs/JoysticMove" };
+        private readonly ResourcePath path = new ResourcePath { PathResource = "Prefabs/Inputs/TouchInput" }; //TouchInput JoysticMove
         private BaseInputView inputView;
 
         public InputController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove)

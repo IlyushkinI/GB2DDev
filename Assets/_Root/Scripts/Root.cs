@@ -14,12 +14,24 @@ public class Root : MonoBehaviour
     private ProfilePlayer playerModel;
     private MainController mainController;
     private IAnaliticTools analiticTools;
+
     void Start()
     {
         analiticTools = new UnityAnaliticTools();
-        playerModel = new ProfilePlayer(5, analiticTools);
+        playerModel = new ProfilePlayer(1.0f, analiticTools);
         playerModel.GameStatus.Value = GameState.Menu;
         mainController = new MainController(playerModel, placeForUI, adsShower);
+    }
+
+
+    private void Update()
+    {
+        if(Input.touchCount > 0)
+        {
+            var touch = Input.GetTouch(0);
+            Debug.Log(touch.phase.ToString());
+        }
+
     }
 
     private void OnDestroy()

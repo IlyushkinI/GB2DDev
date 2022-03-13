@@ -34,8 +34,7 @@ namespace RaceMobile.Menu
         {
 
             profilePlayer.GameStatus.Value = GameState.Game;
-            adsShower.ShowInterstitial();
-
+           //temp: adsShower.ShowInterstitial();
         }
 
     }

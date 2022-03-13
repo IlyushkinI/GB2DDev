@@ -1,6 +1,8 @@
 ﻿using RaceMobile.Base;
 using RaceMobile.Tools.ResourceManagment;
+using RaceMobile.Tools.Reactive;
 using UnityEngine;
+using DG.Tweening;
 
 namespace RaceMobile.Car
 {
@@ -9,10 +11,29 @@ namespace RaceMobile.Car
         private readonly ResourcePath viewPath = new ResourcePath() { PathResource = "Prefabs/Transport/Car" };
         private CarView carView;
 
-        public CarController()
+        private SubscriptionProperty<float> leftMove;
+        private SubscriptionProperty<float> rightMove;
+
+
+        public CarController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, ProfilePlayer profile)
         {
             carView = LoadView();
+            RotationWheel();
+
+            //temp:
+            //this.leftMove = leftMove;
+            //this.rightMove = rightMove;
+
+
+            //this.leftMove.SubscribeOnChange(RotationWheel);
+            //this.rightMove.SubscribeOnChange(RotationWheel);
         }
+
+        //protected override void OnDispose()
+        //{
+        //    leftMove.UnsubscribeOnChange(RotationWheel);
+        //    rightMove.UnsubscribeOnChange(RotationWheel);
+        //}
 
         private CarView LoadView()
         {
@@ -22,6 +43,13 @@ namespace RaceMobile.Car
 
             return go.GetComponent<CarView>();
         }
+
+
+        private void RotationWheel()
+        {
+            
+        }
+
 
         public GameObject GetViewObject()
         {

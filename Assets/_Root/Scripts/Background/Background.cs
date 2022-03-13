@@ -18,7 +18,7 @@ namespace RaceMobile.Background
 
             if (position.x <= leftBorder)
                 transform.position = new Vector3(rightBorder - (leftBorder - position.x), position.y, position.z);
-            else if (transform.position.x >= rightBorder)
+            else if (position.x >= rightBorder)
                 transform.position = new Vector3(leftBorder + (rightBorder - position.x), position.y, position.z);
 
         }
