@@ -1,4 +1,5 @@
 ﻿using Tools;
+using CarInput;
 
 public class GameController : BaseController
 {
@@ -9,8 +10,9 @@ public class GameController : BaseController
         
         var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
         AddController(tapeBackgroundController);
-        
-        var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
+
+        var gameInputType = InputType.TOUCH;
+        var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar, gameInputType);
         AddController(inputGameController);
             
         var carController = new CarController();
