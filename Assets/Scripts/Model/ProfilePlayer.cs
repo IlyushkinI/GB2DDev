@@ -1,4 +1,5 @@
-﻿using Profile;
+﻿using Model.Analytic;
+using Profile;
 using Tools;
 
 public class ProfilePlayer
