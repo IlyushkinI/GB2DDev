@@ -13,6 +13,8 @@ public class Root : MonoBehaviour
         var profilePlayer = new ProfilePlayer(15f);
         profilePlayer.CurrentState.Value = GameState.Start;
         _mainController = new MainController(_placeForUi, profilePlayer);
+        
+        new TrailController(_placeForUi);
     }
 
     protected void OnDestroy()
