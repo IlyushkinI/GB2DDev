@@ -57,7 +57,6 @@ public sealed class TrailController : BaseController
 
     private void MouseTouch()
     {
-        
         DrawTrail(Input.GetMouseButton(0), _trail, CorrectPosition(Input.mousePosition), ref _currentFrame, _framesForStartTrail);
     }
 

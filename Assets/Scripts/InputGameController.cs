@@ -3,22 +3,39 @@ using UnityEngine;
 
 public class InputGameController : BaseController
 {
-    public InputGameController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, Car car)
+
+    public InputGameController(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, Car car, InputControllerType controller)
     {
-        _view = LoadView();
-        _view.Init(leftMove, rightMove, car.Speed);
+        switch (controller)
+        {
+            case InputControllerType.Stick:
+                BaseInputView viewStick = LoadView(new ResourcePath { PathResource = "Prefabs/StickControl" });
+                viewStick.Init(leftMove, rightMove, car.Speed);
+                break;
+
+            case InputControllerType.Buttons:
+                BaseInputView viewButtons = LoadView(new ResourcePath { PathResource = "Prefabs/ButtonControl" });
+                viewButtons.Init(leftMove, rightMove, car.Speed);
+                break;
+
+            case InputControllerType.Swipe:
+                new InputSwipeController(leftMove, rightMove, car.Speed);
+                break;
+
+            case InputControllerType.None:
+                break;
+
+            default:
+                break;
+        }
     }
 
-    //private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/StickControl" };
-    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/ButtonControl" };
-    private BaseInputView _view;
-
-    private BaseInputView LoadView()
+    private BaseInputView LoadView(ResourcePath viewPath)
     {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
+        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(viewPath));
         AddGameObjects(objView);
 
         return objView.GetComponent<BaseInputView>();
     }
-}
 
+}
