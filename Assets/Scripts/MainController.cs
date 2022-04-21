@@ -15,6 +15,7 @@ public class MainController : BaseController
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
 
+    private InputControllerType _inputType = InputControllerType.Buttons;
     private MainMenuController _mainMenuController;
     private GameController _gameController;
     private readonly Transform _placeForUi;
@@ -39,7 +40,8 @@ public class MainController : BaseController
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
-                _gameController = new GameController(_profilePlayer);
+                _inputType = _mainMenuController.ControllerType;
+                _gameController = new GameController(_profilePlayer, _inputType);
                 _mainMenuController?.Dispose();
                 break;
             default:

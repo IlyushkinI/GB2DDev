@@ -22,9 +22,6 @@ public class InputGameController : BaseController
                 new InputSwipeController(leftMove, rightMove, car.Speed);
                 break;
 
-            case InputControllerType.None:
-                break;
-
             default:
                 break;
         }
