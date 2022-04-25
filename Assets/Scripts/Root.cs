@@ -8,7 +8,8 @@ public class Root : MonoBehaviour
     [SerializeField] 
     private Transform _placeForUi;
 
-    [SerializeField] private UnityAdsTools _ads;
+    [SerializeField]
+    private UnityAdsTools _ads;
 
     private MainController _mainController;
     private IAnalyticTools _analyticsTools;

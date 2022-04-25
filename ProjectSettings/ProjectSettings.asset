@@ -260,8 +260,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
-  AndroidKeystoreName: '{dedicated}: 00r.keystore'
-  AndroidKeyaliasName: qqq
+  AndroidKeystoreName: '{inproject}: Vasco.keystore'
+  AndroidKeyaliasName: 3312doks
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

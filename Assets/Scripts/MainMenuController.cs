@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Model.Analytic;
+﻿using Model.Analytic;
 using Profile;
-using Tools.Ads;
 using System;
 using System.Collections.Generic;
+using Tools.Ads;
 using UnityEngine;
 
 public class MainMenuController : BaseController
@@ -16,8 +15,8 @@ public class MainMenuController : BaseController
     private InputControllerType _inputControllerType;
 
     public InputControllerType ControllerType => _inputControllerType;
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads)
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, InputControllerType inputControllerType)
+
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, InputControllerType inputControllerType, IAnalyticTools analytics, IAdsShower ads)
     {
         _inputControllerType = inputControllerType;
         _profilePlayer = profilePlayer;

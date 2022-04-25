@@ -36,7 +36,7 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _analyticsTools, _ads);
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _inputType, _analyticsTools, _ads);
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
