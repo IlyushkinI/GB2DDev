@@ -1,19 +1,11 @@
 ﻿using Model.Analytic;
 using Profile;
+using System.Collections.Generic;
 using Tools.Ads;
 using UnityEngine;
 
 public class MainController : BaseController
 {
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analyticsTools, IAdsShower ads)
-    {
-        _profilePlayer = profilePlayer;
-        _analyticsTools = analyticsTools;
-        _ads = ads;
-        _placeForUi = placeForUi;
-        OnChangeGameState(_profilePlayer.CurrentState.Value);
-        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
-    }
 
     private InputControllerType _inputType = InputControllerType.Buttons;
     private MainMenuController _mainMenuController;
@@ -22,6 +14,19 @@ public class MainController : BaseController
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAnalyticTools _analyticsTools;
     private readonly IAdsShower _ads;
+    private Dictionary<string, object> _analyticDataInputTypeSelected;
+
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analyticsTools, IAdsShower ads)
+    {
+        _profilePlayer = profilePlayer;
+        _analyticsTools = analyticsTools;
+        _ads = ads;
+        _placeForUi = placeForUi;
+        _analyticDataInputTypeSelected = new Dictionary<string, object>();
+        
+        OnChangeGameState(_profilePlayer.CurrentState.Value);
+        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
+    }
 
     protected override void OnDispose()
     {
@@ -37,6 +42,8 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _inputType, _analyticsTools, _ads);
+                _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
+                _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
                 _gameController?.Dispose();
                 break;
             case GameState.Game:

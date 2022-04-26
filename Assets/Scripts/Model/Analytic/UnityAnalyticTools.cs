@@ -9,7 +9,7 @@ namespace Model.Analytic
         {
             if (eventData == null)
                 eventData = new Dictionary<string, object>();
-            UnityEngine.Analytics.Analytics.CustomEvent(alias, eventData);
+            Analytics.CustomEvent(alias, eventData);
         }
     }
 }
