@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Tools.Ads;
 using UnityEngine;
 
+
 public class MainMenuController : BaseController
 {
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
