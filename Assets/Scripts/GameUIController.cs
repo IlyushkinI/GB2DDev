@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 
@@ -8,52 +7,29 @@ public class GameUIController : BaseController
 
     #region Fields
 
-    private readonly string _buttonExitPath = "Prefabs/ButtonExit";
-    private readonly string _buttonStorePath = "Prefabs/ButtonStore";
-    private readonly ButtonView _buttonExitView;
-    private readonly ButtonStoreView _buttonStoreView;
-    private readonly List<GlobalEventSO> _eventsUI;
+    private readonly string _prefabUI = "Prefabs/UI";
+    private readonly GlobalEventSO _eventUI;
+    private readonly CarController _carController;
 
     #endregion
 
 
     #region CodeLifeCycles
 
-    public GameUIController(Transform placeForUI, List<GlobalEventSO> eventsUI)
+    public GameUIController(Transform placeForUI, GlobalEventSO eventUI, CarController carController)
     {
-        _eventsUI = eventsUI;
+        _eventUI = eventUI;
+        _carController = carController;
 
-        _buttonExitView = Resources.Load<ButtonView>(_buttonExitPath);
-        GameObject.Instantiate(_buttonExitView, placeForUI);
-        //AddGameObjects(_buttonExitView.gameObject);
+        GameObject.Instantiate(Resources.Load(_prefabUI), placeForUI);
 
-        _buttonStoreView = Resources.Load<ButtonStoreView>(_buttonStorePath);
-        GameObject.Instantiate(_buttonStoreView, placeForUI);
-        //AddGameObjects(_buttonStoreView.gameObject);
-
-        SubscribeEvents(_eventsUI);
+        _eventUI.GlobalEventAction += UIEventHandler;
     }
 
     #endregion
 
 
     #region Methods
-
-    private void SubscribeEvents(List<GlobalEventSO> eventsUI)
-    {
-        foreach (var item in eventsUI)
-        {
-            item.GlobalEventAction += UIEventHandler;
-        }
-    }
-
-    private void UnsubscribeEvents(List<GlobalEventSO> eventsUI)
-    {
-        foreach (var item in eventsUI)
-        {
-            item.GlobalEventAction += UIEventHandler;
-        }
-    }
 
     private void UIEventHandler(UIElements caller)
     {
@@ -81,16 +57,13 @@ public class GameUIController : BaseController
 
     private void PurchaseComplete()
     {
-        Debug.Log("store");
-        //foreach (var wheel in _wheels)
-        //{
-        //    wheel.color = Color.green;
-        //}
+        _carController.CarView.BackWheel.color = Color.green;
+        _carController.CarView.FrontWheel.color = Color.green;
     }
 
     protected override void OnDispose()
     {
-        UnsubscribeEvents(_eventsUI);
+        _eventUI.GlobalEventAction -= UIEventHandler;
     }
 
     #endregion

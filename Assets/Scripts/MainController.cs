@@ -20,7 +20,7 @@ public class MainController : BaseController
     private Dictionary<string, object> _analyticDataInputTypeSelected;
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
     private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
-    private readonly List<GlobalEventSO> _eventsUI;
+    private readonly GlobalEventSO _eventUI;
 
     public MainController(
         Transform placeForUI,
@@ -30,7 +30,7 @@ public class MainController : BaseController
         List<ItemConfig> itemsConfig,
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
         IReadOnlyList<AbilityItemConfig> abilityItems,
-        List<GlobalEventSO> eventsUI)
+        GlobalEventSO eventUI)
     {
         _profilePlayer = profilePlayer;
         _analyticsTools = analyticsTools;
@@ -40,7 +40,7 @@ public class MainController : BaseController
         _upgradeItems = upgradeItems;
         _abilityItems = abilityItems;
         _analyticDataInputTypeSelected = new Dictionary<string, object>();
-        _eventsUI = eventsUI;
+        _eventUI = eventUI;
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -73,7 +73,7 @@ public class MainController : BaseController
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
-                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventsUI);
+                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventUI);
                 _mainMenuController?.Dispose();
                 break;
             default:

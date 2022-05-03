@@ -9,7 +9,7 @@ using UnityEngine;
 public class Root : MonoBehaviour
 {
     [SerializeField]
-    private List<GlobalEventSO> _eventsUI;
+    private GlobalEventSO _eventUI;
 
     [SerializeField] 
     private Transform _placeForUi;
@@ -38,7 +38,7 @@ public class Root : MonoBehaviour
         var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
         profilePlayer.CurrentState.Value = GameState.Start;
         new TrailController(_placeForUi);
-        _mainController = new MainController(_placeForUi, profilePlayer, _analyticsTools, _ads, _items, _upgradeSource.ItemConfigs.ToList(), _abilityItems.AsReadOnly(), _eventsUI);
+        _mainController = new MainController(_placeForUi, profilePlayer, _analyticsTools, _ads, _items, _upgradeSource.ItemConfigs.ToList(), _abilityItems.AsReadOnly(), _eventUI);
     }
 
     protected void OnDestroy()

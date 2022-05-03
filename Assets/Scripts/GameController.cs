@@ -11,7 +11,7 @@ public class GameController : BaseController
         Transform placeForUI, 
         IReadOnlyList<AbilityItemConfig> configs, 
         InventoryModel inventoryModel,
-        List<GlobalEventSO> eventsUI)
+        GlobalEventSO eventUI)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -25,7 +25,7 @@ public class GameController : BaseController
         var carController = new CarController();
         AddController(carController);
 
-        var gameUIController = new GameUIController(placeForUI, eventsUI);
+        var gameUIController = new GameUIController(placeForUI, eventUI, carController);
         AddController(gameUIController);
 
         var abilityRepository = new AbilityRepository(configs);
