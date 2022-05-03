@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryController : BaseController, IInventoryController
 {
     private readonly IInventoryModel _inventoryModel;
-    private readonly IInventoryView _inventoryView;
+    private readonly InventoryView _inventoryView;
     private readonly IItemsRepository _itemsRepository;
 
     private readonly string _pathToView = "Prefabs/Shed";
@@ -13,13 +13,16 @@ public class InventoryController : BaseController, IInventoryController
     public InventoryController(List<ItemConfig> itemConfigs, InventoryModel inventoryModel, Transform placeForUI)
     {
         _inventoryModel = inventoryModel;
-        _inventoryView = //new InventoryView();
-        GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
+        _inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
+        _inventoryView.isActive = false;
+
         _itemsRepository = new ItemsRepository(itemConfigs);
     }
 
     public void ShowInventory()
     {
+        _inventoryView.isActive = true;
+
         foreach (var item in _itemsRepository.Items.Values)
             _inventoryModel.EquipItem(item);
 

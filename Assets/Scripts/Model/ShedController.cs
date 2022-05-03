@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Tools;
 using UnityEngine;
+
 
 public class ShedController : BaseController, IShedController
 {
@@ -8,7 +10,7 @@ public class ShedController : BaseController, IShedController
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _model;
-
+    
     public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI)
     {
         _upgradeItems = upgradeItems;

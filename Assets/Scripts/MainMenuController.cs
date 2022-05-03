@@ -14,17 +14,25 @@ public class MainMenuController : BaseController
     private readonly IAdsShower _ads;
     private readonly MainMenuView _view;
     private InputControllerType _inputControllerType;
+    private readonly ShedController _shedController;
 
     public InputControllerType ControllerType => _inputControllerType;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, InputControllerType inputControllerType, IAnalyticTools analytics, IAdsShower ads)
+    public MainMenuController(
+        Transform placeForUi,
+        ProfilePlayer profilePlayer,
+        InputControllerType inputControllerType,
+        IAnalyticTools analytics,
+        IAdsShower ads,
+        ShedController shedController)
     {
         _inputControllerType = inputControllerType;
         _profilePlayer = profilePlayer;
         _analytics = analytics;
         _ads = ads;
         _view = LoadView(placeForUi);
-        _view.Init(StartGame, ChooseInput);
+        _shedController = shedController;
+        _view.Init(StartGame, ChooseInput, EnterShed);
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -57,4 +65,15 @@ public class MainMenuController : BaseController
         view.DropdownInputSelect.value = (int)_inputControllerType - 1;
     }
 
+    private void EnterShed()
+    {
+        _view.isActive = false;
+        //_shedController.
+        _shedController.Enter();
+    }
+
+    private void ExitShed()
+    {
+        _view.isActive = true;
+    }
 }

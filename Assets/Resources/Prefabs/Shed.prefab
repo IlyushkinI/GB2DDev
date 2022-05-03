@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 5634234710344163010}
   - component: {fileID: 2248321781317531468}
   m_Layer: 5
-  m_Name: OK
+  m_Name: Button OK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1640,7 +1640,7 @@ GameObject:
   - component: {fileID: 4268070108414326432}
   - component: {fileID: 7856832373263740307}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1848,7 +1848,7 @@ GameObject:
   - component: {fileID: 4926092236816483001}
   - component: {fileID: 2428249543841323567}
   m_Layer: 5
-  m_Name: Cancel
+  m_Name: Button Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2003,6 +2003,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776fd12578cd5934486c065caa02e4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rootGameObject: {fileID: 8905095801594322727}
+  _buttonOK: {fileID: 2248321781317531468}
+  _buttonCancel: {fileID: 2428249543841323567}
 --- !u!1 &8914577845252374147
 GameObject:
   m_ObjectHideFlags: 0

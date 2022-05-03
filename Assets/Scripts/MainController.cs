@@ -59,17 +59,17 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads);
                 _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUI);
-                _shedController.Enter();
-                _shedController.Exit();
+                _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads, _shedController);
+                //_shedController.Enter();
+                //_shedController.Exit();
                 _gameController?.Dispose();
                 _inventoryController?.Dispose();
                 break;
             case GameState.Game:
                 var inventoryModel = new InventoryModel();
                 _inventoryController = new InventoryController(_itemsConfig, inventoryModel, _placeForUI);
-                _inventoryController.ShowInventory();
+                //_inventoryController.ShowInventory();
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
