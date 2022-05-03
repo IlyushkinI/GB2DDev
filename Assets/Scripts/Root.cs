@@ -8,15 +8,26 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
+    [SerializeField]
+    private List<GlobalEventSO> _eventsUI;
+
     [SerializeField] 
     private Transform _placeForUi;
 
     [SerializeField]
     private UnityAdsTools _ads;
 
-    [SerializeField] private List<ItemConfig> _items;
-    [SerializeField] private UpgradeItemConfigDataSource _upgradeSource;
-    [SerializeField] private List<AbilityItemConfig> _abilityItems;
+    [Space]
+    [SerializeField]
+    private List<ItemConfig> _items;
+
+    [Space]
+    [SerializeField]
+    private UpgradeItemConfigDataSource _upgradeSource;
+
+    [Space]
+    [SerializeField]
+    private List<AbilityItemConfig> _abilityItems;
 
     private MainController _mainController;
     private IAnalyticTools _analyticsTools;
@@ -27,7 +38,7 @@ public class Root : MonoBehaviour
         var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
         profilePlayer.CurrentState.Value = GameState.Start;
         new TrailController(_placeForUi);
-        _mainController = new MainController(_placeForUi, profilePlayer, _analyticsTools, _ads, _items, _upgradeSource.ItemConfigs.ToList(), _abilityItems.AsReadOnly());
+        _mainController = new MainController(_placeForUi, profilePlayer, _analyticsTools, _ads, _items, _upgradeSource.ItemConfigs.ToList(), _abilityItems.AsReadOnly(), _eventsUI);
     }
 
     protected void OnDestroy()

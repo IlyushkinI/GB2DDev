@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class GameController : BaseController
 {
-    public GameController(ProfilePlayer profilePlayer, InputControllerType inputControllerType, Transform placeForUI, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel)
+    public GameController(
+        ProfilePlayer profilePlayer, 
+        InputControllerType inputControllerType, 
+        Transform placeForUI, 
+        IReadOnlyList<AbilityItemConfig> configs, 
+        InventoryModel inventoryModel,
+        List<GlobalEventSO> eventsUI)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -19,7 +25,7 @@ public class GameController : BaseController
         var carController = new CarController();
         AddController(carController);
 
-        var gameUIController = new GameUIController(placeForUI);
+        var gameUIController = new GameUIController(placeForUI, eventsUI);
         AddController(gameUIController);
 
         var abilityRepository = new AbilityRepository(configs);

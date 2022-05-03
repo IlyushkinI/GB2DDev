@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -7,56 +8,91 @@ public class GameUIController : BaseController
 
     #region Fields
 
-    //private Action action;
-
-    //private event Action BuyAction
-    //{
-    //    add { action += value; }
-    //    remove { action -= value; }
-    //}
-
     private readonly string _buttonExitPath = "Prefabs/ButtonExit";
     private readonly string _buttonStorePath = "Prefabs/ButtonStore";
-    private readonly ButtonExitView _buttonExitView;
+    private readonly ButtonView _buttonExitView;
     private readonly ButtonStoreView _buttonStoreView;
+    private readonly List<GlobalEventSO> _eventsUI;
 
     #endregion
 
 
     #region CodeLifeCycles
 
-    public GameUIController(Transform placeForUI)
+    public GameUIController(Transform placeForUI, List<GlobalEventSO> eventsUI)
     {
-        //action = new Action(DoBuy);
+        _eventsUI = eventsUI;
 
-        _buttonExitView = Resources.Load<ButtonExitView>(_buttonExitPath);
+        _buttonExitView = Resources.Load<ButtonView>(_buttonExitPath);
         GameObject.Instantiate(_buttonExitView, placeForUI);
         //AddGameObjects(_buttonExitView.gameObject);
 
         _buttonStoreView = Resources.Load<ButtonStoreView>(_buttonStorePath);
-        //GameObject.Instantiate(_buttonStoreView);
         GameObject.Instantiate(_buttonStoreView, placeForUI);
-        //_buttonStoreView = ResourceLoader.LoadPrefab(new ResourcePath { PathResource = _buttonStorePath }).GetComponent<ButtonStoreView>();
         //AddGameObjects(_buttonStoreView.gameObject);
-        //_buttonStoreView.SetEvent(action);
-        //BuyAction += DoBuy;
+
+        SubscribeEvents(_eventsUI);
     }
 
     #endregion
 
 
-    //#region Methods
+    #region Methods
 
-    //private void DoBuy()
-    //{
-    //    Debug.LogWarning("buy");
-    //}
+    private void SubscribeEvents(List<GlobalEventSO> eventsUI)
+    {
+        foreach (var item in eventsUI)
+        {
+            item.GlobalEventAction += UIEventHandler;
+        }
+    }
 
-    //#endregion
+    private void UnsubscribeEvents(List<GlobalEventSO> eventsUI)
+    {
+        foreach (var item in eventsUI)
+        {
+            item.GlobalEventAction += UIEventHandler;
+        }
+    }
 
+    private void UIEventHandler(UIElements caller)
+    {
+        switch (caller)
+        {
+            case UIElements.None:
+                break;
+            case UIElements.ButtonExit:
+                DoExit();
+                break;
+            case UIElements.ButtonStore:
+                PurchaseComplete();
+                break;
+        }
+    }
 
-    //protected override void OnDispose()
-    //{
-    //}
+    private void DoExit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    private void PurchaseComplete()
+    {
+        Debug.Log("store");
+        //foreach (var wheel in _wheels)
+        //{
+        //    wheel.color = Color.green;
+        //}
+    }
+
+    protected override void OnDispose()
+    {
+        UnsubscribeEvents(_eventsUI);
+    }
+
+    #endregion
 
 }

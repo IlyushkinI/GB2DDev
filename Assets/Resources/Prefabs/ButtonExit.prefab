@@ -276,3 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d1587694ae2d44382b2a2aad64d8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _button: {fileID: 3011865017756838839}
+  _eventCaller: 1

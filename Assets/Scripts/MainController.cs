@@ -20,6 +20,7 @@ public class MainController : BaseController
     private Dictionary<string, object> _analyticDataInputTypeSelected;
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
     private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
+    private readonly List<GlobalEventSO> _eventsUI;
 
     public MainController(
         Transform placeForUI,
@@ -28,7 +29,8 @@ public class MainController : BaseController
         IAdsShower ads,
         List<ItemConfig> itemsConfig,
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
-        IReadOnlyList<AbilityItemConfig> abilityItems)
+        IReadOnlyList<AbilityItemConfig> abilityItems,
+        List<GlobalEventSO> eventsUI)
     {
         _profilePlayer = profilePlayer;
         _analyticsTools = analyticsTools;
@@ -38,6 +40,7 @@ public class MainController : BaseController
         _upgradeItems = upgradeItems;
         _abilityItems = abilityItems;
         _analyticDataInputTypeSelected = new Dictionary<string, object>();
+        _eventsUI = eventsUI;
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -46,7 +49,7 @@ public class MainController : BaseController
     protected override void OnDispose()
     {
         AllClear();
-        
+
         _profilePlayer.CurrentState.UnSubscriptionOnChange(OnChangeGameState);
         base.OnDispose();
     }
@@ -70,7 +73,7 @@ public class MainController : BaseController
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
-                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel);
+                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventsUI);
                 _mainMenuController?.Dispose();
                 break;
             default:

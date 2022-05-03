@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 110943065940386869}
   - component: {fileID: 110943065940386868}
   - component: {fileID: 110943065940386875}
-  - component: {fileID: 5258477860820309756}
+  - component: {fileID: 3528429229559426302}
   m_Layer: 0
   m_Name: ButtonStore
   m_TagString: Untagged
@@ -137,7 +137,7 @@ MonoBehaviour:
   onPurchaseComplete:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5258477860820309756}
+      - m_Target: {fileID: 3528429229559426302}
         m_MethodName: PurchaseComplete
         m_Mode: 1
         m_Arguments:
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5258477860820309756
+--- !u!114 &3528429229559426302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,4 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a98a08d6a25a341bdda33c0cd0844b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 110943065940386870}
+  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _button: {fileID: 110943065940386875}
+  _eventCaller: 2

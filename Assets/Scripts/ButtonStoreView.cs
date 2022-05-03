@@ -1,27 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-
-public sealed class ButtonStoreView : MonoBehaviour
+﻿public sealed class ButtonStoreView : ButtonView
 {
 
-    private List<SpriteRenderer> _wheels;
+    #region Methods
 
     public void PurchaseComplete()
     {
-        foreach (var wheel in _wheels)
-        {
-            wheel.color = Color.green;
-        }
+        _eventSO?.Invoke(_eventCaller);
     }
 
-    private void OnEnable()
-    {
-        _wheels = new List<SpriteRenderer>();
+    protected override void OnClick() { }
 
-        foreach (var wheel in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            _wheels.Add(wheel.GetComponent<SpriteRenderer>());
-        }
-    }
+    #endregion
+
 }
