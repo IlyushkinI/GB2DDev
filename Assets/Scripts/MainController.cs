@@ -60,7 +60,7 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads);
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar);
+                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUI);
                 _shedController.Enter();
                 _shedController.Exit();
                 _gameController?.Dispose();
@@ -68,7 +68,7 @@ public class MainController : BaseController
                 break;
             case GameState.Game:
                 var inventoryModel = new InventoryModel();
-                _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
+                _inventoryController = new InventoryController(_itemsConfig, inventoryModel, _placeForUI);
                 _inventoryController.ShowInventory();
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2888579476072394851}
   - component: {fileID: 2799938565668799931}
   m_Layer: 0
-  m_Name: backWheel
+  m_Name: BackWheel
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 1959354338043260515}
   - component: {fileID: 1088290134615923334}
   m_Layer: 0
-  m_Name: forwardWheel
+  m_Name: FrontWheel
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

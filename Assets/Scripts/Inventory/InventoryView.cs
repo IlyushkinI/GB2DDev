@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryView : IInventoryView
+public class InventoryView : MonoBehaviour, IInventoryView
 {
     public void Display(IReadOnlyList<IItem> items)
     {

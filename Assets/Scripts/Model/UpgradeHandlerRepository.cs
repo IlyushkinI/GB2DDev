@@ -26,21 +26,12 @@ public class UpgradeHandlerRepository : BaseController
         {
             case UpgradeType.None:
                 return UpgradeHandlerStub.Default;
-                //break;
             case UpgradeType.Speed:
                 return new SpeedUpgradeHandler(config);
-                //break;
             case UpgradeType.Control:
                 return UpgradeHandlerStub.Default;
-                //break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-}
-
-public interface IShedController
-{
-    void Enter();
-    void Exit();
 }

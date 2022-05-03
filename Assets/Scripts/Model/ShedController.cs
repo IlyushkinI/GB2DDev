@@ -9,15 +9,16 @@ public class ShedController : BaseController, IShedController
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _model;
 
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car)
+    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI)
     {
         _upgradeItems = upgradeItems;
         _car = car;
+
         _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
+        AddController(_upgradeRepository);
 
         _model = new InventoryModel();
-        AddController(_upgradeRepository);
-        _inventoryController = new InventoryController(items, _model);
+        _inventoryController = new InventoryController(items, _model, placeForUI);
         AddController(_inventoryController);
     }
 
