@@ -9,12 +9,15 @@ public class MainMenuController : BaseController
     private readonly ProfilePlayer _profilePlayer;
     private readonly MainMenuView _view;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
+    public MainMenuController(
+        Transform placeForUi, 
+        ProfilePlayer profilePlayer)
     {
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
         AddGameObjects(_view.gameObject);
         _view.Init(StartGame);
+        _view.EnterShed(EnterShed);
     }
     
     private MainMenuView LoadView(Transform placeForUi)
@@ -28,7 +31,12 @@ public class MainMenuController : BaseController
 
         _profilePlayer.AnalyticTools.SendMessage("start_game",
             new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup }
-    });
-}
+        });
+    }
+
+    private void EnterShed()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Shed;
+    }
 }
 

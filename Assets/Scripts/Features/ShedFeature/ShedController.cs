@@ -8,22 +8,40 @@ public class ShedController : BaseController, IShedController
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _model;
+    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Shed" };
+    private readonly ShedView _view;
+    private ProfilePlayer _profilePlayer;
 
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car)
+    public ShedController(
+        Transform placeForUi, 
+        IReadOnlyList<UpgradeItemConfig> upgradeItems, 
+        List<ItemConfig> items, 
+        ProfilePlayer profilePlayer)
     {
         _upgradeItems = upgradeItems;
-        _car = car;
+        _profilePlayer = profilePlayer;
+        _car = profilePlayer.CurrentCar;
         _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
-
+        _view = LoadView(placeForUi);
+        _view.ExitShed(Exit);
         _model = new InventoryModel();
         AddController(_upgradeRepository);
         _inventoryController = new InventoryController(items, _model);
         AddController(_inventoryController);
     }
 
+    private ShedView LoadView(Transform placeForUi)
+    {
+        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
+        AddGameObjects(objectView);
+
+        return objectView.GetComponent<ShedView>();
+    }
+
     public void Enter()
     {
         _inventoryController.ShowInventory();
+        _view.DropdownItems(_inventoryController.GetItems());
         Debug.Log($"Enter, car speed = {_car.Speed}");
     }
 
@@ -31,6 +49,8 @@ public class ShedController : BaseController, IShedController
     {
         UpgradeCarWithEquipedItems(_car, _model.GetEquippedItems(), _upgradeRepository.Content);
         Debug.Log($"Exit, car speed = {_car.Speed}");
+
+        _profilePlayer.CurrentState.Value = Profile.GameState.Start;
     }
 
     private void UpgradeCarWithEquipedItems(IUpgradeableCar car,

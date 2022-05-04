@@ -19,7 +19,12 @@ public class InventoryController : BaseController, IInventoryController
         foreach (var item in _itemsRepository.Content.Values)
             _inventoryModel.EquipItem(item);
 
-        var equippedItems = _inventoryModel.GetEquippedItems();
-        _inventoryView.Display(equippedItems);
+        //var equippedItems = _inventoryModel.GetEquippedItems();
+        //_inventoryView.Display(equippedItems);
+    }
+
+    public IReadOnlyList<IItem> GetItems()
+    {
+        return _inventoryModel.GetEquippedItems();
     }
 }

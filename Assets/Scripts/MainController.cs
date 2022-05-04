@@ -27,12 +27,13 @@ public class MainController : BaseController
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
+    private HudController _hud;
     private InventoryController _inventoryController;
-    private readonly Transform _placeForUi;
-    private readonly ProfilePlayer _profilePlayer;
-    private readonly List<ItemConfig> _itemsConfig;
-    private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
-    private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
+    private Transform _placeForUi;
+    private ProfilePlayer _profilePlayer;
+    private List<ItemConfig> _itemsConfig;
+    private IReadOnlyList<UpgradeItemConfig> _upgradeItems;
+    private IReadOnlyList<AbilityItemConfig> _abilityItems;
 
     protected override void OnDispose()
     {
@@ -48,18 +49,24 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar);
-                _shedController.Enter();
-                _shedController.Exit();
-                _gameController?.Dispose();
                 _inventoryController?.Dispose();
+                _hud?.Dispose();
+                _shedController?.Dispose();
+                _gameController?.Dispose();
+                break;
+            case GameState.Shed:
+                _shedController = new ShedController(_placeForUi, _upgradeItems, _itemsConfig, _profilePlayer);
+                _shedController.Enter();
+                _mainMenuController?.Dispose();
                 break;
             case GameState.Game:
                 var inventoryModel = new InventoryModel();
                 _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
                 _inventoryController.ShowInventory();
-                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi);
+                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel);
+                _hud = new HudController(_placeForUi, _profilePlayer);
                 _mainMenuController?.Dispose();
+                _shedController?.Dispose();
                 break;
             default:
                 AllClear();
