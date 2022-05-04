@@ -4,6 +4,8 @@
     {
         None,
         Start,
+        Shed,
+        Inventory,
         Game
     }
 }

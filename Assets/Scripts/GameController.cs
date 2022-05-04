@@ -21,7 +21,6 @@ public class GameController : BaseController
         var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository,
             new AbilitiesCollectionViewStub());
         AddController(abilitiesController);
-
     }
 }
 
