@@ -29,7 +29,7 @@ public class UpgradeHandlerRepository : BaseController
             case UpgradeType.Speed:
                 return new SpeedUpgradeHandler(config);
             case UpgradeType.Control:
-                return UpgradeHandlerStub.Default;
+                return new ControlUpgradeHandler(config);
             default:
                 throw new ArgumentOutOfRangeException();
         }

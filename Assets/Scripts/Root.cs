@@ -9,8 +9,12 @@ using UnityEngine;
 public class Root : MonoBehaviour
 {
     [SerializeField]
-    private GlobalEventSO _eventUI;
+    private GlobalEventSO _eventsGameUI;
+    
+    [SerializeField]
+    private GlobalEventSO _eventsShed;
 
+    [Space]
     [SerializeField] 
     private Transform _placeForUi;
 
@@ -38,7 +42,16 @@ public class Root : MonoBehaviour
         var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
         profilePlayer.CurrentState.Value = GameState.Start;
         new TrailController(_placeForUi);
-        _mainController = new MainController(_placeForUi, profilePlayer, _analyticsTools, _ads, _items, _upgradeSource.ItemConfigs.ToList(), _abilityItems.AsReadOnly(), _eventUI);
+        _mainController = new MainController(
+            _placeForUi, 
+            profilePlayer, 
+            _analyticsTools, 
+            _ads, 
+            _items, 
+            _upgradeSource.ItemConfigs.ToList(), 
+            _abilityItems.AsReadOnly(), 
+            _eventsGameUI,
+            _eventsShed);
     }
 
     protected void OnDestroy()

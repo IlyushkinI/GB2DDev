@@ -15,6 +15,7 @@ public class MainMenuController : BaseController
     private readonly MainMenuView _view;
     private InputControllerType _inputControllerType;
     private readonly ShedController _shedController;
+    private readonly GlobalEventSO _eventsShed;
 
     public InputControllerType ControllerType => _inputControllerType;
 
@@ -24,7 +25,8 @@ public class MainMenuController : BaseController
         InputControllerType inputControllerType,
         IAnalyticTools analytics,
         IAdsShower ads,
-        ShedController shedController)
+        ShedController shedController,
+        GlobalEventSO eventsShed)
     {
         _inputControllerType = inputControllerType;
         _profilePlayer = profilePlayer;
@@ -32,7 +34,9 @@ public class MainMenuController : BaseController
         _ads = ads;
         _view = LoadView(placeForUi);
         _shedController = shedController;
+        _eventsShed = eventsShed;
         _view.Init(StartGame, ChooseInput, EnterShed);
+        _eventsShed.GlobalEventAction += EventsShedHandler;
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -68,12 +72,31 @@ public class MainMenuController : BaseController
     private void EnterShed()
     {
         _view.isActive = false;
-        //_shedController.
         _shedController.Enter();
     }
 
     private void ExitShed()
     {
         _view.isActive = true;
+        _shedController.Exit();
     }
+
+    private void EventsShedHandler(UIElements caller)
+    {
+        switch (caller)
+        {
+            case UIElements.ButtonOK:
+                ExitShed();
+                break;
+            case UIElements.ButtonCancel:
+                ExitShed();
+                break;
+        }
+    }
+
+    protected override void OnDispose()
+    {
+        _eventsShed.GlobalEventAction -= EventsShedHandler;
+    }
+
 }

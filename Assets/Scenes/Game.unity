@@ -249,7 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2daee8eff28379d4daff2805b218db1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventUI: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _eventsGameUI: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _eventsShed: {fileID: 11400000, guid: b079f4af6dfd08443a1472c0c0bfdb30, type: 2}
   _placeForUi: {fileID: 1138651854}
   _ads: {fileID: 587536404}
   _items:

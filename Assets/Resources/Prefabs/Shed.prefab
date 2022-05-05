@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 7225981452883637345}
   - component: {fileID: 4909743270297598723}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: DropdownBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2004,8 +2004,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rootGameObject: {fileID: 8905095801594322727}
+  _eventsShed: {fileID: 11400000, guid: b079f4af6dfd08443a1472c0c0bfdb30, type: 2}
   _buttonOK: {fileID: 2248321781317531468}
   _buttonCancel: {fileID: 2428249543841323567}
+  _dropdownBase: {fileID: 4909743270297598723}
+  _dropdownBaseRectTransform: {fileID: 2016203777826132201}
 --- !u!1 &8914577845252374147
 GameObject:
   m_ObjectHideFlags: 0

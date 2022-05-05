@@ -20,7 +20,8 @@ public class MainController : BaseController
     private Dictionary<string, object> _analyticDataInputTypeSelected;
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
     private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
-    private readonly GlobalEventSO _eventUI;
+    private readonly GlobalEventSO _eventsGameUI;
+    private readonly GlobalEventSO _eventsShed;
 
     public MainController(
         Transform placeForUI,
@@ -30,7 +31,8 @@ public class MainController : BaseController
         List<ItemConfig> itemsConfig,
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
         IReadOnlyList<AbilityItemConfig> abilityItems,
-        GlobalEventSO eventUI)
+        GlobalEventSO eventsGameUI,
+        GlobalEventSO eventsShed)
     {
         _profilePlayer = profilePlayer;
         _analyticsTools = analyticsTools;
@@ -40,7 +42,8 @@ public class MainController : BaseController
         _upgradeItems = upgradeItems;
         _abilityItems = abilityItems;
         _analyticDataInputTypeSelected = new Dictionary<string, object>();
-        _eventUI = eventUI;
+        _eventsGameUI = eventsGameUI;
+        _eventsShed = eventsShed;
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -59,8 +62,8 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUI);
-                _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads, _shedController);
+                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUI, _eventsShed);
+                _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads, _shedController, _eventsShed);
                 //_shedController.Enter();
                 //_shedController.Exit();
                 _gameController?.Dispose();
@@ -68,12 +71,12 @@ public class MainController : BaseController
                 break;
             case GameState.Game:
                 var inventoryModel = new InventoryModel();
-                _inventoryController = new InventoryController(_itemsConfig, inventoryModel, _placeForUI);
+                _inventoryController = new InventoryController(_itemsConfig, inventoryModel, _placeForUI, _eventsShed);
                 //_inventoryController.ShowInventory();
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
-                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventUI);
+                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventsGameUI);
                 _mainMenuController?.Dispose();
                 break;
             default:

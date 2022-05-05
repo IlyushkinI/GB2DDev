@@ -11,7 +11,7 @@ public class ShedController : BaseController, IShedController
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _model;
     
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI)
+    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI, GlobalEventSO eventsShed)
     {
         _upgradeItems = upgradeItems;
         _car = car;
@@ -20,20 +20,20 @@ public class ShedController : BaseController, IShedController
         AddController(_upgradeRepository);
 
         _model = new InventoryModel();
-        _inventoryController = new InventoryController(items, _model, placeForUI);
+        _inventoryController = new InventoryController(items, _model, placeForUI, eventsShed);
         AddController(_inventoryController);
     }
 
     public void Enter()
     {
         _inventoryController.ShowInventory();
-        Debug.Log($"Enter, car speed = {_car.Speed}");
+        Debug.Log($"Enter, car speed = {_car.Speed} + {_car.Control}");
     }
 
     public void Exit()
     {
         UpgradeCarWithEquipedItems(_car, _model.GetEquippedItems(), _upgradeRepository.UpgradeItems);
-        Debug.Log($"Exit, car speed = {_car.Speed}");
+        Debug.Log($"Exit, car speed = {_car.Speed} + {_car.Control}");
     }
 
     private void UpgradeCarWithEquipedItems(IUpgradeableCar car,

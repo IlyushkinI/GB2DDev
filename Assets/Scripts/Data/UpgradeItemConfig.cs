@@ -18,10 +18,3 @@ public class UpgradeItemConfig : ScriptableObject
 
     public int ValueUpgrade => _valueUpgrade;
 }
-
-public enum UpgradeType
-{
-    None,
-    Speed,
-    Control
-}
