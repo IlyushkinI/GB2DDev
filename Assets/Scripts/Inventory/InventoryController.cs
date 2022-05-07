@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -7,27 +8,55 @@ public class InventoryController : BaseController, IInventoryController
 
     #region Fields
 
-    private readonly IInventoryModel _inventoryModel;
     private readonly InventoryView _inventoryView;
     private readonly IItemsRepository _itemsRepository;
 
     private readonly string _pathToView = "Prefabs/Shed";
     private readonly GlobalEventSO _eventsShed;
 
+    private InventoryModel _inventoryModel;
+
+    #endregion
+
+
+    #region Properties
+
+    public IReadOnlyList<IItem> EquipedItems => _inventoryModel.GetEquippedItems();
+
     #endregion
 
 
     #region CodeLifeCycles
 
-    public InventoryController(List<ItemConfig> itemConfigs, InventoryModel inventoryModel, Transform placeForUI, GlobalEventSO eventsShed)
+    public InventoryController(
+        List<ItemConfig> itemConfigs,
+        IReadOnlyList<UpgradeItemConfig> upgradeItems,
+        Transform placeForUI,
+        GlobalEventSO eventsShed)
     {
+        _itemsRepository = new ItemsRepository(itemConfigs);
+        _inventoryModel = new InventoryModel(new List<IItem>(_itemsRepository.Items.Values));
+
         _eventsShed = eventsShed;
 
-        _inventoryModel = inventoryModel;
         _inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
+        _inventoryView.Display(_inventoryModel.GetEquippedItems());
+
+        foreach (var item in _inventoryModel.GetEquippedItems())
+        {
+            _inventoryView.ItemsList[item.Info.Title].options.Add(new TMP_Dropdown.OptionData("None"));
+
+            foreach (var upgradeItem in upgradeItems)
+            {
+                if (upgradeItem.Id == item.Id)
+                {
+                    _inventoryView.ItemsList[item.Info.Title].options.Add(new TMP_Dropdown.OptionData(upgradeItem.name));
+                }
+            }
+        }
+
         _inventoryView.isActive = false;
 
-        _itemsRepository = new ItemsRepository(itemConfigs);
         _eventsShed.GlobalEventAction += EventUIHandler;
     }
 
@@ -36,16 +65,14 @@ public class InventoryController : BaseController, IInventoryController
 
     #region Methods
 
-    public void ShowInventory()
+    public void ShowInventory(float speed, float control)
     {
         _inventoryView.isActive = true;
-
-        foreach (var item in _itemsRepository.Items.Values)
-            _inventoryModel.EquipItem(item);
-
-        var equippedItems = _inventoryModel.GetEquippedItems();
-
-        _inventoryView.Display(equippedItems);
+        _inventoryView.Display(_inventoryModel.GetEquippedItems());
+        _inventoryView.SetTextForItemsEffect =
+            "Effects:\n" +
+            $"\tCar speed : {speed}\n" +
+            $"\tCar control : {control}";
     }
 
     protected override void OnDispose()

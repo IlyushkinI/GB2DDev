@@ -1,4 +1,4 @@
 ﻿public interface IInventoryController
 {
-    void ShowInventory();
+    void ShowInventory(float speed, float control);
 }

@@ -20,23 +20,25 @@ public class MainMenuController : BaseController
     public InputControllerType ControllerType => _inputControllerType;
 
     public MainMenuController(
-        Transform placeForUi,
+        Transform placeForUI,
         ProfilePlayer profilePlayer,
         InputControllerType inputControllerType,
         IAnalyticTools analytics,
         IAdsShower ads,
-        ShedController shedController,
-        GlobalEventSO eventsShed)
+        GlobalEventSO eventsShed,
+        List<ItemConfig> itemsConfig,
+        IReadOnlyList<UpgradeItemConfig> upgradeItems)
     {
         _inputControllerType = inputControllerType;
         _profilePlayer = profilePlayer;
         _analytics = analytics;
         _ads = ads;
-        _view = LoadView(placeForUi);
-        _shedController = shedController;
+        _view = LoadView(placeForUI);
         _eventsShed = eventsShed;
         _view.Init(StartGame, ChooseInput, EnterShed);
         _eventsShed.GlobalEventAction += EventsShedHandler;
+
+        _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed);
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -44,7 +46,7 @@ public class MainMenuController : BaseController
         var objectView = GameObject.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false).GetComponent<MainMenuView>();
         AddGameObjects(objectView.gameObject);
 
-        ConfigureDropdown(objectView);
+        ConfigureInputDropdown(objectView);
 
         return objectView;
     }
@@ -61,7 +63,7 @@ public class MainMenuController : BaseController
         _inputControllerType = (InputControllerType)(inputControllerType + 1);
     }
 
-    private void ConfigureDropdown(MainMenuView view)
+    private void ConfigureInputDropdown(MainMenuView view)
     {
         string[] allInputTypes = Enum.GetNames(typeof(InputControllerType));
         view.DropdownInputSelect.ClearOptions();

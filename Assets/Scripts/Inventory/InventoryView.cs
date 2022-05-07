@@ -26,15 +26,13 @@ public class InventoryView : MonoBehaviour, IInventoryView
 
     [Space]
     [SerializeField]
-    private TMP_Dropdown _dropdownBase;
+    private InventoryBaseItemView _baseItem;
 
+    [Space]
     [SerializeField]
-    private RectTransform _dropdownBaseRectTransform;
+    private TextMeshProUGUI _textForEffect;
 
-    private float _dropdownBaseHeight;
-    private Vector3 _dropdownBasePosition;
-
-    private List<TMP_Dropdown> _dropdowns;
+    private Dictionary<string, TMP_Dropdown> _itemsList;
 
     #endregion
 
@@ -45,6 +43,13 @@ public class InventoryView : MonoBehaviour, IInventoryView
     {
         set => _rootGameObject.gameObject.SetActive(value);
         get => _rootGameObject.gameObject.activeSelf;
+    }
+    public Dictionary<string, TMP_Dropdown> ItemsList => _itemsList;
+    public string SetTextForItemsEffect { 
+        set 
+        {
+            _textForEffect.text = value;
+        } 
     }
 
     #endregion
@@ -68,6 +73,10 @@ public class InventoryView : MonoBehaviour, IInventoryView
 
 
     #region Methods
+    public void Display(IReadOnlyList<IItem> items)
+    {
+        CreateItemsList(items, _baseItem, out _itemsList);
+    }
 
     private void OnClickOK()
     {
@@ -79,26 +88,34 @@ public class InventoryView : MonoBehaviour, IInventoryView
         _eventsShed.Invoke(UIElements.ButtonCancel);
     }
 
-    public void Display(IReadOnlyList<IItem> items)
+    private void CreateItemsList(IReadOnlyList<IItem> items, InventoryBaseItemView baseItem, out Dictionary<string, TMP_Dropdown> itemsList)
     {
-        _dropdowns = new List<TMP_Dropdown>(items.Count);
+        itemsList = new Dictionary<string, TMP_Dropdown>(items.Count);
+        
+        if (baseItem == null)
+        {
+            return;
+        }
 
-        _dropdownBasePosition = _dropdownBaseRectTransform.anchoredPosition3D;
-        _dropdownBaseHeight = _dropdownBaseRectTransform.rect.height;
+        Vector3 baseItemPosition = baseItem.AnchoredPosition;
+        float baseItemHeight = baseItem.Height;
 
         for (int i = 0; i < items.Count; i++)
         {
-            Debug.Log($"Id item: {items[i].Id}. Title item: {items[i].Info.Title}");
+            var newItem = GameObject.Instantiate(_baseItem, _baseItem.transform.parent);
             
-            _dropdowns.Add(GameObject.Instantiate(_dropdownBase, _dropdownBase.transform.parent));
-            _dropdowns[i].gameObject.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(
-                _dropdownBasePosition.x,
-                _dropdownBasePosition.y + (_dropdownBaseHeight - _dropdownBasePosition.y) * -i,
-                _dropdownBasePosition.z);
+            newItem.gameObject.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(
+                baseItemPosition.x,
+                baseItemPosition.y + (baseItemHeight - baseItemPosition.y) * -i,
+                baseItemPosition.z);
+            
+            newItem.Label.text = items[i].Info.Title;
+            newItem.Dropdown.ClearOptions();
 
+            itemsList.Add(items[i].Info.Title, newItem.Dropdown);
         }
 
-        _dropdownBase.gameObject.SetActive(false);
+        GameObject.Destroy(baseItem.gameObject);
     }
 
     #endregion
