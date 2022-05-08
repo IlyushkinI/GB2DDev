@@ -23,6 +23,6 @@ public class GlobalEventSO : ScriptableObject
 
     public void Invoke(UIElements eventCaller) => _eventAction.Invoke(eventCaller);
 
-    public void Invoke(UIElements eventCaller, int value, string label) => _eventDropdown.Invoke(eventCaller, value, label);
+    public void Invoke(UIElements eventCaller, int dropdownValue, string dropdownItemLabel) => _eventDropdown.Invoke(eventCaller, dropdownValue, dropdownItemLabel);
 
 }

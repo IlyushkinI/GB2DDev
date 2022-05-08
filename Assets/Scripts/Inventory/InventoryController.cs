@@ -10,7 +10,6 @@ public class InventoryController : BaseController, IInventoryController
 
     private readonly InventoryView _inventoryView;
     private readonly IItemsRepository _itemsRepository;
-    IReadOnlyList<UpgradeItemConfig> _availableUpgradeItems;
     List<UpgradeItemConfig> _applyUpgradeItems;
 
     private readonly string _pathToView = "Prefabs/Shed";
@@ -26,6 +25,8 @@ public class InventoryController : BaseController, IInventoryController
     private float _defaultControl;
 
     private string _emptyDropdownLabel = "None";
+
+    private ItemsDatabase _itemsDatabase;
 
     #endregion
 
@@ -45,17 +46,16 @@ public class InventoryController : BaseController, IInventoryController
         Transform placeForUI,
         GlobalEventSO eventsShed)
     {
-        _applyUpgradeItems = new List<UpgradeItemConfig>();
-        _availableUpgradeItems = upgradeItems;
         _itemsRepository = new ItemsRepository(itemConfigs);
         _inventoryModel = new InventoryModel(new List<IItem>(_itemsRepository.Items.Values));
+        _itemsDatabase = new ItemsDatabase(upgradeItems, itemConfigs);
 
         _eventsShed = eventsShed;
 
         _inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
         _inventoryView.MakeDropdownPanel(EquipedItems);
 
-        ConfigureDropdownPanel(_availableUpgradeItems, _inventoryModel, _inventoryView);
+        ConfigureDropdownPanel(_itemsDatabase, _inventoryView);
 
         _inventoryView.isActive = false;
 
@@ -75,8 +75,9 @@ public class InventoryController : BaseController, IInventoryController
         _defaultSpeed = _car.Speed;
         _currentControl = _car.Control;
         _defaultControl = _car.Control;
+        _applyUpgradeItems = new List<UpgradeItemConfig>(_car.AppliedItems);
         _inventoryView.isActive = true;
-        //ActualizeDropdownPanel(_car.AppliedItems);
+        SetValuesForDropdownPanel(_car.AppliedItems, _itemsDatabase, _inventoryView);
         UpdateInventoryText();
     }
 
@@ -94,46 +95,47 @@ public class InventoryController : BaseController, IInventoryController
             $"\tCar control : {FormatText(_defaultControl, _currentControl)}";
     }
 
-    private string FormatText(float a, float b)
+    private string FormatText(float defValue, float curValue)
     {
-        if (Mathf.Approximately(b - a, 0.0f))
+        if (Mathf.Approximately(curValue - defValue, 0.0f))
         {
-            return $"{a}";
+            return $"{defValue}";
         }
         else
         {
-            if ((b - a) > 0.0f)
+            if (curValue > defValue)
             {
-                return $"{a} + {b - a}";
+                return $"{defValue} + {curValue - defValue}";
             }
             else
             {
-                return $"{a} - {a - b}";
+                return $"{defValue} - {defValue - curValue}";
             }
         }
     }
 
-    private void ConfigureDropdownPanel(IReadOnlyList<UpgradeItemConfig> upgradeItems, InventoryModel inventoryModel, InventoryView inventoryView)
+    private void ConfigureDropdownPanel(ItemsDatabase itemsDatabase, InventoryView inventoryView)
     {
-        foreach (var item in inventoryModel.GetEquippedItems())
+        foreach (var item in itemsDatabase.Items)
         {
-            inventoryView.ItemsList[item.Info.Title].Dropdown.options.Add(new TMP_Dropdown.OptionData(_emptyDropdownLabel));
+            inventoryView.ItemsList[item.Title].Dropdown.options.Add(new TMP_Dropdown.OptionData(_emptyDropdownLabel));
+            inventoryView.ItemsList[item.Title].Dropdown.options.AddRange(itemsDatabase.GetUpgradeItems(item.Title).ConvertAll(i => new TMP_Dropdown.OptionData(i.Name)));
+        }
+    }
 
-            foreach (var upgradeItem in upgradeItems)
+    private void SetValuesForDropdownPanel(List<UpgradeItemConfig> itemsOnPlayer, ItemsDatabase itemsDatabase, InventoryView inventoryView)
+    {
+        foreach (var item in itemsDatabase.Items)
+        {
+            var itemOnPlayer = itemsOnPlayer.Find(i => i.Id == item.Id);
+            int index = 0;
+
+            if (itemOnPlayer != null)
             {
-                if (upgradeItem.Id == item.Id)
-                {
-                    inventoryView.ItemsList[item.Info.Title].Dropdown.options.Add(new TMP_Dropdown.OptionData(upgradeItem.Name));
-                }
+                index = inventoryView.ItemsList[item.Title].Dropdown.options.FindIndex(i => i.text == itemOnPlayer.Name);
             }
-        }
-    }
 
-    private void ActualizeDropdownPanel(List<UpgradeItemConfig> itemConfigs)
-    {
-        foreach (var item in itemConfigs)
-        {
-            
+            inventoryView.ItemsList[item.Title].Dropdown.SetValueWithoutNotify(index);
         }
     }
 
@@ -155,75 +157,56 @@ public class InventoryController : BaseController, IInventoryController
         }
     }
 
-    private void EventUIHandler(UIElements caller, int value, string dropdownLabel)
+    private void EventUIHandler(UIElements _, int dropdownValue, string dropdownItemLabel)
     {
-        ManageApplyList(value, dropdownLabel);
-        ApplyItems();
+        ManageApplyList(dropdownValue, dropdownItemLabel, _inventoryView, _applyUpgradeItems, _itemsDatabase, _emptyDropdownLabel);
         UpdateInventoryText();
     }
 
-    private void ManageApplyList(int value, string dropdownLabel)
+    private void ManageApplyList(
+        int dropdownValue,
+        string dropdownItemLabel,
+        InventoryView inventoryView,
+        List<UpgradeItemConfig> applyUpgradeItems,
+        ItemsDatabase itemsDatabase,
+        string emptyDropdownLabel)
     {
-        foreach (var itemAvailable in _availableUpgradeItems)
+        var dropdownValueName = inventoryView.ItemsList[dropdownItemLabel].Dropdown.options[dropdownValue].text;// uItem.Name
+
+        var upgradeItemForRemove = applyUpgradeItems.Find(i => i.Id == itemsDatabase.Items.Find(ii => ii.Title == dropdownItemLabel).Id);// uItem or null
+        var upgradeItemForAdd = itemsDatabase.UpgradeItems.Find(i => i.Name == dropdownValueName);// uItem or null
+
+        if (dropdownValueName == emptyDropdownLabel)
         {
-            if (_inventoryView.ItemsList[dropdownLabel].Dropdown.options[value].text == _emptyDropdownLabel)
+            ApplyItemForUI(false, upgradeItemForRemove);
+            applyUpgradeItems.Remove(upgradeItemForRemove);
+        }
+        else
+        {
+            if (upgradeItemForRemove != null)
             {
-                _applyUpgradeItems.Remove(GetItemByID(_applyUpgradeItems, GetIDbyName(EquipedItems, dropdownLabel)));
+                ApplyItemForUI(false, upgradeItemForRemove);
+                applyUpgradeItems.Remove(upgradeItemForRemove);
+            }
+
+            ApplyItemForUI(true, upgradeItemForAdd);
+            applyUpgradeItems.Add(upgradeItemForAdd);
+        }
+    }
+
+    private void ApplyItemForUI(bool isIncrease, UpgradeItemConfig item)
+    {
+        switch (item.UpgradeType)
+        {
+            case UpgradeType.None:
                 break;
-            }
-
-            if (_inventoryView.ItemsList[dropdownLabel].Dropdown.options[value].text == itemAvailable.Name)
-            {
-                _applyUpgradeItems.Remove(GetItemByID(_applyUpgradeItems, itemAvailable.Id));
-                _applyUpgradeItems.Add(itemAvailable);
+            case UpgradeType.Speed:
+                _currentSpeed += item.ValueUpgrade * (isIncrease ? 1 : -1);
                 break;
-            }
+            case UpgradeType.Control:
+                _currentControl += item.ValueUpgrade * (isIncrease ? 1 : -1);
+                break;
         }
-    }
-
-    private void ApplyItems()
-    {
-        _currentSpeed = _defaultSpeed;
-        _currentControl = _defaultControl;
-
-        foreach (var item in _applyUpgradeItems)
-        {
-            switch (item.UpgradeType)
-            {
-                case UpgradeType.None:
-                    break;
-                case UpgradeType.Speed:
-                    _currentSpeed += item.ValueUpgrade;
-                    break;
-                case UpgradeType.Control:
-                    _currentControl += item.ValueUpgrade;
-                    break;
-            }
-        }
-    }
-
-    private int GetIDbyName(IReadOnlyList<IItem> list, string name)
-    {
-        foreach (var item in list)
-        {
-            if (item.Info.Title == name)
-            {
-                return item.Id;
-            }
-        }
-        return -1;
-    }
-
-    private UpgradeItemConfig GetItemByID(List<UpgradeItemConfig> applyUpgradeItems, int ID)
-    {
-        foreach (var item in applyUpgradeItems)
-        {
-            if (item.Id == ID)
-            {
-                return item;
-            }
-        }
-        return null;
     }
 
     #endregion

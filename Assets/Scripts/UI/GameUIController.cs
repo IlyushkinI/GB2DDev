@@ -35,6 +35,7 @@ public class GameUIController : BaseController
         GameObject.Instantiate(Resources.Load(_prefabUI), placeForUI);
 
         _shedController = new ShedController(upgradeItems, itemsConfig, profilePlayer.CurrentCar, placeForUI, eventsShed);
+        AddController(_shedController);
 
         _eventUI.GlobalEventAction += UIEventHandler;
         _eventsShed.GlobalEventAction += EventsShedHandler;

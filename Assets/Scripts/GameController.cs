@@ -10,7 +10,6 @@ public class GameController : BaseController
         InputControllerType inputControllerType,
         Transform placeForUI,
         IReadOnlyList<AbilityItemConfig> configs,
-        InventoryModel inventoryModel,
         GlobalEventSO eventUI,
         GlobalEventSO eventsShed,
         List<ItemConfig> itemsConfig,
@@ -32,8 +31,7 @@ public class GameController : BaseController
         AddController(gameUIController);
 
         var abilityRepository = new AbilityRepository(configs);
-        var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository,
-            new AbilitiesCollectionViewStub());
+        var abilitiesController = new AbilitiesController(carController, abilityRepository, new AbilitiesCollectionViewStub());
         AddController(abilitiesController);
     }
 }

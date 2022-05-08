@@ -10,7 +10,6 @@ public class MainController : BaseController
     private InputControllerType _inputType = InputControllerType.Buttons;
     private MainMenuController _mainMenuController;
     private GameController _gameController;
-    private InventoryController _inventoryController;
     private readonly Transform _placeForUI;
     private readonly ProfilePlayer _profilePlayer;
     private readonly List<ItemConfig> _itemsConfig;
@@ -63,14 +62,12 @@ public class MainController : BaseController
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads, _eventsShed, _itemsConfig, _upgradeItems);
                 _gameController?.Dispose();
-                _inventoryController?.Dispose();
                 break;
             case GameState.Game:
-                var inventoryModel = new InventoryModel();
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
-                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventsGameUI, _eventsShed, _itemsConfig, _upgradeItems);
+                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, _eventsGameUI, _eventsShed, _itemsConfig, _upgradeItems);
                 _mainMenuController?.Dispose();
                 break;
             default:
@@ -81,7 +78,6 @@ public class MainController : BaseController
 
     private void AllClear()
     {
-        _inventoryController?.Dispose();
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
     }

@@ -39,6 +39,7 @@ public class MainMenuController : BaseController
         _eventsShed.GlobalEventAction += EventsShedHandler;
 
         _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed);
+        AddController(_shedController);
     }
 
     private MainMenuView LoadView(Transform placeForUi)
