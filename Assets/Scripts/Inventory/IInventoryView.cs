@@ -2,5 +2,5 @@
 
 public interface IInventoryView
 {
-    void Display(IReadOnlyList<IItem> items);
+    void MakeDropdownPanel(IReadOnlyList<IItem> items);
 }

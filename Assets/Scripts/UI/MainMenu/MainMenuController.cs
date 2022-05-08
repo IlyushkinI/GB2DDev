@@ -85,14 +85,9 @@ public class MainMenuController : BaseController
 
     private void EventsShedHandler(UIElements caller)
     {
-        switch (caller)
+        if (caller == UIElements.ExitShed)
         {
-            case UIElements.ButtonOK:
-                ExitShed();
-                break;
-            case UIElements.ButtonCancel:
-                ExitShed();
-                break;
+            ExitShed();
         }
     }
 

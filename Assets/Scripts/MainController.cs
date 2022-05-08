@@ -70,7 +70,7 @@ public class MainController : BaseController
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
-                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventsGameUI);
+                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, inventoryModel, _eventsGameUI, _eventsShed, _itemsConfig, _upgradeItems);
                 _mainMenuController?.Dispose();
                 break;
             default:

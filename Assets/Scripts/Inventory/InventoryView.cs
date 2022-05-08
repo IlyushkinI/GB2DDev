@@ -32,7 +32,7 @@ public class InventoryView : MonoBehaviour, IInventoryView
     [SerializeField]
     private TextMeshProUGUI _textForEffect;
 
-    private Dictionary<string, TMP_Dropdown> _itemsList;
+    private Dictionary<string, InventoryBaseItemView> _itemsList;
 
     #endregion
 
@@ -44,12 +44,12 @@ public class InventoryView : MonoBehaviour, IInventoryView
         set => _rootGameObject.gameObject.SetActive(value);
         get => _rootGameObject.gameObject.activeSelf;
     }
-    public Dictionary<string, TMP_Dropdown> ItemsList => _itemsList;
-    public string SetTextForItemsEffect { 
-        set 
-        {
-            _textForEffect.text = value;
-        } 
+
+    public Dictionary<string, InventoryBaseItemView> ItemsList => _itemsList;
+
+    public string SetTextForItemsEffect
+    {
+        set => _textForEffect.text = value;
     }
 
     #endregion
@@ -73,9 +73,11 @@ public class InventoryView : MonoBehaviour, IInventoryView
 
 
     #region Methods
-    public void Display(IReadOnlyList<IItem> items)
+
+    public void MakeDropdownPanel(IReadOnlyList<IItem> items)
     {
-        CreateItemsList(items, _baseItem, out _itemsList);
+        _itemsList = new Dictionary<string, InventoryBaseItemView>(items.Count);
+        CreateItemsList(items, _baseItem, ref _itemsList);
     }
 
     private void OnClickOK()
@@ -88,31 +90,24 @@ public class InventoryView : MonoBehaviour, IInventoryView
         _eventsShed.Invoke(UIElements.ButtonCancel);
     }
 
-    private void CreateItemsList(IReadOnlyList<IItem> items, InventoryBaseItemView baseItem, out Dictionary<string, TMP_Dropdown> itemsList)
+    private void CreateItemsList(IReadOnlyList<IItem> items, InventoryBaseItemView baseItem, ref Dictionary<string, InventoryBaseItemView> itemsList)
     {
-        itemsList = new Dictionary<string, TMP_Dropdown>(items.Count);
-        
-        if (baseItem == null)
-        {
-            return;
-        }
-
         Vector3 baseItemPosition = baseItem.AnchoredPosition;
         float baseItemHeight = baseItem.Height;
 
         for (int i = 0; i < items.Count; i++)
         {
             var newItem = GameObject.Instantiate(_baseItem, _baseItem.transform.parent);
-            
+
             newItem.gameObject.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(
                 baseItemPosition.x,
                 baseItemPosition.y + (baseItemHeight - baseItemPosition.y) * -i,
                 baseItemPosition.z);
-            
+
             newItem.Label.text = items[i].Info.Title;
             newItem.Dropdown.ClearOptions();
 
-            itemsList.Add(items[i].Info.Title, newItem.Dropdown);
+            itemsList.Add(items[i].Info.Title, newItem);
         }
 
         GameObject.Destroy(baseItem.gameObject);

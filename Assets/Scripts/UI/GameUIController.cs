@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -9,21 +10,34 @@ public class GameUIController : BaseController
 
     private readonly string _prefabUI = "Prefabs/UI";
     private readonly GlobalEventSO _eventUI;
+    private readonly GlobalEventSO _eventsShed;
     private readonly CarController _carController;
+    private readonly ShedController _shedController;
 
     #endregion
 
 
     #region CodeLifeCycles
 
-    public GameUIController(Transform placeForUI, GlobalEventSO eventUI, CarController carController)
+    public GameUIController(
+        Transform placeForUI, 
+        GlobalEventSO eventUI, 
+        CarController carController,
+        GlobalEventSO eventsShed,
+        List<ItemConfig> itemsConfig,
+        IReadOnlyList<UpgradeItemConfig> upgradeItems,
+        ProfilePlayer profilePlayer)
     {
         _eventUI = eventUI;
+        _eventsShed = eventsShed;
         _carController = carController;
 
         GameObject.Instantiate(Resources.Load(_prefabUI), placeForUI);
 
+        _shedController = new ShedController(upgradeItems, itemsConfig, profilePlayer.CurrentCar, placeForUI, eventsShed);
+
         _eventUI.GlobalEventAction += UIEventHandler;
+        _eventsShed.GlobalEventAction += EventsShedHandler;
     }
 
     #endregion
@@ -43,6 +57,9 @@ public class GameUIController : BaseController
             case UIElements.ButtonStore:
                 PurchaseComplete();
                 break;
+            case UIElements.EnterShed:
+                EnterShed();
+                break;
         }
     }
 
@@ -61,9 +78,30 @@ public class GameUIController : BaseController
         _carController.CarView.FrontWheel.color = Color.green;
     }
 
+    private void EnterShed()
+    {
+        //_view.isActive = false;
+        _shedController.Enter();
+    }
+
+    private void ExitShed()
+    {
+        //_view.isActive = true;
+        _shedController.Exit();
+    }
+
+    private void EventsShedHandler(UIElements caller)
+    {
+        if (caller == UIElements.ExitShed)
+        {
+            ExitShed();
+        }
+    }
+
     protected override void OnDispose()
     {
         _eventUI.GlobalEventAction -= UIEventHandler;
+        _eventsShed.GlobalEventAction -= EventsShedHandler;
     }
 
     #endregion

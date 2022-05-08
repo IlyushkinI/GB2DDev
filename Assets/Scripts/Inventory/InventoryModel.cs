@@ -1,8 +1,17 @@
 ﻿using System.Collections.Generic;
 
+
 public class InventoryModel : IInventoryModel
 {
+
+    #region Fields
+
     private readonly List<IItem> _items = new List<IItem>();
+
+    #endregion
+
+
+    #region CodeLifeCycles
 
     public InventoryModel() { }
 
@@ -13,6 +22,11 @@ public class InventoryModel : IInventoryModel
             EquipItem(item);
         }
     }
+
+    #endregion
+
+
+    #region IInventoryModel
 
     public IReadOnlyList<IItem> GetEquippedItems()
     {
@@ -31,4 +45,7 @@ public class InventoryModel : IInventoryModel
     {
         _items.Remove(item);
     }
+
+    #endregion
+
 }

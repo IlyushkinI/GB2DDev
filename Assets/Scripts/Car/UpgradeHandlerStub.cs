@@ -6,4 +6,8 @@
     {
         return car;
     }
+    public IUpgradeableCar Unupgrade(IUpgradeableCar car)
+    {
+        return car;
+    }
 }

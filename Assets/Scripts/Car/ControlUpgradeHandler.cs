@@ -13,5 +13,9 @@
         car.Control += _config.ValueUpgrade;
         return car;
     }
-
+    public IUpgradeableCar Unupgrade(IUpgradeableCar car)
+    {
+        car.Control -= _config.ValueUpgrade;
+        return car;
+    }
 }
