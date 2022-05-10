@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using Tools.Ads;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : BaseController
 {
+    private readonly string _sceneAI = "AI";
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAnalyticTools _analytics;
@@ -35,7 +36,8 @@ public class MainMenuController : BaseController
         _ads = ads;
         _view = LoadView(placeForUI);
         _eventsShed = eventsShed;
-        _view.Init(StartGame, ChooseInput, EnterShed);
+        _view.Init(StartGame, ChooseInput, EnterShed, StartBattle);
+
         _eventsShed.GlobalEventAction += EventsShedHandler;
 
         _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed);
@@ -82,6 +84,11 @@ public class MainMenuController : BaseController
     {
         _view.isActive = true;
         _shedController.Exit();
+    }
+
+    private void StartBattle()
+    {
+        SceneManager.LoadScene(_sceneAI);
     }
 
     private void EventsShedHandler(UIElements caller)
