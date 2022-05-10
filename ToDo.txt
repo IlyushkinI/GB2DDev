@@ -1,0 +1,3 @@
+1. TrailController. Разобраться с Trail-артефактами. trailRenderer.clear() не срабатывает.
+2. UnityStandardAssets.CrossPlatformInput. Разобраться с There is already a virtual axis named Horizontal registered.
+3. Сброс параметров во view после старта уровня
