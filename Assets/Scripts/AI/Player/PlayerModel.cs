@@ -13,7 +13,7 @@ namespace AI
         private const int MIN_VALUE = 0;
         private const int MAX_VALUE = 999;
 
-        private Dictionary<PlayerDataTypes, int> _playerData;
+        private Dictionary<PlayerDataType, int> _playerData;
 
         #endregion
 
@@ -22,11 +22,11 @@ namespace AI
 
         public PlayerModel()
         {
-            var playerDataTypesValues = Enum.GetValues(typeof(PlayerDataTypes));
-            _playerData = new Dictionary<PlayerDataTypes, int>(playerDataTypesValues.Length);
+            var playerDataTypesValues = Enum.GetValues(typeof(PlayerDataType));
+            _playerData = new Dictionary<PlayerDataType, int>(playerDataTypesValues.Length);
             foreach (var item in playerDataTypesValues)
             {
-                _playerData.Add((PlayerDataTypes)item, 0);
+                _playerData.Add((PlayerDataType)item, 0);
             }
         }
 
@@ -45,7 +45,7 @@ namespace AI
 
         #region IPlayerData
 
-        public bool TrySetData(PlayerDataTypes dataType, int value)
+        public bool TrySetData(PlayerDataType dataType, int value)
         {
             if (ClampValue(_playerData[dataType] + value) != _playerData[dataType])
             {
@@ -56,7 +56,7 @@ namespace AI
             return false;
         }
 
-        public int GetData(PlayerDataTypes dataType)
+        public int GetData(PlayerDataType dataType)
         {
             return _playerData[dataType];
         }

@@ -36,49 +36,58 @@ namespace AI
 
         #region Methods
 
-        private void UIEventHandler(AIUIElements caller)
+        private void UIEventHandler(AIUIElement caller, PlayerDataType dataType, int data)
         {
-            switch (caller)
-            {
-                case AIUIElements.ButtonHealthAdd:
-                    if (_playerModel.TrySetData(PlayerDataTypes.Health, 1))
-                    {
-                        Notify(PlayerDataTypes.Health);
-                    }
-                    break;
-                case AIUIElements.ButtonHealthSub:
-                    if (_playerModel.TrySetData(PlayerDataTypes.Health, -1))
-                    {
-                        Notify(PlayerDataTypes.Health);
-                    }
-                    break;
-                case AIUIElements.ButtonMoneyAdd:
-                    if (_playerModel.TrySetData(PlayerDataTypes.Money, 1))
-                    {
-                        Notify(PlayerDataTypes.Money);
-                    }
-                    break;
-                case AIUIElements.ButtonMoneyhSub:
-                    if (_playerModel.TrySetData(PlayerDataTypes.Money, -1))
-                    {
-                        Notify(PlayerDataTypes.Money);
-                    }
-                    break;
-                case AIUIElements.ButtonForceAdd:
-                    if (_playerModel.TrySetData(PlayerDataTypes.Force, 1))
-                    {
-                        Notify(PlayerDataTypes.Force);
-                    }
-                    break;
-                case AIUIElements.ButtonForceSub:
-                    if (_playerModel.TrySetData(PlayerDataTypes.Force, -1))
-                    {
-                        Notify(PlayerDataTypes.Force);
-                    }
-                    break;
-                default:
-                    break;
-            }
+            if (AIUIElement.ConfigButtons.HasFlag(caller))
+                if (_playerModel.TrySetData(dataType, data))
+                {
+                    UnityEngine.Debug.Log($"Button {caller}. Data {dataType}. Value {data}.");
+                    Notify(dataType);
+                }
+
+
+            //switch (caller)
+            //{
+            //    case AIUIElement.ButtonHealthAdd:
+            //        if (_playerModel.TrySetData(PlayerDataType.Health, 1))
+            //        {
+            //            Notify(PlayerDataType.Health);
+            //        }
+            //        break;
+            //    case AIUIElement.ButtonHealthSub:
+            //        if (_playerModel.TrySetData(PlayerDataType.Health, -1))
+            //        {
+            //            Notify(PlayerDataType.Health);
+            //        }
+            //        break;
+            //    case AIUIElement.ButtonMoneyAdd:
+            //        if (_playerModel.TrySetData(PlayerDataType.Money, 1))
+            //        {
+            //            Notify(PlayerDataType.Money);
+            //        }
+            //        break;
+            //    case AIUIElement.ButtonMoneyhSub:
+            //        if (_playerModel.TrySetData(PlayerDataType.Money, -1))
+            //        {
+            //            Notify(PlayerDataType.Money);
+            //        }
+            //        break;
+            //    case AIUIElement.ButtonForceAdd:
+            //        if (_playerModel.TrySetData(PlayerDataType.Force, 1))
+            //        {
+            //            Notify(PlayerDataType.Force);
+            //        }
+            //        break;
+            //    case AIUIElement.ButtonForceSub:
+            //        if (_playerModel.TrySetData(PlayerDataType.Force, -1))
+            //        {
+            //            Notify(PlayerDataType.Force);
+            //        }
+            //        break;
+            //    default:
+            //        break;
+            //}
+
         }
 
         #endregion
@@ -86,7 +95,7 @@ namespace AI
 
         #region IPlayerObserver
 
-        public void Notify(PlayerDataTypes dataType)
+        public void Notify(PlayerDataType dataType)
         {
             _observers.ForEach(i => i.Catch(dataType, _playerModel));
         }

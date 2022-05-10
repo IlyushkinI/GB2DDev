@@ -18,7 +18,14 @@ namespace AI
 
         [Space]
         [SerializeField]
-        private AIUIElements _eventCaller;
+        private AIUIElement _eventCaller;
+
+        [Space]
+        [SerializeField]
+        private PlayerDataType _dataType;
+
+        [SerializeField]
+        private int _dataValue;
 
         #endregion
 
@@ -42,7 +49,7 @@ namespace AI
 
         private void OnClick()
         {
-            _eventSO?.Invoke(_eventCaller);
+            _eventSO?.Invoke(_eventCaller, _dataType, _dataValue);
         }
 
         #endregion

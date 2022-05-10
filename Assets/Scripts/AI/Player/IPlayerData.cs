@@ -2,7 +2,7 @@
 {
     public interface IPlayerData
     {
-        bool TrySetData(PlayerDataTypes dataType, int value);
-        int GetData(PlayerDataTypes dataType);
+        bool TrySetData(PlayerDataType dataType, int value);
+        int GetData(PlayerDataType dataType);
     }
 }

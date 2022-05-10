@@ -2,6 +2,6 @@
 {
     public interface IObserver
     {
-        void Catch(PlayerDataTypes dataType, IPlayerData data);
+        void Catch(PlayerDataType dataType, IPlayerData data);
     }
 }

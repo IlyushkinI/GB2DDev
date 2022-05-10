@@ -8,15 +8,15 @@ namespace AI
     public sealed class AIUIEventSO : ScriptableObject
     {
 
-        private Action<AIUIElements> _eventAction;
+        private Action<AIUIElement, PlayerDataType, int> _eventAction;
 
-        public event Action<AIUIElements> UIEvent
+        public event Action<AIUIElement, PlayerDataType, int> UIEvent
         {
             add { _eventAction += value; }
             remove { _eventAction -= value; }
         }
 
-        public void Invoke(AIUIElements eventCaller) => _eventAction.Invoke(eventCaller);
+        public void Invoke(AIUIElement eventCaller, PlayerDataType dataType, int value) => _eventAction.Invoke(eventCaller, dataType, value);
 
     }
 }

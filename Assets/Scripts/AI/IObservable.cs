@@ -4,6 +4,6 @@
     {
         void Subscribe(IObserver enemy);
         void Unsubscribe(IObserver enemy);
-        void Notify(PlayerDataTypes dataType);
+        void Notify(PlayerDataType dataType);
     }
 }

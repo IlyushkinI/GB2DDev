@@ -31,17 +31,11 @@ namespace AI
 
         #region Methods
 
-        private void UIEventHandler(AIUIElements caller)
+        private void UIEventHandler(AIUIElement caller, PlayerDataType dataType, int data)
         {
-            switch (caller)
+            if (caller == AIUIElement.ButtonFight)
             {
-                case AIUIElements.None:
-                    break;
-                case AIUIElements.ButtonFight:
                     ButtonFightHandler();
-                    break;
-                default:
-                    break;
             }
         }
 
@@ -65,17 +59,17 @@ namespace AI
 
         #region IObserver
 
-        public void Catch(PlayerDataTypes dataType, IPlayerData data)
+        public void Catch(PlayerDataType dataType, IPlayerData data)
         {
             switch (dataType)
             {
-                case PlayerDataTypes.Money:
+                case PlayerDataType.Money:
                     _uiView.MoneySet = data.GetData(dataType);
                     break;
-                case PlayerDataTypes.Health:
+                case PlayerDataType.Health:
                     _uiView.HealthSet = data.GetData(dataType);
                     break;
-                case PlayerDataTypes.Force:
+                case PlayerDataType.Force:
                     _uiView.ForceSet = data.GetData(dataType);
                     break;
                 default:
