@@ -3,7 +3,7 @@
 
 namespace AI
 {
-    public sealed class PlayerController : BaseController, IObservable
+    public sealed class PlayerController : BaseController, IObservable, IPlayerController
     {
 
         #region Fields
@@ -25,7 +25,7 @@ namespace AI
             _eventSO = eventSO;
 
             _playerModel = new PlayerModel();
-
+            
             _observers = new List<IObserver>();
 
             _eventSO.UIEvent += UIEventHandler;
@@ -38,7 +38,7 @@ namespace AI
 
         private void UIEventHandler(AIUIElement caller, PlayerDataType dataType, int data)
         {
-            if (AIUIElement.ConfigButtons.HasFlag(caller))
+            if (AIUIElement.ConfigElements.HasFlag(caller))
             {
                 if (_playerModel.TrySetData(dataType, data))
                 {
@@ -46,6 +46,13 @@ namespace AI
                 }
             }
         }
+
+        #endregion
+
+
+        #region IPlayerController
+
+        public IPlayerData GetPlayerModel => _playerModel;
 
         #endregion
 

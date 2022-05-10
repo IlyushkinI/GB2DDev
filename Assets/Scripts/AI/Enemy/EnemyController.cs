@@ -3,7 +3,7 @@
 
 namespace AI
 {
-    public sealed class EnemyController : BaseController, IObserver, IObservable
+    public sealed class EnemyController : BaseController, IObserver, IObservable, IEnemyController
     {
 
         #region Fields
@@ -26,16 +26,22 @@ namespace AI
         #endregion
 
 
+        #region IEnemyController
+
+        public IEnemyModel GetEnemyModel => _enemyModel;
+
+        #endregion
+
+
         #region IObserver
 
         public void Catch(PlayerDataType _, IPlayerData data)
         {
             _enemyModel.CalculatePower(data);
-            UnityEngine.Debug.Log(_enemyModel.GetPower);
             Notify(_);
         }
 
-        public void Catch(float data) { }
+        public void Catch(float _) { }
 
         #endregion
 

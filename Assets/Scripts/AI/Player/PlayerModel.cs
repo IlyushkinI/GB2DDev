@@ -47,6 +47,12 @@ namespace AI
 
         public bool TrySetData(PlayerDataType dataType, int value)
         {
+            if (dataType == PlayerDataType.CrimeLevel)
+            {
+                _playerData[dataType] = value;
+                return true;
+            }
+
             if (ClampValue(_playerData[dataType] + value) != _playerData[dataType])
             {
                 _playerData[dataType] = ClampValue(_playerData[dataType] + value);

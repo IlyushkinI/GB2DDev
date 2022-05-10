@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 namespace AI
@@ -10,46 +9,15 @@ namespace AI
         #region Fields
 
         private readonly IAIUIView _uiView;
-        private readonly AIUIEventSO _eventsUI;
 
         #endregion
 
 
         #region CodeLifeCycles
 
-        public AIUIController(AIUIEventSO eventsUI, IAIUIView uiView)
+        public AIUIController(IAIUIView uiView)
         {
-            _eventsUI = eventsUI;
             _uiView = uiView;
-            _eventsUI.UIEvent += UIEventHandler;
-        }
-
-        #endregion
-
-
-        #region Methods
-
-        private void UIEventHandler(AIUIElement caller, PlayerDataType dataType, int data)
-        {
-            if (caller == AIUIElement.ButtonFight)
-            {
-                    ButtonFightHandler();
-            }
-        }
-
-        private void ButtonFightHandler()
-        {
-            Debug.Log("bf");
-        }
-
-        #endregion
-
-
-        #region BaseController
-
-        protected override void OnDispose()
-        {
-            _eventsUI.UIEvent -= UIEventHandler;
         }
 
         #endregion
@@ -74,6 +42,11 @@ namespace AI
                     break;
                 case PlayerDataType.Force:
                     _uiView.ForceSet = data.GetData(dataType);
+                    break;
+                case PlayerDataType.CrimeLevel:
+                    Debug.Log(
+                    data.GetData(dataType)
+                    );
                     break;
                 default:
                     break;

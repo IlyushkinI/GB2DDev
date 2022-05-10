@@ -6,6 +6,7 @@
         Money = None << 1,
         Health = None << 2,
         Force = None << 3,
+        CrimeLevel = None << 4,
     }
 
     public static class Extensions

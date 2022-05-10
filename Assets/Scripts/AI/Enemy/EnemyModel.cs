@@ -16,8 +16,10 @@
 
         public float GetPower => _power;
 
-
-        // money (<_min) + health / force
+        /// <summary>
+        /// money (<_min) + health / force
+        /// </summary>
+        /// <param name="data"></param>
         public void CalculatePower(IPlayerData data)
         {
             float money = data.GetData(PlayerDataType.Money);
@@ -35,11 +37,5 @@
 
         #endregion
 
-    }
-
-    public interface IEnemyModel
-    {
-        float GetPower { get; }
-        void CalculatePower(IPlayerData data);
     }
 }

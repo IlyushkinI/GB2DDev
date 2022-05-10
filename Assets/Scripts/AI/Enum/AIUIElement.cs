@@ -10,13 +10,15 @@
         ButtonForceAdd = None << 5,
         ButtonForceSub = None << 6,
         ButtonFight = None << 7,
+        SliderCrime = None << 8,
 
-        ConfigButtons = 
+        ConfigElements = 
             ButtonHealthAdd | 
             ButtonHealthSub | 
             ButtonMoneyAdd | 
             ButtonMoneyhSub | 
             ButtonForceAdd | 
-            ButtonForceSub,
+            ButtonForceSub |
+            SliderCrime
     }
 }
