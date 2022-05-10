@@ -26,12 +26,12 @@ namespace AI
         #endregion
 
 
-        #region Properties
+        #region IAIUIView
 
-        public int MoneySet { set => _textDataMoney.text = $"Money :\t{value:D3} $"; }
-        public int HealthSet { set => _textDataHealth.text = $"Health :\t{value:D3} ♥"; }
-        public int ForceSet { set => _textDataForce.text = $"Force :\t{value:D3} †"; }
-        public int EnemyPowerSet { set => _textDataEnemy.text = $"Enemy power :\t{value:D3}"; }
+        public int MoneySet { set => _textDataMoney.text = $"Money :\t{value:D3} {PlayerDataType.Money.ToUnit()}"; }
+        public int HealthSet { set => _textDataHealth.text = $"Health :\t{value:D3} {PlayerDataType.Health.ToUnit()}"; }
+        public int ForceSet { set => _textDataForce.text = $"Force :\t{value:D3} {PlayerDataType.Force.ToUnit()}"; }
+        public float EnemyPowerSet { set => _textDataEnemy.text = $"Enemy power :\t{value:00.0}"; }
 
         #endregion
 

@@ -10,20 +10,18 @@ namespace AI
         #region Fields
 
         private readonly IAIUIView _uiView;
-        private readonly AIUIEventSO _eventSO;
-
-        private int _health;
+        private readonly AIUIEventSO _eventsUI;
 
         #endregion
 
 
         #region CodeLifeCycles
 
-        public AIUIController(AIUIEventSO eventSO, IAIUIView uiView)
+        public AIUIController(AIUIEventSO eventsUI, IAIUIView uiView)
         {
-            _eventSO = eventSO;
+            _eventsUI = eventsUI;
             _uiView = uiView;
-            _eventSO.UIEvent += UIEventHandler;
+            _eventsUI.UIEvent += UIEventHandler;
         }
 
         #endregion
@@ -51,13 +49,18 @@ namespace AI
 
         protected override void OnDispose()
         {
-            _eventSO.UIEvent -= UIEventHandler;
+            _eventsUI.UIEvent -= UIEventHandler;
         }
 
         #endregion
 
 
         #region IObserver
+
+        public void Catch(float data)
+        {
+            _uiView.EnemyPowerSet = data;
+        }
 
         public void Catch(PlayerDataType dataType, IPlayerData data)
         {

@@ -139,7 +139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enemy power :\t000
+  m_text: Enemy power :\t00,0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.8
+  m_fontSize: 33.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -629,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212734123230424}
+  _textOnButton: {fileID: 6241212734419150467}
   _eventCaller: 16
   _dataType: 2
   _dataValue: -1
@@ -1032,6 +1033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212734333436983}
+  _textOnButton: {fileID: 6241212734228812469}
   _eventCaller: 32
   _dataType: 8
   _dataValue: 1
@@ -1568,6 +1570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212734660853166}
+  _textOnButton: {fileID: 6241212734812937964}
   _eventCaller: 64
   _dataType: 8
   _dataValue: -1
@@ -2391,6 +2394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212734878965851}
+  _textOnButton: {fileID: 6241212735144606909}
   _eventCaller: 4
   _dataType: 4
   _dataValue: -1
@@ -2528,8 +2532,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212734975269374}
+  _textOnButton: {fileID: 6241212734848921463}
   _eventCaller: 128
-  _dataType: 0
+  _dataType: 1
   _dataValue: 0
 --- !u!1 &6241212734977065791
 GameObject:
@@ -3225,6 +3230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212735612024024}
+  _textOnButton: {fileID: 6241212734824833846}
   _eventCaller: 2
   _dataType: 4
   _dataValue: 1
@@ -3495,6 +3501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventSO: {fileID: 11400000, guid: 8569c63b28a0a344a87eac13b82351ce, type: 2}
   _button: {fileID: 6241212735714289787}
+  _textOnButton: {fileID: 6241212734775059148}
   _eventCaller: 8
   _dataType: 2
   _dataValue: 1

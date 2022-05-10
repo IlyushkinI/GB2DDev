@@ -39,78 +39,35 @@ namespace AI
         private void UIEventHandler(AIUIElement caller, PlayerDataType dataType, int data)
         {
             if (AIUIElement.ConfigButtons.HasFlag(caller))
+            {
                 if (_playerModel.TrySetData(dataType, data))
                 {
-                    UnityEngine.Debug.Log($"Button {caller}. Data {dataType}. Value {data}.");
                     Notify(dataType);
                 }
-
-
-            //switch (caller)
-            //{
-            //    case AIUIElement.ButtonHealthAdd:
-            //        if (_playerModel.TrySetData(PlayerDataType.Health, 1))
-            //        {
-            //            Notify(PlayerDataType.Health);
-            //        }
-            //        break;
-            //    case AIUIElement.ButtonHealthSub:
-            //        if (_playerModel.TrySetData(PlayerDataType.Health, -1))
-            //        {
-            //            Notify(PlayerDataType.Health);
-            //        }
-            //        break;
-            //    case AIUIElement.ButtonMoneyAdd:
-            //        if (_playerModel.TrySetData(PlayerDataType.Money, 1))
-            //        {
-            //            Notify(PlayerDataType.Money);
-            //        }
-            //        break;
-            //    case AIUIElement.ButtonMoneyhSub:
-            //        if (_playerModel.TrySetData(PlayerDataType.Money, -1))
-            //        {
-            //            Notify(PlayerDataType.Money);
-            //        }
-            //        break;
-            //    case AIUIElement.ButtonForceAdd:
-            //        if (_playerModel.TrySetData(PlayerDataType.Force, 1))
-            //        {
-            //            Notify(PlayerDataType.Force);
-            //        }
-            //        break;
-            //    case AIUIElement.ButtonForceSub:
-            //        if (_playerModel.TrySetData(PlayerDataType.Force, -1))
-            //        {
-            //            Notify(PlayerDataType.Force);
-            //        }
-            //        break;
-            //    default:
-            //        break;
-            //}
-
+            }
         }
 
         #endregion
 
 
-        #region IPlayerObserver
+        #region IObservable
 
         public void Notify(PlayerDataType dataType)
         {
             _observers.ForEach(i => i.Catch(dataType, _playerModel));
         }
 
-        public void Subscribe(IObserver enemy)
+        public void Subscribe(IObserver observer)
         {
-            if (!_observers.Contains(enemy))
+            if (!_observers.Contains(observer))
             {
-                _observers.Add(enemy);
+                _observers.Add(observer);
             }
         }
 
-        public void Unsubscribe(IObserver enemy)
+        public void Unsubscribe(IObserver observer)
         {
-            _observers.Remove(enemy);
+            _observers.Remove(observer);
         }
 
         #endregion

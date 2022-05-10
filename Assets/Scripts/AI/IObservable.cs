@@ -2,8 +2,8 @@
 {
     public interface IObservable
     {
-        void Subscribe(IObserver enemy);
-        void Unsubscribe(IObserver enemy);
+        void Subscribe(IObserver observer);
+        void Unsubscribe(IObserver observer);
         void Notify(PlayerDataType dataType);
     }
 }
