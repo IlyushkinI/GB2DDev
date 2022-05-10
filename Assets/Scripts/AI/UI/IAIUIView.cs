@@ -6,5 +6,6 @@
         int HealthSet { set; }
         int ForceSet { set; }
         float EnemyPowerSet { set; }
+        bool EnableButtonGo { set; get; }
     }
 }

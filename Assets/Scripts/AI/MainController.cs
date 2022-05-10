@@ -16,11 +16,12 @@
             var enemyController = new EnemyController(enemyView);
             AddController(enemyController);
             
-            var battleController = new BattleController(eventsUI, enemyController.GetEnemyModel, playerController.GetPlayerModel);
+            var battleController = new BattleController(eventsUI, enemyController.GetEnemyModel, aiUIController);
             AddController(battleController);
 
             playerController.Subscribe(aiUIController);
             playerController.Subscribe(enemyController);
+            playerController.Subscribe(battleController);
             
             enemyController.Subscribe(aiUIController);
         }

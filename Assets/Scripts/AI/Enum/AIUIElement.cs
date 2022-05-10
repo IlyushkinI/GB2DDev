@@ -11,6 +11,7 @@
         ButtonForceSub = None << 6,
         ButtonFight = None << 7,
         SliderCrime = None << 8,
+        ButtonGo = None << 9,
 
         ConfigElements = 
             ButtonHealthAdd | 

@@ -3,7 +3,7 @@
 
 namespace AI
 {
-    public class BattleController : BaseController
+    public class BattleController : BaseController, IObserver
     {
 
         #region Fields
@@ -11,20 +11,19 @@ namespace AI
         private readonly BattleModel _battleModel;
         private readonly AIUIEventSO _eventsUI;
         private readonly IEnemyModel _enemyModel;
-        private readonly IPlayerData _playerModel;
+        private readonly IAIUIController _UI;
 
         #endregion
 
 
         #region CodeLifeCycles
 
-        public BattleController(AIUIEventSO eventsUI, IEnemyModel enemyModel, IPlayerData playerModel)
+        public BattleController(AIUIEventSO eventsUI, IEnemyModel enemyModel, IAIUIController UI)
         {
             _battleModel = new BattleModel();
             _eventsUI = eventsUI;
             _enemyModel = enemyModel;
-            _playerModel = playerModel;
-
+            _UI = UI;
             _eventsUI.UIEvent += UIEventHandler;
         }
 
@@ -35,9 +34,16 @@ namespace AI
 
         private void UIEventHandler(AIUIElement caller, PlayerDataType dataType, int data)
         {
-            if (caller == AIUIElement.ButtonFight)
+            switch (caller)
             {
-                ButtonFightHandler();
+                case AIUIElement.ButtonFight:
+                    ButtonFightHandler();
+                    break;
+
+                case AIUIElement.ButtonGo:
+                    _UI.Win();
+                    break;
+
             }
         }
 
@@ -45,11 +51,11 @@ namespace AI
         {
             if (_battleModel.IsPlayerWin(_enemyModel))
             {
-                Debug.Log("WIN");
+                _UI.Win();
             }
             else
             {
-                Debug.Log("LOSE");
+                _UI.Lose();
             }
         }
 
@@ -61,6 +67,21 @@ namespace AI
         protected override void OnDispose()
         {
             _eventsUI.UIEvent -= UIEventHandler;
+        }
+
+        #endregion
+
+
+        #region IObserver
+
+        public void Catch(float _) { }
+
+        public void Catch(PlayerDataType dataType, IPlayerData data)
+        {
+            if (dataType == PlayerDataType.CrimeLevel)
+            {
+                _UI.EnableButtonGo = !_battleModel.IsNeedBattle(data);
+            }
         }
 
         #endregion

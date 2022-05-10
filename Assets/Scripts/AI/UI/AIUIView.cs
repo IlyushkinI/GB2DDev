@@ -1,6 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace AI
 {
@@ -23,6 +23,10 @@ namespace AI
         [SerializeField]
         private TextMeshProUGUI _textDataEnemy;
 
+        [Space]
+        [SerializeField]
+        private Button _buttonGo;
+
         #endregion
 
 
@@ -32,6 +36,11 @@ namespace AI
         public int HealthSet { set => _textDataHealth.text = $"Health :\t{value:D3} {PlayerDataType.Health.ToUnit()}"; }
         public int ForceSet { set => _textDataForce.text = $"Force :\t{value:D3} {PlayerDataType.Force.ToUnit()}"; }
         public float EnemyPowerSet { set => _textDataEnemy.text = $"Enemy power :\t{value:00.0}"; }
+        public bool EnableButtonGo
+        {
+            get => _buttonGo.interactable;
+            set => _buttonGo.interactable = value;
+        }
 
         #endregion
 

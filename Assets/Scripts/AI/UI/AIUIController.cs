@@ -3,7 +3,7 @@
 
 namespace AI
 {
-    public sealed class AIUIController : BaseController, IObserver
+    public sealed class AIUIController : BaseController, IObserver, IAIUIController
     {
 
         #region Fields
@@ -18,6 +18,8 @@ namespace AI
         public AIUIController(IAIUIView uiView)
         {
             _uiView = uiView;
+
+            _uiView.EnableButtonGo = true;
         }
 
         #endregion
@@ -43,14 +45,26 @@ namespace AI
                 case PlayerDataType.Force:
                     _uiView.ForceSet = data.GetData(dataType);
                     break;
-                case PlayerDataType.CrimeLevel:
-                    Debug.Log(
-                    data.GetData(dataType)
-                    );
-                    break;
                 default:
                     break;
             }
+        }
+
+        #endregion
+
+
+        #region IAIUIController
+
+        public bool EnableButtonGo { set => _uiView.EnableButtonGo = value; }
+
+        public void Lose()
+        {
+            Debug.Log("LOSE");
+        }
+
+        public void Win()
+        {
+            Debug.Log("WIN");
         }
 
         #endregion
