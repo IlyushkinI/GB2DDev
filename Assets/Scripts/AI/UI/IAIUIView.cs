@@ -6,6 +6,9 @@
         int HealthSet { set; }
         int ForceSet { set; }
         float EnemyPowerSet { set; }
-        bool EnableButtonGo { set; get; }
+        bool EnableButtonGo { set; }
+        bool EnableButtonRestart { set; }
+        bool SetIteractableForAll { set; }
+        void ShowEndGame(bool isShow, bool isWin);
     }
 }

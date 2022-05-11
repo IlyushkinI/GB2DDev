@@ -20,6 +20,8 @@ namespace AI
             _uiView = uiView;
 
             _uiView.EnableButtonGo = true;
+            _uiView.EnableButtonRestart = false;
+            _uiView.ShowEndGame(false, default);
         }
 
         #endregion
@@ -59,12 +61,15 @@ namespace AI
 
         public void Lose()
         {
-            Debug.Log("LOSE");
+            _uiView.SetIteractableForAll = false;
+            _uiView.EnableButtonRestart = true;
+            _uiView.ShowEndGame(true, false);
         }
 
         public void Win()
         {
-            Debug.Log("WIN");
+            _uiView.EnableButtonRestart = true;
+            _uiView.ShowEndGame(true, true);
         }
 
         #endregion

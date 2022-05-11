@@ -12,6 +12,8 @@
         ButtonFight = None << 7,
         SliderCrime = None << 8,
         ButtonGo = None << 9,
+        ButtonExit = None << 10,
+        ButtonRestart = None << 11,
 
         ConfigElements = 
             ButtonHealthAdd | 

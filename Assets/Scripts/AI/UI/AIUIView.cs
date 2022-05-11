@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,23 @@ namespace AI
         [SerializeField]
         private Button _buttonGo;
 
+        [SerializeField]
+        private Button _buttonRestart;
+
+        [SerializeField]
+        private Button _buttonExit;
+
+        [Space]
+        [SerializeField]
+        private GameObject _panelEndGame;
+
+        [SerializeField]
+        private TextMeshProUGUI _textEndGame;
+
+        [Space]
+        [SerializeField]
+        private List<Selectable> _interactables;
+
         #endregion
 
 
@@ -40,6 +58,35 @@ namespace AI
         {
             get => _buttonGo.interactable;
             set => _buttonGo.interactable = value;
+        }
+        public bool EnableButtonRestart
+        {
+            set => _buttonRestart.gameObject.SetActive(value);
+        }
+        public bool SetIteractableForAll
+        {
+            set
+            {
+                foreach (var item in _interactables)
+                {
+                    item.interactable = value;
+                }
+            }
+        }
+
+        public void ShowEndGame(bool isShow, bool isWin)
+        {
+            _panelEndGame.gameObject.SetActive(isShow);
+            if (isWin)
+            {
+                _textEndGame.text = "WIN";
+                _textEndGame.color = Color.green;
+            }
+            else
+            {
+                _textEndGame.text = "LOSE";
+                _textEndGame.color = Color.red;
+            }
         }
 
         #endregion

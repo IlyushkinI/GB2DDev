@@ -10,7 +10,7 @@ namespace AI
 
         private readonly PlayerView _playerView;
         private readonly PlayerModel _playerModel;
-        private readonly AIUIEventSO _eventSO;
+        private readonly AIUIEventSO _eventsUI;
 
         private List<IObserver> _observers;
 
@@ -19,16 +19,16 @@ namespace AI
 
         #region CodeLifeCycles
 
-        public PlayerController(PlayerView playerView, AIUIEventSO eventSO)
+        public PlayerController(PlayerView playerView, AIUIEventSO eventsUI)
         {
             _playerView = playerView;
-            _eventSO = eventSO;
+            _eventsUI = eventsUI;
 
             _playerModel = new PlayerModel();
             
             _observers = new List<IObserver>();
 
-            _eventSO.UIEvent += UIEventHandler;
+            _eventsUI.UIEvent += UIEventHandler;
         }
 
         #endregion
@@ -84,7 +84,7 @@ namespace AI
 
         protected override void OnDispose()
         {
-            _eventSO.UIEvent -= UIEventHandler;
+            _eventsUI.UIEvent -= UIEventHandler;
         }
 
         #endregion
