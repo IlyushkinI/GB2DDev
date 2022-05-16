@@ -1,7 +1,6 @@
 ﻿public enum Currency
 {
-    None = 1,
-    Coins = None << 1,
-    Food = None << 2,
-    Gems = None << 3,
+    Coins = 1,
+    Food = 2,
+    Gems = 3,
 }

@@ -2,6 +2,6 @@
 {
     public interface IObserver
     {
-        void Catch();
+        void Catch(Currency currency, int value);
     }
 }

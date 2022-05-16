@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rewards:
   - Day: 1
-    Currency: 2
+    Currency: 1
     Value: 200
   - Day: 2
-    Currency: 4
+    Currency: 2
     Value: 50
   - Day: 3
-    Currency: 8
+    Currency: 3
     Value: 10
   - Day: 4
-    Currency: 2
+    Currency: 1
     Value: 1000
   - Day: 7
-    Currency: 8
+    Currency: 3
     Value: 50

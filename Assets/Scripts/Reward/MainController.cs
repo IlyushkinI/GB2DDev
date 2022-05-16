@@ -10,6 +10,7 @@ namespace Reward
 
         private readonly UIController _uiController;
         private readonly RewardsController _rewardController;
+        private readonly StorageController _storageController;
 
         #endregion
 
@@ -21,7 +22,10 @@ namespace Reward
             _uiController = new UIController(rewardWindow, currencyList);
             AddController(_uiController);
 
-            _rewardController = new RewardsController(_uiController, timer, rewardsConfig);
+            _storageController = new StorageController(_uiController);
+            AddController(_storageController);
+
+            _rewardController = new RewardsController(_uiController, timer, rewardsConfig, _storageController.StorageModel);
             AddController(_rewardController);
         }
 

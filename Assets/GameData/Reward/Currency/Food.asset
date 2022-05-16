@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763357985f4b7fe4da02ed731b143234, type: 3}
   m_Name: Food
   m_EditorClassIdentifier: 
-  _currencyType: 4
+  _currencyType: 2
   _currencySprite: {fileID: 21300000, guid: 1618cb37bcd5144fd923b9697be57d63, type: 3}

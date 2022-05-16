@@ -14,8 +14,8 @@ namespace Reward
         private IEnumerator TimerCoroutine(int time)
         {
             yield return new WaitForSecondsRealtime(time);
-            _timerFinish.Invoke();
             StopAllCoroutines();
+            _timerFinish.Invoke();
         }
 
         private IEnumerator EverySecond()

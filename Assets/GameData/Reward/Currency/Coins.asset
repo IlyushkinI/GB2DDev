@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763357985f4b7fe4da02ed731b143234, type: 3}
   m_Name: Coins
   m_EditorClassIdentifier: 
-  _currencyType: 2
+  _currencyType: 1
   _currencySprite: {fileID: 21300000, guid: 53831ffd2c1064d07b3fcc10982b1e0d, type: 3}

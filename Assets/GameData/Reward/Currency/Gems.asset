@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763357985f4b7fe4da02ed731b143234, type: 3}
   m_Name: Gems
   m_EditorClassIdentifier: 
-  _currencyType: 8
+  _currencyType: 3
   _currencySprite: {fileID: 21300000, guid: f59401c5c79564fd1ae3bfb0876455a7, type: 3}

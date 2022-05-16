@@ -4,6 +4,6 @@
     {
         void Subscribe(IObserver observer);
         void Unsubscribe(IObserver observer);
-        void Notify();
+        void Notify(Currency currency, int value);
     }
 }
