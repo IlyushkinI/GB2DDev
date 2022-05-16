@@ -557,6 +557,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 39397f5364e93f741a5b4e7ba86da7b8, type: 2}
   - {fileID: 11400000, guid: ff8de99a535703e4b9e55a4b3e272da5, type: 2}
   _timer: {fileID: 2079335483}
+  _rewardsConfig: {fileID: 11400000, guid: f81431b2d12e47e40b41fdff3ff34cfe, type: 2}
 --- !u!114 &2079335483
 MonoBehaviour:
   m_ObjectHideFlags: 0

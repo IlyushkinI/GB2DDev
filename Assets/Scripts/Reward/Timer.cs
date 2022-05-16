@@ -22,8 +22,8 @@ namespace Reward
         {
             yield return new WaitForSecondsRealtime(1.0f);
             _tick.Invoke();
+            StartCoroutine(EverySecond());
         }
-
 
         #region ITimer
 

@@ -12,6 +12,7 @@ namespace Reward
         private readonly TimeSpan _oneSecond = new TimeSpan(0, 0, 1);
         private readonly IUIController _uiController;
         private readonly ITimer _timer;
+        private readonly DateTime _zeroData = new DateTime();
         private DateTime _time = new DateTime();
 
         #endregion
@@ -19,21 +20,18 @@ namespace Reward
 
         #region CodeLifeCycles
 
-        public RewardsController(IUIController uiController, ITimer timer)
+        public RewardsController(IUIController uiController, ITimer timer, RewardsConfSO rewardsConfig)
         {
             _uiController = uiController;
             _timer = timer;
+            
+            _time = _time.AddSeconds(10);
+            _timer.StartTimer(_time.Second);
+
+            _uiController.CreateRewards(rewardsConfig.Rewards);
 
             _timer.Tick += TickHandler;
             _timer.TimerFinish += TimerFinishHandler;
-
-            _time.AddSeconds(10);
-            _timer.StartTimer(_time.Second);
-
-            var asd = new System.Collections.Generic.List<RewardData>();
-            asd.Add(new RewardData { Currency = Currency.Coins, Day = 1, Value = 100 });
-
-            _uiController.CreateRewards(asd);
         }
 
         protected override void OnDispose()
@@ -55,6 +53,8 @@ namespace Reward
 
         private void TimerFinishHandler()
         {
+            _time = _zeroData;
+            _uiController.SetTimer(_time);
             _uiController.SetRewardItemActive(1);
         }
 

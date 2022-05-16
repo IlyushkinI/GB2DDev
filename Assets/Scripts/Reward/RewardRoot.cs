@@ -22,6 +22,10 @@ namespace Reward
         [SerializeField]
         private Timer _timer;
 
+        [Space]
+        [SerializeField]
+        private RewardsConfSO _rewardsConfig;
+
         #endregion
 
 
@@ -29,7 +33,7 @@ namespace Reward
 
         private void Awake()
         {
-            _ = new MainController(_eventsUI, _rewardWindow, _currencyList, _timer);
+            _ = new MainController(_eventsUI, _rewardWindow, _currencyList, _timer, _rewardsConfig);
         }
 
         #endregion

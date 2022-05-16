@@ -185,9 +185,8 @@ MonoBehaviour:
   _sprite: {fileID: 745233500001709660}
   _daysToGet: {fileID: 7575199789474957391}
   _value: {fileID: 745233498811435386}
-  _rewardBackground: {fileID: 0}
+  _rewardBackground: {fileID: 745233499947614153}
   _rewardActiveColor: {r: 1, g: 0.78431374, b: 0.39215687, a: 0.39215687}
-  _rewardEmptyColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!1 &745233499947614159
 GameObject:
   m_ObjectHideFlags: 0

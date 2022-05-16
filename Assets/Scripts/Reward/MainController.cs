@@ -16,18 +16,16 @@ namespace Reward
 
         #region CodeLifeCycles
 
-        public MainController(UIEventSO eventsUI, RewardWindowView rewardWindow, List<CurrencySO> currencyList, ITimer timer)
+        public MainController(UIEventSO eventsUI, RewardWindowView rewardWindow, List<CurrencySO> currencyList, ITimer timer, RewardsConfSO rewardsConfig)
         {
             _uiController = new UIController(rewardWindow, currencyList);
             AddController(_uiController);
 
-            _rewardController = new RewardsController(_uiController, timer);
+            _rewardController = new RewardsController(_uiController, timer, rewardsConfig);
             AddController(_rewardController);
         }
 
         #endregion
-
-        
 
     }
 }

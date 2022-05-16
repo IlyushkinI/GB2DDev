@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5538aebc44c144bbc662c33e1b5ed9, type: 3}
+  m_Name: RewardsConfig
+  m_EditorClassIdentifier: 
+  _rewards:
+  - Day: 1
+    Currency: 2
+    Value: 200
+  - Day: 2
+    Currency: 4
+    Value: 50
+  - Day: 3
+    Currency: 8
+    Value: 10
+  - Day: 4
+    Currency: 2
+    Value: 1000
+  - Day: 7
+    Currency: 8
+    Value: 50
