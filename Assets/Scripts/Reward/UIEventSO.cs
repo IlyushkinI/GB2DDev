@@ -16,7 +16,7 @@ namespace Reward
             remove { _eventAction -= value; }
         }
 
-        public void Invoke(UIElement eventCaller) => _eventAction.Invoke(eventCaller);
+        public void Invoke(UIElement eventCaller) => _eventAction?.Invoke(eventCaller);
 
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1589632849972441499}
   - component: {fileID: 1589632849972441498}
   m_Layer: 5
-  m_Name: Grid
+  m_Name: GridStorage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 1589632850436943036}
   - component: {fileID: 1589632850436943011}
   m_Layer: 5
-  m_Name: Grid
+  m_Name: GridRewards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,10 +592,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16310c7af58efb946aa55b30bf0a4bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventsUI: {fileID: 11400000, guid: 384be8c180886334884ca265c692cbc9, type: 2}
-  _rewardsView: {fileID: 7451395268652353449}
-  _storageView: {fileID: 6759401027250198749}
-  _asd: {fileID: 745233499920920884, guid: 88285409054818b48a8d1c82264b4059, type: 3}
+  _rewardCell: {fileID: 6946396040416930823, guid: 88285409054818b48a8d1c82264b4059,
+    type: 3}
+  _rewardsParent: {fileID: 1589632850436943036}
+  _storageCell: {fileID: 4529321266626034169, guid: ce62049215560b2439e70f2988384b70,
+    type: 3}
+  _storageParent: {fileID: 1589632849972441499}
+  _textTimer: {fileID: 1589632851139387221}
 --- !u!1 &1589632850915808529
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +610,6 @@ GameObject:
   - component: {fileID: 1589632850915808528}
   - component: {fileID: 1589632850915808534}
   - component: {fileID: 1589632850915808535}
-  - component: {fileID: 7451395268652353449}
   m_Layer: 5
   m_Name: PanelRewards
   m_TagString: Untagged
@@ -672,18 +674,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7451395268652353449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589632850915808529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df65bae6003d8f6498566a03333f2077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1589632851001355760
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +953,6 @@ GameObject:
   - component: {fileID: 1589632851009885149}
   - component: {fileID: 1589632851009885123}
   - component: {fileID: 1589632851009885148}
-  - component: {fileID: 6759401027250198749}
   m_Layer: 5
   m_Name: PanelStorage
   m_TagString: Untagged
@@ -1028,18 +1017,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6759401027250198749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589632851009885150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec1a69d8b1315046823faf8b0acdffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1589632851038495252
 GameObject:
   m_ObjectHideFlags: 0

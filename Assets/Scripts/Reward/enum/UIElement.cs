@@ -2,7 +2,7 @@
 {
     public enum UIElement
     {
-        None = 0b_0000_0001,
+        None = 1,
         ButtonGetReward = None << 1,
         ButtonResetTimer = None << 2,
         ButtonExit = None << 3,
