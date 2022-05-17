@@ -11,6 +11,7 @@ namespace Reward
         #region Fields
 
         private const string CURRENT_ITEM = "CurrentItem";
+        private const string ITEM_DT = "ItemDT";
         private Dictionary<Currency, int> _storage;
         private List<IObserver> _observers;
 
@@ -30,12 +31,24 @@ namespace Reward
             }
 
             _observers = new List<IObserver>();
+
         }
 
         #endregion
 
 
-            #region IStorageModel
+        #region IStorageModel
+
+        public DateTime WhenCollectingAvailable
+        {
+            get
+            {
+                DateTime result = new DateTime();
+                DateTime.TryParse(PlayerPrefs.GetString(ITEM_DT), out result);
+                return result;
+            }
+            set => PlayerPrefs.SetString(ITEM_DT, value.ToString());
+        }
 
         public int CurrentRewardItem { get => PlayerPrefs.GetInt(CURRENT_ITEM, 0); set => PlayerPrefs.SetInt(CURRENT_ITEM, value); }
 

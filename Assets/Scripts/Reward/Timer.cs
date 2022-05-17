@@ -45,6 +45,11 @@ namespace Reward
             StartCoroutine(TimerCoroutine(seconds));
         }
 
+        public void StopTimer()
+        {
+            StopAllCoroutines();
+        }
+
         #endregion
 
     }
