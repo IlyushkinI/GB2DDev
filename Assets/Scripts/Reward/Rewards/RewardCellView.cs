@@ -25,6 +25,9 @@ public class RewardCellView : MonoBehaviour
     [SerializeField]
     private Color _rewardActiveColor;
 
+    [SerializeField]
+    private Image _rewardCollectedState;
+
     #endregion
 
 
@@ -41,7 +44,15 @@ public class RewardCellView : MonoBehaviour
             {
                 _rewardBackground.color = _rewardActiveColor;
             }
+            else
+            {
+                _rewardBackground.color = new Color(1, 1, 1, 100/255);
+            }
         }
+    }
+    public bool SetCollectedState
+    {
+        set => _rewardCollectedState.color = new Color(0, 0, 0, value ? 0.5f : 0.0f);
     }
 
     #endregion

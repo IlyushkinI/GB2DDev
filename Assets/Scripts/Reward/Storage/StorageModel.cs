@@ -12,6 +12,7 @@ namespace Reward
 
         private const string CURRENT_ITEM = "CurrentItem";
         private const string ITEM_DT = "ItemDT";
+        private readonly Array _currencies;
         private Dictionary<Currency, int> _storage;
         private List<IObserver> _observers;
 
@@ -22,10 +23,10 @@ namespace Reward
 
         public StorageModel()
         {
-            var currencies = Enum.GetValues(typeof(Currency));
-            _storage = new Dictionary<Currency, int>(currencies.Length);
+            _currencies = Enum.GetValues(typeof(Currency));
+            _storage = new Dictionary<Currency, int>(_currencies.Length);
 
-            foreach (Currency currency in currencies)
+            foreach (Currency currency in _currencies)
             {
                 _storage.Add(currency, PlayerPrefs.GetInt(currency.ToString(), 0));
             }
@@ -50,7 +51,7 @@ namespace Reward
             set => PlayerPrefs.SetString(ITEM_DT, value.ToString());
         }
 
-        public int CurrentRewardItem { get => PlayerPrefs.GetInt(CURRENT_ITEM, 0); set => PlayerPrefs.SetInt(CURRENT_ITEM, value); }
+        public int CurrentRewardItemID { get => PlayerPrefs.GetInt(CURRENT_ITEM, 0); set => PlayerPrefs.SetInt(CURRENT_ITEM, value); }
 
         public void SetCurrency(Currency currency, int value)
         {
@@ -62,6 +63,16 @@ namespace Reward
         public int GetCurrency(Currency currency)
         {
             return _storage[currency];
+        }
+
+        public void SetDefaults()
+        {
+            foreach (Currency currency in _currencies)
+            {
+                SetCurrency(currency, 0);
+            }
+            WhenCollectingAvailable = new DateTime();
+            CurrentRewardItemID = -1;
         }
 
         #endregion

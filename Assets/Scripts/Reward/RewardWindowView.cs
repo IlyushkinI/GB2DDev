@@ -2,6 +2,7 @@
 using TMPro;
 using Tools;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Reward
@@ -31,6 +32,10 @@ namespace Reward
         [SerializeField]
         private TextMeshProUGUI _textTimer;
 
+        [Space]
+        [SerializeField]
+        private Button _buttonGetReward; 
+
         #endregion
 
 
@@ -41,6 +46,7 @@ namespace Reward
         public StorageCellView StorageCell => _storageCell;
         public Transform StorageParent => _storageParent;
         public DateTime TimeToReward { set => _timeToReward.Value = value; }
+        public Button ButtonGetReward => _buttonGetReward;
 
         #endregion
 
@@ -62,7 +68,7 @@ namespace Reward
 
         #region Methods
 
-        void ChangeTimerView(DateTime dateTime)
+        private void ChangeTimerView(DateTime dateTime)
         {
             _textTimer.text = $"Time left - {_timeToReward.Value:T}";
         }

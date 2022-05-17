@@ -41,6 +41,7 @@ namespace Reward
 
         public void StartTimer(int seconds)
         {
+            StopAllCoroutines();
             StartCoroutine(EverySecond());
             StartCoroutine(TimerCoroutine(seconds));
         }

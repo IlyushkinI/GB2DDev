@@ -11,6 +11,7 @@ namespace Reward
         private readonly UIController _uiController;
         private readonly RewardsController _rewardController;
         private readonly StorageController _storageController;
+        private readonly GameButtonsController _gameButtonsController;
 
         #endregion
 
@@ -25,8 +26,11 @@ namespace Reward
             _storageController = new StorageController(_uiController);
             AddController(_storageController);
 
-            _rewardController = new RewardsController(_uiController, timer, rewardsConfig, _storageController.StorageModel);
+            _rewardController = new RewardsController(_uiController, timer, rewardsConfig, _storageController.StorageModel, eventsUI);
             AddController(_rewardController);
+
+            _gameButtonsController = new GameButtonsController(eventsUI);
+            AddController(_gameButtonsController);
         }
 
         #endregion

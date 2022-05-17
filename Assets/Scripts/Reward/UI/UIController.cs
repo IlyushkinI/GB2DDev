@@ -50,6 +50,8 @@ namespace Reward
 
         #region IUIController
 
+        public bool SetButtonGetRewardInteractable { set => _rewardWindow.ButtonGetReward.interactable = value; }
+
         public void SetStorageItemValue(Currency currency, int value)
         {
             _storageCells[currency].Value = value;
@@ -69,9 +71,14 @@ namespace Reward
             }
         }
 
-        public void SetRewardItemActive(int day)
+        public void SetRewardItemActive(int day, bool state)
         {
-            _rewardCells[day].ActivateReward = true;
+            _rewardCells[day].ActivateReward = state;
+        }
+
+        public void SetRewardItemCollectedState(int day, bool state)
+        {
+            _rewardCells[day].SetCollectedState = state;
         }
 
         public void SetTimer(DateTime time)
