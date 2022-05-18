@@ -35,13 +35,16 @@ public class Root : MonoBehaviour
 
     private MainController _mainController;
     private IAnalyticTools _analyticsTools;
+    private TrailController _trailController;
 
     private void Awake()
     {
         _analyticsTools = new UnityAnalyticTools();
         var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
         profilePlayer.CurrentState.Value = GameState.Start;
-        new TrailController(_placeForUi);
+        
+        _trailController = new TrailController(_placeForUi);
+
         _mainController = new MainController(
             _placeForUi, 
             profilePlayer, 
@@ -56,6 +59,7 @@ public class Root : MonoBehaviour
 
     protected void OnDestroy()
     {
+        _trailController?.Dispose();
         _mainController?.Dispose();
     }
 }

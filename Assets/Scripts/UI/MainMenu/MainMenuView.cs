@@ -20,6 +20,9 @@ public class MainMenuView : MonoBehaviour
     [SerializeField]
     private Button _buttonStartBattle;
 
+    [SerializeField]
+    private Button _buttonReward;
+
     [Space]
     [SerializeField]
     private Transform _rootGameObject;
@@ -32,12 +35,13 @@ public class MainMenuView : MonoBehaviour
 
     public Dropdown DropdownInputSelect => _dropdownInputSelect;
 
-    public void Init(UnityAction startGame, UnityAction<int> changeInputType, UnityAction enterShed, UnityAction startBattle)
+    public void Init(UnityAction startGame, UnityAction<int> changeInputType, UnityAction enterShed, UnityAction startBattle, UnityAction openRewards)
     {
         _buttonStart.onClick.AddListener(startGame);
         _dropdownInputSelect.onValueChanged.AddListener(changeInputType);
         _buttonShed.onClick.AddListener(enterShed);
         _buttonStartBattle.onClick.AddListener(startBattle);
+        _buttonReward.onClick.AddListener(openRewards);
     }
 
     protected void OnDestroy()
@@ -46,5 +50,6 @@ public class MainMenuView : MonoBehaviour
         _dropdownInputSelect.onValueChanged.RemoveAllListeners();
         _buttonShed.onClick.RemoveAllListeners();
         _buttonStartBattle.onClick.RemoveAllListeners();
+        _buttonReward.onClick.RemoveAllListeners();
     }
 }

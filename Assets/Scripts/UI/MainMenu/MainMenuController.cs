@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : BaseController
 {
-    private readonly string _sceneAI = "AI";
+    private const string SCENE_AI_NAME = "AI";
+    private const string SCENE_REWARD_NAME = "Reward";
+
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAnalyticTools _analytics;
@@ -36,7 +38,7 @@ public class MainMenuController : BaseController
         _ads = ads;
         _view = LoadView(placeForUI);
         _eventsShed = eventsShed;
-        _view.Init(StartGame, ChooseInput, EnterShed, StartBattle);
+        _view.Init(StartGame, ChooseInput, EnterShed, StartBattle, OpenRewards);
 
         _eventsShed.GlobalEventAction += EventsShedHandler;
 
@@ -88,7 +90,12 @@ public class MainMenuController : BaseController
 
     private void StartBattle()
     {
-        SceneManager.LoadScene(_sceneAI);
+        SceneManager.LoadScene(SCENE_AI_NAME);
+    }
+
+    private void OpenRewards()
+    {
+        SceneManager.LoadScene(SCENE_REWARD_NAME);
     }
 
     private void EventsShedHandler(UIElements caller)

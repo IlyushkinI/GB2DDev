@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AI.unity
     guid: 8ede54d127f38f749a617c73afdc356d
+  - enabled: 1
+    path: Assets/Scenes/Reward.unity
+    guid: f47acf97ba9c17d4a969760e6a4110e8
   m_configObjects: {}
