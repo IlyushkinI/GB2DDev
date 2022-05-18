@@ -145,7 +145,7 @@ namespace Reward
                 timeSpan = TimeSpan.Zero;
             }
             _time = _zeroData.Add(timeSpan);
-            _timer.StartTimer(_time.Second);
+            _timer.StartTimer((int)timeSpan.TotalSeconds);
         }
 
         #endregion
