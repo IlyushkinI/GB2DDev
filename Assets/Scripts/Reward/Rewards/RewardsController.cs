@@ -9,14 +9,14 @@ namespace Reward
         #region Fields
 
         private readonly TimeSpan _oneSecond = new TimeSpan(0, 0, 1);
+        private readonly DateTime _zeroData = new DateTime();
+
         private readonly IUIController _uiController;
         private readonly ITimer _timer;
         private readonly RewardsConfSO _rewardsConfig;
         private readonly IStorageModel _storageModel;
         private readonly UIEventSO _eventsUI;
-        private readonly DateTime _zeroData = new DateTime();
-        private DateTime _time = new DateTime();
-        private RewardData _currentReward;
+        private DateTime _timeToReward = new DateTime();
 
         #endregion
 
@@ -39,15 +39,12 @@ namespace Reward
             _uiController.CreateRewards(_rewardsConfig.Rewards);
             MarkCollectedRewards();
 
-            if (_storageModel.WhenCollectingAvailable == _zeroData)// if first start
+            if (_storageModel.WhenCollectingAvailable == _zeroData)
             {
-                _storageModel.CurrentRewardItemID = -1;
-                SetNextReward();
+                _storageModel.WhenCollectingAvailable = DateAfterX(_rewardsConfig.Rewards[0].Day);
             }
-            else
-            {
-                StartTimer();
-            }
+
+            StartTimer();
         }
 
         protected override void OnDispose()
@@ -67,16 +64,18 @@ namespace Reward
             switch (caller)
             {
                 case UIElement.ButtonGetReward:
-                    _uiController.SetRewardItemCollectedState(_currentReward.Day, true);
-                    _storageModel.SetCurrency(_currentReward.Currency, _storageModel.GetCurrency(_currentReward.Currency) + _currentReward.Value);
-                    //if ()
+                    var currentReward = _rewardsConfig.Rewards[_storageModel.CurrentRewardItemID];
+                    _uiController.SetRewardItemCollectedState(currentReward.Day, true);
+                    _storageModel.SetCurrency(currentReward.Currency, _storageModel.GetCurrency(currentReward.Currency) + currentReward.Value);
+                    _storageModel.CurrentRewardCollectedState = true;
+                    _uiController.SetButtonGetRewardInteractable = false;
                     SetNextReward();
                     break;
                 case UIElement.ButtonReset:
                     _storageModel.SetDefaults();
-                    _currentReward = new RewardData();
+                    _storageModel.WhenCollectingAvailable = DateAfterX(_rewardsConfig.Rewards[0].Day);
                     MarkCollectedRewards();
-                    SetNextReward();
+                    StartTimer();
                     break;
                 default:
                     break;
@@ -85,22 +84,20 @@ namespace Reward
 
         private void TickHandler()
         {
-            if (_time != _zeroData)
+            if (_timeToReward != _zeroData)
             {
-                _time = _time.Subtract(_oneSecond);
-                _uiController.SetTimer(_time);
+                _timeToReward = _timeToReward.Subtract(_oneSecond);
+                _uiController.SetTimer(_timeToReward);
             }
         }
 
         private void TimerFinishHandler()
         {
-            _currentReward = _rewardsConfig.Rewards[_storageModel.CurrentRewardItemID];
-
             _uiController.SetTimer(_zeroData);
-
-            if (_storageModel.CurrentRewardItemID < _rewardsConfig.Rewards.Count)
+            _uiController.SetRewardItemActive(_rewardsConfig.Rewards[_storageModel.CurrentRewardItemID].Day, true);
+            _uiController.SetRewardItemCollectedState(_rewardsConfig.Rewards[_storageModel.CurrentRewardItemID].Day, _storageModel.CurrentRewardCollectedState);
+            if (!_storageModel.CurrentRewardCollectedState)
             {
-                _uiController.SetRewardItemActive(_currentReward.Day, true);
                 _uiController.SetButtonGetRewardInteractable = true;
             }
         }
@@ -124,17 +121,20 @@ namespace Reward
 
         private void SetNextReward()
         {
-            _uiController.SetButtonGetRewardInteractable = false;
-
             if (_storageModel.CurrentRewardItemID != (_rewardsConfig.Rewards.Count - 1))
             {
-                var privDay = _currentReward.Day;
+                var privDay = _rewardsConfig.Rewards[_storageModel.CurrentRewardItemID].Day;
+                _storageModel.CurrentRewardCollectedState = false;
                 _storageModel.CurrentRewardItemID++;
-                _currentReward = _rewardsConfig.Rewards[_storageModel.CurrentRewardItemID];
-                _storageModel.WhenCollectingAvailable = DateTime.UtcNow.AddMinutes(_currentReward.Day - privDay);
-                //_storageModel.CurrentItemDT = DateTime.UtcNow.AddDays(_currentReward.Day - asd);
+                _storageModel.WhenCollectingAvailable = DateAfterX(_rewardsConfig.Rewards[_storageModel.CurrentRewardItemID].Day - privDay);
                 StartTimer();
             }
+        }
+
+        private DateTime DateAfterX(int value)
+        {
+            return DateTime.UtcNow.AddMinutes(value);
+            //return DateTime.UtcNow.AddDays(value);
         }
 
         private void StartTimer()
@@ -144,7 +144,7 @@ namespace Reward
             {
                 timeSpan = TimeSpan.Zero;
             }
-            _time = _zeroData.Add(timeSpan);
+            _timeToReward = _zeroData.Add(timeSpan);
             _timer.StartTimer((int)timeSpan.TotalSeconds);
         }
 

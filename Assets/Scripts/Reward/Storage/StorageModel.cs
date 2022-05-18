@@ -10,8 +10,10 @@ namespace Reward
 
         #region Fields
 
-        private const string CURRENT_ITEM = "CurrentItem";
-        private const string ITEM_DT = "ItemDT";
+        private const string CURRENT_ITEM = nameof(CURRENT_ITEM);
+        private const string ITEM_DT = nameof(ITEM_DT);
+        private const string COLLECTED_STATE = nameof(COLLECTED_STATE);
+
         private readonly Array _currencies;
         private Dictionary<Currency, int> _storage;
         private List<IObserver> _observers;
@@ -39,6 +41,8 @@ namespace Reward
 
 
         #region IStorageModel
+
+        public bool CurrentRewardCollectedState { get => PlayerPrefs.GetInt(COLLECTED_STATE, 0) == 1; set => PlayerPrefs.SetInt(COLLECTED_STATE, value ? 1 : 0); }
 
         public DateTime WhenCollectingAvailable
         {
@@ -72,7 +76,8 @@ namespace Reward
                 SetCurrency(currency, 0);
             }
             WhenCollectingAvailable = new DateTime();
-            CurrentRewardItemID = -1;
+            CurrentRewardItemID = 0;
+            CurrentRewardCollectedState = false;
         }
 
         #endregion
