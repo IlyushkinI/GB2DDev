@@ -11,7 +11,7 @@ public class MainMenuController : BaseController
     private const string SCENE_AI_NAME = "AI";
     private const string SCENE_REWARD_NAME = "Reward";
 
-    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
+    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/MainMenu/mainMenu" };
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAnalyticTools _analytics;
     private readonly IAdsShower _ads;

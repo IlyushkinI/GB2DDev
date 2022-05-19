@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 920311699619640791}
   - component: {fileID: 3014522136850185377}
   - component: {fileID: 5634234710344163010}
-  - component: {fileID: 2248321781317531468}
+  - component: {fileID: 6183474136126145525}
   m_Layer: 5
   m_Name: Button OK
   m_TagString: Untagged
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2248321781317531468
+--- !u!114 &6183474136126145525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070242243844512243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 69bee9cc74dab2340bc45ddd7ffa64d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -731,6 +731,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _buttonRectTransform: {fileID: 920311699619640791}
 --- !u!1 &2135719554935526617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,7 +2189,7 @@ GameObject:
   - component: {fileID: 4862671803305437159}
   - component: {fileID: 2884393855187724776}
   - component: {fileID: 4926092236816483001}
-  - component: {fileID: 2428249543841323567}
+  - component: {fileID: 7924369453547943296}
   m_Layer: 5
   m_Name: Button Cancel
   m_TagString: Untagged
@@ -2253,7 +2254,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2428249543841323567
+--- !u!114 &7924369453547943296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2262,7 +2263,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8899277368512097640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 69bee9cc74dab2340bc45ddd7ffa64d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2296,6 +2297,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _buttonRectTransform: {fileID: 4862671803305437159}
 --- !u!1 &8905095801594322724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,8 +2349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rootGameObject: {fileID: 8905095801594322727}
   _eventsShed: {fileID: 11400000, guid: b079f4af6dfd08443a1472c0c0bfdb30, type: 2}
-  _buttonOK: {fileID: 2248321781317531468}
-  _buttonCancel: {fileID: 2428249543841323567}
+  _buttonOK: {fileID: 6183474136126145525}
+  _buttonCancel: {fileID: 7924369453547943296}
   _baseItem: {fileID: 340660616747515353}
   _textForEffect: {fileID: 7856832373263740307}
 --- !u!1 &8914577845252374147

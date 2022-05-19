@@ -87,11 +87,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4663239025869935060}
-  - component: {fileID: 4663239025869935064}
   - component: {fileID: 4663239025869935067}
   - component: {fileID: 4663239025869935066}
-  - component: {fileID: 4663239025869935061}
   - component: {fileID: 8199505426340026640}
+  - component: {fileID: 3531588986705380154}
+  - component: {fileID: 2934718321231845516}
   m_Layer: 0
   m_Name: ButtonStore
   m_TagString: Untagged
@@ -119,41 +119,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: -100}
   m_SizeDelta: {x: 250, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4663239025869935064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4663239025869935063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  productId: tires
-  buttonType: 0
-  consumePurchase: 1
-  onPurchaseComplete:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8199505426340026640}
-        m_MethodName: PurchaseComplete
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onPurchaseFailed:
-    m_PersistentCalls:
-      m_Calls: []
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 4663239024403718837}
-  priceText: {fileID: 0}
 --- !u!222 &4663239025869935067
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -191,7 +156,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4663239025869935061
+--- !u!114 &8199505426340026640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +165,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 4663239025869935063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b6a98a08d6a25a341bdda33c0cd0844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _button: {fileID: 3531588986705380154}
+  _eventCaller: 2
+--- !u!114 &3531588986705380154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663239025869935063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69bee9cc74dab2340bc45ddd7ffa64d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -234,7 +214,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8199505426340026640
+  _buttonRectTransform: {fileID: 4663239025869935060}
+--- !u!114 &2934718321231845516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,12 +224,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 4663239025869935063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a98a08d6a25a341bdda33c0cd0844b, type: 3}
+  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
-  _button: {fileID: 4663239025869935061}
-  _eventCaller: 2
+  productId: tires
+  buttonType: 0
+  consumePurchase: 1
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8199505426340026640}
+        m_MethodName: PurchaseComplete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 4663239024403718837}
+  priceText: {fileID: 0}
 --- !u!1 &5308501510400550257
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,8 +261,8 @@ GameObject:
   - component: {fileID: 3693639345765436956}
   - component: {fileID: 6471723339727712112}
   - component: {fileID: 2124239531343203460}
-  - component: {fileID: 285408469488053980}
   - component: {fileID: 120262139953929023}
+  - component: {fileID: 592079411101460345}
   m_Layer: 5
   m_Name: ButtonShed
   m_TagString: Untagged
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &285408469488053980
+--- !u!114 &120262139953929023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -335,7 +336,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5308501510400550257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 86d1587694ae2d44382b2a2aad64d8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _button: {fileID: 592079411101460345}
+  _eventCaller: 7
+--- !u!114 &592079411101460345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308501510400550257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69bee9cc74dab2340bc45ddd7ffa64d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -369,21 +385,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &120262139953929023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308501510400550257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d1587694ae2d44382b2a2aad64d8c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
-  _button: {fileID: 285408469488053980}
-  _eventCaller: 7
+  _buttonRectTransform: {fileID: 3693639345765436956}
 --- !u!1 &7821869277036729427
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,8 +530,8 @@ GameObject:
   - component: {fileID: 8900501227402149281}
   - component: {fileID: 8900501227402149282}
   - component: {fileID: 8900501227402149283}
-  - component: {fileID: 8900501227402149280}
   - component: {fileID: 2865306932708469817}
+  - component: {fileID: 8441214997785121618}
   m_Layer: 0
   m_Name: ButtonExit
   m_TagString: Untagged
@@ -594,7 +596,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8900501227402149280
+--- !u!114 &2865306932708469817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -603,7 +605,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8900501227402149278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 86d1587694ae2d44382b2a2aad64d8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
+  _button: {fileID: 8441214997785121618}
+  _eventCaller: 1
+--- !u!114 &8441214997785121618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900501227402149278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69bee9cc74dab2340bc45ddd7ffa64d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -636,33 +653,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8900501227402149283}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2865306932708469817}
-        m_MethodName: DoExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2865306932708469817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8900501227402149278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d1587694ae2d44382b2a2aad64d8c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _eventSO: {fileID: 11400000, guid: 8c1f16292a6a89f4f971763dc9997db1, type: 2}
-  _button: {fileID: 8900501227402149280}
-  _eventCaller: 1
+      m_Calls: []
+  _buttonRectTransform: {fileID: 8900501227402149281}
 --- !u!1 &8900501227952709676
 GameObject:
   m_ObjectHideFlags: 0

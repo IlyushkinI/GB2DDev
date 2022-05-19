@@ -9,12 +9,12 @@ public class InputGameController : BaseController
         switch (controller)
         {
             case InputControllerType.Stick:
-                BaseInputView viewStick = LoadView(new ResourcePath { PathResource = "Prefabs/StickControl" });
+                BaseInputView viewStick = LoadView(new ResourcePath { PathResource = "Prefabs/Game/StickControl" });
                 viewStick.Init(leftMove, rightMove, car.Speed);
                 break;
 
             case InputControllerType.Buttons:
-                BaseInputView viewButtons = LoadView(new ResourcePath { PathResource = "Prefabs/ButtonControl" });
+                BaseInputView viewButtons = LoadView(new ResourcePath { PathResource = "Prefabs/Game/ButtonControl" });
                 viewButtons.Init(leftMove, rightMove, car.Speed);
                 break;
 

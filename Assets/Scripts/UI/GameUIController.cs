@@ -8,7 +8,7 @@ public class GameUIController : BaseController
 
     #region Fields
 
-    private readonly string _prefabUI = "Prefabs/UI";
+    private readonly string _prefabUI = "Prefabs/Game/UI";
     private readonly GlobalEventSO _eventUI;
     private readonly GlobalEventSO _eventsShed;
     private readonly CarController _carController;

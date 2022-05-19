@@ -12,7 +12,7 @@ public class InventoryController : BaseController, IInventoryController
     private readonly IItemsRepository _itemsRepository;
     List<UpgradeItemConfig> _applyUpgradeItems;
 
-    private readonly string _pathToView = "Prefabs/Shed";
+    private readonly string _pathToView = "Prefabs/Shed/Shed";
     private readonly GlobalEventSO _eventsShed;
 
     private InventoryModel _inventoryModel;
