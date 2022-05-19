@@ -74,6 +74,7 @@ namespace Reward
                 case UIElement.ButtonReset:
                     _storageModel.SetDefaults();
                     _storageModel.WhenCollectingAvailable = DateAfterX(_rewardsConfig.Rewards[0].Day);
+                    _uiController.SetButtonGetRewardInteractable = false;
                     MarkCollectedRewards();
                     StartTimer();
                     break;
