@@ -81,13 +81,11 @@ public class GameUIController : BaseController
 
     private void EnterShed()
     {
-        //_view.isActive = false;
         _shedController.Enter();
     }
 
     private void ExitShed()
     {
-        //_view.isActive = true;
         _shedController.Exit();
     }
 

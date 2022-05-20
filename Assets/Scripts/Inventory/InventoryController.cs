@@ -53,6 +53,7 @@ public class InventoryController : BaseController, IInventoryController
         _eventsShed = eventsShed;
 
         _inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
+        AddGameObjects(_inventoryView.gameObject);
         _inventoryView.MakeDropdownPanel(EquipedItems);
 
         ConfigureDropdownPanel(_itemsDatabase, _inventoryView);
