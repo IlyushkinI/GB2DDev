@@ -9,12 +9,14 @@ namespace DOTween
     public class DOTweenButtonEditor : ButtonEditor
     {
 
-        private SerializedProperty m_InteractableProperty;
+        private SerializedProperty _buttonRect;
+        private SerializedProperty _window;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_InteractableProperty = serializedObject.FindProperty(DOTweenButtonView.ButtonRectField);
+            _buttonRect = serializedObject.FindProperty(DOTweenButtonView.ButtonRectField);
+            _window = serializedObject.FindProperty(DOTweenButtonView.Window);
         }
 
         public override void OnInspectorGUI()
@@ -28,9 +30,10 @@ namespace DOTween
             serializedObject.Update();
 
             GUILayout.Space(20);
-            EditorGUILayout.PropertyField(m_InteractableProperty);
+            EditorGUILayout.PropertyField(_buttonRect);
+            GUILayout.Space(10);
+            EditorGUILayout.PropertyField(_window);
             GUILayout.Space(20);
-
             EditorGUI.BeginChangeCheck();
             serializedObject.ApplyModifiedProperties();
         }

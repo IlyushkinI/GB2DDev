@@ -346,6 +346,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 5843607055864924364}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &1835569226168780639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1145,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 3448431390184351028}
+  _windowForClosing: {fileID: 5265005786112583283}
 --- !u!1 &5375237727915249213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,6 +1795,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212734123230427}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &6241212734228812471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,6 +2201,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212734333436982}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &6241212734419150477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,6 +2740,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212734660853161}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &6241212734709353416
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,6 +3566,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212734878965850}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &6241212734975269368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3700,6 +3706,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212734975269369}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &6241212734977065791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,6 +4051,7 @@ GameObject:
   - component: {fileID: 6241212735357813387}
   - component: {fileID: 6241212735357813386}
   - component: {fileID: 6241212735357813397}
+  - component: {fileID: 5265005786112583283}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4138,6 +4146,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5265005786112583283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241212735357813396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c360cff1beb077243857d22145931e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 6241212735357813384}
 --- !u!1 &6241212735364099219
 GameObject:
   m_ObjectHideFlags: 0
@@ -4193,14 +4214,14 @@ MonoBehaviour:
   _panelEndGame: {fileID: 3806379128553768678}
   _textEndGame: {fileID: 6387407878858983679}
   _interactables:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3891801216125324990}
+  - {fileID: 8927686709996667137}
+  - {fileID: 6165637068856611434}
+  - {fileID: 6306854041447255865}
+  - {fileID: 5118809171552549166}
+  - {fileID: 4207870347302521647}
+  - {fileID: 4623379648219906438}
+  - {fileID: 2508685009951783395}
   - {fileID: 6972606209966152996}
 --- !u!1 &6241212735548854904
 GameObject:
@@ -4418,6 +4439,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212735612024027}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &6241212735669876943
 GameObject:
   m_ObjectHideFlags: 0
@@ -4690,6 +4712,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 6241212735714289786}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &7121168756887087950
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,6 +4981,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 2572552430478145770}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &7979352360280727169
 GameObject:
   m_ObjectHideFlags: 0

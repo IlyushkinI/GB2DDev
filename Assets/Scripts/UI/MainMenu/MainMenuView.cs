@@ -29,8 +29,15 @@ public class MainMenuView : MonoBehaviour
 
     public bool isActive
     {
-        set => _rootGameObject.gameObject.SetActive(value);
-        get => _rootGameObject.gameObject.activeSelf;
+        set
+        {
+            _rootGameObject.gameObject.SetActive(value);
+        }
+
+        get
+        {
+            return _rootGameObject.gameObject.activeSelf;
+        }
     }
 
     public Dropdown DropdownInputSelect => _dropdownInputSelect;

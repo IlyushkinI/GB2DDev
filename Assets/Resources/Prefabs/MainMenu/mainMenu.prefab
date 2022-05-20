@@ -425,6 +425,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 4940586803682128856}
+  _windowForClosing: {fileID: 3056647881555270177}
 --- !u!1 &894712212031802955
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,6 +803,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 3130634385701380256}
+  _windowForClosing: {fileID: 3056647881555270177}
 --- !u!1 &4698332495843348255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5660545872060543822}
   - component: {fileID: 6551692825999885062}
+  - component: {fileID: 3056647881555270177}
   m_Layer: 5
   m_Name: mainMenu
   m_TagString: Untagged
@@ -1212,6 +1215,19 @@ MonoBehaviour:
   _buttonStartBattle: {fileID: 419855475226354444}
   _buttonReward: {fileID: 5957799069504684057}
   _rootGameObject: {fileID: 5660545872060543822}
+--- !u!114 &3056647881555270177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015533690559672758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c360cff1beb077243857d22145931e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 5660545872060543822}
 --- !u!1 &6065488581566716782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,6 +1434,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 7299689036431724080}
+  _windowForClosing: {fileID: 3056647881555270177}
 --- !u!1 &6888920513732523659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,6 +2153,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 3469440967942972243}
+  _windowForClosing: {fileID: 3056647881555270177}
 --- !u!1 &9083995811457073350
 GameObject:
   m_ObjectHideFlags: 0

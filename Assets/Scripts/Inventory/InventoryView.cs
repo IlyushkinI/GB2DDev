@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DOTween;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,9 @@ public class InventoryView : MonoBehaviour, IInventoryView
     [SerializeField]
     private TextMeshProUGUI _textForEffect;
 
+    [SerializeField]
+    private DOTweenWindowView _window;
+
     private Dictionary<string, InventoryBaseItemView> _itemsList;
 
     #endregion
@@ -41,7 +45,15 @@ public class InventoryView : MonoBehaviour, IInventoryView
 
     public bool isActive
     {
-        set => _rootGameObject.gameObject.SetActive(value);
+        set
+        {
+            _rootGameObject.gameObject.SetActive(value);
+            if (value)
+                _window.OpenWindow();
+            else
+                _window.CloseWindow();
+        }
+
         get => _rootGameObject.gameObject.activeSelf;
     }
 

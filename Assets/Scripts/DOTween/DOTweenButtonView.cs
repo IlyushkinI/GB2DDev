@@ -12,12 +12,18 @@ namespace DOTween
         #region Fields
 
         public static string ButtonRectField = nameof(_buttonRectTransform);
+        public static string Window = nameof(_windowForClosing);
 
-        private readonly float _duration = 1.0f;
+        private readonly float _duration = 0.5f;
         private readonly float _strength = 5.0f;
+
+        private PointerEventData _eventData;
 
         [SerializeField]
         private RectTransform _buttonRectTransform;
+
+        [SerializeField]
+        private DOTweenWindowView _windowForClosing;
 
         #endregion
 
@@ -26,8 +32,7 @@ namespace DOTween
 
         public override void OnPointerClick(PointerEventData eventData)
         {
-            base.OnPointerClick(eventData);
-
+            _eventData = eventData;
             RunDOTWeenAnimation();
         }
 
@@ -38,10 +43,21 @@ namespace DOTween
 
         private void RunDOTWeenAnimation()
         {
-            _buttonRectTransform.DOShakeAnchorPos(_duration, strength: _strength);
+            var sequence = DG.Tweening.DOTween.Sequence();
+            sequence.Insert(0.0f, _buttonRectTransform.DOShakeAnchorPos(_duration, strength: _strength));
+            if (_windowForClosing != null)
+            {
+                sequence.Insert(0.0f, _windowForClosing.CloseWindow());
+            }
+            sequence.OnComplete(OnAnimationFinish);
+        }
+
+        private void OnAnimationFinish()
+        {
+            base.OnPointerClick(_eventData);
         }
 
         #endregion
-    
+
     }
 }

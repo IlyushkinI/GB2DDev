@@ -229,6 +229,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_AI
       objectReference: {fileID: 0}
+    - target: {fileID: 9115756688928086203, guid: faa7407dafb878241ac41883d6ec9dea,
+        type: 3}
+      propertyPath: _windowForClosing
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faa7407dafb878241ac41883d6ec9dea, type: 3}
 --- !u!4 &7910543254171791252 stripped

@@ -405,6 +405,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 1589632850482641515}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &1589632850701663884
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +551,7 @@ GameObject:
   - component: {fileID: 8869556782347896839}
   - component: {fileID: 7790993705368111990}
   - component: {fileID: 5486120434897776495}
+  - component: {fileID: 851515723914477376}
   m_Layer: 5
   m_Name: RewardWindow
   m_TagString: Untagged
@@ -635,6 +637,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b74a1a2138e1d42a2fad7fe4f022d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &851515723914477376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589632850910913568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c360cff1beb077243857d22145931e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1589632850910913575}
 --- !u!1 &1589632850915808529
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +994,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 1589632851002736430}
+  _windowForClosing: {fileID: 0}
 --- !u!1 &1589632851009885150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1206,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _buttonRectTransform: {fileID: 1589632851038495259}
+  _windowForClosing: {fileID: 851515723914477376}
 --- !u!1 &1589632851139387223
 GameObject:
   m_ObjectHideFlags: 0
