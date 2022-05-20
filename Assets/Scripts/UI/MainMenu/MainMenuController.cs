@@ -3,8 +3,10 @@ using Profile;
 using System;
 using System.Collections.Generic;
 using Tools.Ads;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class MainMenuController : BaseController
 {
@@ -36,9 +38,10 @@ public class MainMenuController : BaseController
         _profilePlayer = profilePlayer;
         _analytics = analytics;
         _ads = ads;
-        _view = LoadView(placeForUI);
         _eventsShed = eventsShed;
-        _view.Init(StartGame, ChooseInput, EnterShed, StartBattle, OpenRewards);
+        
+        _view = LoadView(placeForUI);
+        _view.Init(StartGame, ChooseInput, EnterShed, StartBattle, OpenRewards, DoExit);
 
         _eventsShed.GlobalEventAction += EventsShedHandler;
 
@@ -54,6 +57,15 @@ public class MainMenuController : BaseController
         ConfigureInputDropdown(objectView);
 
         return objectView;
+    }
+
+    private void DoExit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void StartGame()
