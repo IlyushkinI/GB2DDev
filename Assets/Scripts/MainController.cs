@@ -83,4 +83,13 @@ public class MainController : BaseController
         _gameController?.Dispose();
     }
 
+    private void DoExit()
+    {
+#if UNITY_EDITOR
+        //EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
 }

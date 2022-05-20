@@ -19,7 +19,8 @@ public class InputGameController : BaseController
                 break;
 
             case InputControllerType.Swipe:
-                new InputSwipeController(leftMove, rightMove, car.Speed);
+                var inputSwipe = new InputSwipeController(leftMove, rightMove, car.Speed);
+                AddController(inputSwipe);
                 break;
 
             default:

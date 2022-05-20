@@ -11,6 +11,7 @@ public class GameUIController : BaseController
     private readonly string _prefabUI = "Prefabs/Game/UI";
     private readonly GlobalEventSO _eventUI;
     private readonly GlobalEventSO _eventsShed;
+    private readonly ProfilePlayer _profilePlayer;
     private readonly CarController _carController;
     private readonly ShedController _shedController;
 
@@ -30,11 +31,13 @@ public class GameUIController : BaseController
     {
         _eventUI = eventUI;
         _eventsShed = eventsShed;
+        _profilePlayer = profilePlayer;
         _carController = carController;
 
-        GameObject.Instantiate(Resources.Load(_prefabUI), placeForUI);
+        var uiGameObject = (GameObject)GameObject.Instantiate(Resources.Load(_prefabUI), placeForUI);
+        AddGameObjects(uiGameObject);
 
-        _shedController = new ShedController(upgradeItems, itemsConfig, profilePlayer.CurrentCar, placeForUI, eventsShed);
+        _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed);
         AddController(_shedController);
 
         _eventUI.GlobalEventAction += UIEventHandler;
@@ -53,7 +56,7 @@ public class GameUIController : BaseController
             case UIElements.None:
                 break;
             case UIElements.ButtonExit:
-                DoExit();
+                _profilePlayer.CurrentState.Value = Profile.GameState.Start;
                 break;
             case UIElements.ButtonStore:
                 PurchaseComplete();
@@ -62,15 +65,6 @@ public class GameUIController : BaseController
                 EnterShed();
                 break;
         }
-    }
-
-    private void DoExit()
-    {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 
     private void PurchaseComplete()

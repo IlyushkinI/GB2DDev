@@ -38,7 +38,6 @@ public sealed class InputSwipeController : BaseController
         }
 
         UpdateManager.SubscribeToUpdate(DoItInUpdate);
-        AddController(this);
     }
 
     #endregion

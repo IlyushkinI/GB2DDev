@@ -18,7 +18,6 @@ public class ShedController : BaseController, IShedController
 
     public void Enter()
     {
-        Time.timeScale = 0.0f;
         _upgradeItemsEnter = new List<UpgradeItemConfig>(_car.AppliedItems);
         _inventoryController.ShowInventory(_car);
     }
@@ -33,7 +32,6 @@ public class ShedController : BaseController, IShedController
 
         UpgradeCarWithEquipedItems(_car, _inventoryController.EquipedItems, addItemsRepo.UpgradeItems, true);
         UpgradeCarWithEquipedItems(_car, _inventoryController.EquipedItems, removeItemsRepo.UpgradeItems, false);
-        Time.timeScale = 1.0f;
     }
 
     private List<UpgradeItemConfig> NeedAdd (List<UpgradeItemConfig> listA, List<UpgradeItemConfig> listB)

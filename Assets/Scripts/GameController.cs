@@ -31,6 +31,8 @@ public class GameController : BaseController
         AddController(gameUIController);
 
         var abilityRepository = new AbilityRepository(configs);
+        AddController(abilityRepository);
+
         var abilitiesController = new AbilitiesController(carController, abilityRepository, new AbilitiesCollectionViewStub());
         AddController(abilitiesController);
     }
