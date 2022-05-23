@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class InventoryController : BaseController, IInventoryController
 {
 
     #region Fields
 
-    private readonly InventoryView _inventoryView;
+    private InventoryView _inventoryView;
     private readonly IItemsRepository _itemsRepository;
     List<UpgradeItemConfig> _applyUpgradeItems;
 
-    private readonly string _pathToView = "Prefabs/Shed/Shed";
     private readonly GlobalEventSO _eventsShed;
-
+    private readonly AsyncOperationHandle _sheedPrefab;
     private InventoryModel _inventoryModel;
 
     private Car _car;
@@ -44,7 +44,8 @@ public class InventoryController : BaseController, IInventoryController
         List<ItemConfig> itemConfigs,
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
         Transform placeForUI,
-        GlobalEventSO eventsShed)
+        GlobalEventSO eventsShed,
+        AssetReference sheedPrefab)
     {
         _itemsRepository = new ItemsRepository(itemConfigs);
         _inventoryModel = new InventoryModel(new List<IItem>(_itemsRepository.Items.Values));
@@ -52,16 +53,23 @@ public class InventoryController : BaseController, IInventoryController
 
         _eventsShed = eventsShed;
 
-        _inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
-        AddGameObjects(_inventoryView.gameObject);
+        //_inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
+        //AddGameObjects(_inventoryView.gameObject);
+        _sheedPrefab = Addressables.InstantiateAsync(sheedPrefab, placeForUI);
+        _sheedPrefab.Completed += AddressableLoadHandler;
+
+        _eventsShed.GlobalEventAction += EventUIHandler;
+        _eventsShed.GlobalEventDropdown += EventUIHandler;
+    }
+
+    private void AddressableLoadHandler(AsyncOperationHandle obj)
+    {
+        _inventoryView = ((GameObject)obj.Result).GetComponent<InventoryView>();
         _inventoryView.MakeDropdownPanel(EquipedItems);
 
         ConfigureDropdownPanel(_itemsDatabase, _inventoryView);
 
         _inventoryView.isActive = false;
-
-        _eventsShed.GlobalEventAction += EventUIHandler;
-        _eventsShed.GlobalEventDropdown += EventUIHandler;
     }
 
     #endregion
@@ -86,6 +94,7 @@ public class InventoryController : BaseController, IInventoryController
     {
         _eventsShed.GlobalEventAction -= EventUIHandler;
         _eventsShed.GlobalEventDropdown -= EventUIHandler;
+        Addressables.ReleaseInstance(_sheedPrefab);
     }
 
     private void UpdateInventoryText()

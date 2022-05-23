@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tools;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 public class GameController : BaseController
@@ -13,7 +14,8 @@ public class GameController : BaseController
         GlobalEventSO eventUI,
         GlobalEventSO eventsShed,
         List<ItemConfig> itemsConfig,
-        IReadOnlyList<UpgradeItemConfig> upgradeItem)
+        IReadOnlyList<UpgradeItemConfig> upgradeItem,
+        AssetReference sheedPrefab)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -27,7 +29,7 @@ public class GameController : BaseController
         var carController = new CarController();
         AddController(carController);
 
-        var gameUIController = new GameUIController(placeForUI, eventUI, carController, eventsShed, itemsConfig, upgradeItem, profilePlayer);
+        var gameUIController = new GameUIController(placeForUI, eventUI, carController, eventsShed, itemsConfig, upgradeItem, profilePlayer, sheedPrefab);
         AddController(gameUIController);
 
         var abilityRepository = new AbilityRepository(configs);

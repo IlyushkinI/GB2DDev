@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AddressableAssets;
 
 public class ShedController : BaseController, IShedController
 {
@@ -8,11 +8,11 @@ public class ShedController : BaseController, IShedController
     private readonly InventoryController _inventoryController;
     private List<UpgradeItemConfig> _upgradeItemsEnter;
 
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI, GlobalEventSO eventsShed)
+    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI, GlobalEventSO eventsShed, AssetReference sheedPrefab)
     {
         _car = car;
         
-        _inventoryController = new InventoryController(items, upgradeItems, placeForUI, eventsShed);
+        _inventoryController = new InventoryController(items, upgradeItems, placeForUI, eventsShed, sheedPrefab);
         AddController(_inventoryController);
     }
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.AddressableAssets;
 
 public class GameUIController : BaseController
 {
@@ -27,7 +26,8 @@ public class GameUIController : BaseController
         GlobalEventSO eventsShed,
         List<ItemConfig> itemsConfig,
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
-        ProfilePlayer profilePlayer)
+        ProfilePlayer profilePlayer,
+        AssetReference sheedPrefab)
     {
         _eventUI = eventUI;
         _eventsShed = eventsShed;
@@ -37,7 +37,7 @@ public class GameUIController : BaseController
         var uiGameObject = (GameObject)GameObject.Instantiate(Resources.Load(_prefabUI), placeForUI);
         AddGameObjects(uiGameObject);
 
-        _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed);
+        _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed, sheedPrefab);
         AddController(_shedController);
 
         _eventUI.GlobalEventAction += UIEventHandler;

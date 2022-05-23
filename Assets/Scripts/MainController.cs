@@ -3,6 +3,7 @@ using Profile;
 using System.Collections.Generic;
 using Tools.Ads;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 public class MainController : BaseController
@@ -21,6 +22,7 @@ public class MainController : BaseController
     private readonly IReadOnlyList<AbilityItemConfig> _abilityItems;
     private readonly GlobalEventSO _eventsGameUI;
     private readonly GlobalEventSO _eventsShed;
+    private readonly AssetReference _sheedPrefab;
 
     public MainController(
         Transform placeForUI,
@@ -31,7 +33,8 @@ public class MainController : BaseController
         IReadOnlyList<UpgradeItemConfig> upgradeItems,
         IReadOnlyList<AbilityItemConfig> abilityItems,
         GlobalEventSO eventsGameUI,
-        GlobalEventSO eventsShed)
+        GlobalEventSO eventsShed,
+        AssetReference sheedPrefab)
     {
         _profilePlayer = profilePlayer;
         _analyticsTools = analyticsTools;
@@ -43,7 +46,7 @@ public class MainController : BaseController
         _analyticDataInputTypeSelected = new Dictionary<string, object>();
         _eventsGameUI = eventsGameUI;
         _eventsShed = eventsShed;
-
+        _sheedPrefab = sheedPrefab;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
@@ -61,14 +64,14 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads, _eventsShed, _itemsConfig, _upgradeItems);
+                _mainMenuController = new MainMenuController(_placeForUI, _profilePlayer, _inputType, _analyticsTools, _ads, _eventsShed, _itemsConfig, _upgradeItems, _sheedPrefab);
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
                 _inputType = _mainMenuController.ControllerType;
                 _analyticDataInputTypeSelected.Add(_inputType.ToString(), null);
                 _analyticsTools.SendMessage("InputTypeSelected", _analyticDataInputTypeSelected);
-                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, _eventsGameUI, _eventsShed, _itemsConfig, _upgradeItems);
+                _gameController = new GameController(_profilePlayer, _inputType, _placeForUI, _abilityItems, _eventsGameUI, _eventsShed, _itemsConfig, _upgradeItems, _sheedPrefab);
                 _mainMenuController?.Dispose();
                 break;
             default:
