@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tools.Ads;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 public class Root : MonoBehaviour
@@ -33,6 +34,10 @@ public class Root : MonoBehaviour
     [SerializeField]
     private List<AbilityItemConfig> _abilityItems;
 
+    [Space]
+    [SerializeField]
+    private AssetReference _sheedPrefab;
+
     private MainController _mainController;
     private IAnalyticTools _analyticsTools;
 
@@ -51,7 +56,8 @@ public class Root : MonoBehaviour
             _upgradeSource.ItemConfigs.ToList(), 
             _abilityItems.AsReadOnly(), 
             _eventsGameUI,
-            _eventsShed);
+            _eventsShed,
+            _sheedPrefab);
     }
 
     protected void OnDestroy()

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Tools.Ads;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 
@@ -32,7 +33,8 @@ public class MainMenuController : BaseController
         IAdsShower ads,
         GlobalEventSO eventsShed,
         List<ItemConfig> itemsConfig,
-        IReadOnlyList<UpgradeItemConfig> upgradeItems)
+        IReadOnlyList<UpgradeItemConfig> upgradeItems,
+        AssetReference sheedPrefab)
     {
         _inputControllerType = inputControllerType;
         _profilePlayer = profilePlayer;
@@ -45,7 +47,7 @@ public class MainMenuController : BaseController
 
         _eventsShed.GlobalEventAction += EventsShedHandler;
 
-        _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed);
+        _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed, sheedPrefab);
         AddController(_shedController);
     }
 
