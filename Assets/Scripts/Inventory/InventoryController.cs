@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -8,6 +9,9 @@ public class InventoryController : BaseController, IInventoryController
 {
 
     #region Fields
+
+    private DateTime _startLoad;
+    private DateTime _finishLoad;
 
     private InventoryView _inventoryView;
     private readonly IItemsRepository _itemsRepository;
@@ -55,6 +59,7 @@ public class InventoryController : BaseController, IInventoryController
 
         //_inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
         //AddGameObjects(_inventoryView.gameObject);
+        _startLoad = DateTime.UtcNow;
         _sheedPrefab = Addressables.InstantiateAsync(sheedPrefab, placeForUI);
         _sheedPrefab.Completed += AddressableLoadHandler;
 
@@ -64,6 +69,9 @@ public class InventoryController : BaseController, IInventoryController
 
     private void AddressableLoadHandler(AsyncOperationHandle obj)
     {
+        _finishLoad = DateTime.UtcNow;
+        Debug.Log($"Load finish with {_finishLoad.Subtract(_startLoad)}");
+
         _inventoryView = ((GameObject)obj.Result).GetComponent<InventoryView>();
         _inventoryView.MakeDropdownPanel(EquipedItems);
 
