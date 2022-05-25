@@ -42,6 +42,7 @@ namespace Reward
             if (_storageModel.WhenCollectingAvailable == _zeroData)
             {
                 _storageModel.WhenCollectingAvailable = DateAfterX(_rewardsConfig.Rewards[0].Day);
+
             }
 
             StartTimer();

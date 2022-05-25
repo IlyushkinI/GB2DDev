@@ -52,7 +52,15 @@ namespace Reward
                 DateTime.TryParse(PlayerPrefs.GetString(ITEM_DT), out result);
                 return result;
             }
-            set => PlayerPrefs.SetString(ITEM_DT, value.ToString());
+            set
+            {
+                PlayerPrefs.SetString(ITEM_DT, value.ToString());
+
+                Notifier.MakeNotification(value,
+                    $"{Application.productName} - Reward wait for collect",
+                    "New reward waiting for you!\n" +
+                    "Enter to the game and collect it.");
+            }
         }
 
         public int CurrentRewardItemID { get => PlayerPrefs.GetInt(CURRENT_ITEM, 0); set => PlayerPrefs.SetInt(CURRENT_ITEM, value); }
