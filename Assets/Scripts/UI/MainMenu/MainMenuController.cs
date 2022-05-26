@@ -6,6 +6,8 @@ using Tools.Ads;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 
@@ -19,9 +21,11 @@ public class MainMenuController : BaseController
     private readonly IAnalyticTools _analytics;
     private readonly IAdsShower _ads;
     private readonly MainMenuView _view;
-    private InputControllerType _inputControllerType;
     private readonly ShedController _shedController;
     private readonly GlobalEventSO _eventsShed;
+    private readonly LocalizationResources _localizationResources;
+
+    private InputControllerType _inputControllerType;
 
     public InputControllerType ControllerType => _inputControllerType;
 
@@ -41,14 +45,45 @@ public class MainMenuController : BaseController
         _analytics = analytics;
         _ads = ads;
         _eventsShed = eventsShed;
-        
+
         _view = LoadView(placeForUI);
-        _view.Init(StartGame, ChooseInput, EnterShed, StartBattle, OpenRewards, DoExit);
+        _view.Init(StartGamePress, ChooseInput, EnterShedPress, StartBattlePress, OpenRewardsPress, ExitPress, ChangeLanguagePress);
 
         _eventsShed.GlobalEventAction += EventsShedHandler;
 
         _shedController = new ShedController(upgradeItems, itemsConfig, _profilePlayer.CurrentCar, placeForUI, _eventsShed, sheedPrefab);
         AddController(_shedController);
+
+        _localizationResources = new LocalizationResources();
+        AddController(_localizationResources);
+
+        _localizationResources.DataAccessable += OnLocalizationDataLoad;
+
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChangedEventHandler;
+    }
+
+    private void OnLocalizationDataLoad()
+    {
+        OnLocaleChangedEventHandler(LocalizationSettings.SelectedLocale);
+    }
+
+    private void OnLocaleChangedEventHandler(Locale _)
+    {
+        ConfigureImageButton();
+        ConfigureInputDropdown();
+    }
+
+    private void ConfigureImageButton()
+    {
+        _view.ButtonStartImage = _localizationResources.GetImage("buttonStart");
+    }
+
+    private void ChangeLanguagePress()
+    {
+        int currentLocaleID = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
+        currentLocaleID++;
+        int localesCount = LocalizationSettings.AvailableLocales.Locales.Count;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[currentLocaleID % localesCount];
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -56,12 +91,10 @@ public class MainMenuController : BaseController
         var objectView = GameObject.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false).GetComponent<MainMenuView>();
         AddGameObjects(objectView.gameObject);
 
-        ConfigureInputDropdown(objectView);
-
         return objectView;
     }
 
-    private void DoExit()
+    private void ExitPress()
     {
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
@@ -70,7 +103,7 @@ public class MainMenuController : BaseController
 #endif
     }
 
-    private void StartGame()
+    private void StartGamePress()
     {
         _analytics.SendMessage("Start", new Dictionary<string, object>());
         _ads.ShowInterstitial();
@@ -82,15 +115,21 @@ public class MainMenuController : BaseController
         _inputControllerType = (InputControllerType)(inputControllerType + 1);
     }
 
-    private void ConfigureInputDropdown(MainMenuView view)
+    private void ConfigureInputDropdown()
     {
-        string[] allInputTypes = Enum.GetNames(typeof(InputControllerType));
-        view.DropdownInputSelect.ClearOptions();
-        view.DropdownInputSelect.AddOptions(new List<string>(allInputTypes));
-        view.DropdownInputSelect.value = (int)_inputControllerType - 1;
+        var inputTypes = Enum.GetNames(typeof(InputControllerType));
+        string[] inputNames = new string[inputTypes.Length];
+        for (int i = 0; i < inputNames.Length; i++)
+        {
+            inputNames[i] = _localizationResources.GetStringData(inputTypes[i]);
+        }
+
+        _view.DropdownInputSelect.ClearOptions();
+        _view.DropdownInputSelect.AddOptions(new List<string>(inputNames));
+        _view.DropdownInputSelect.value = (int)_inputControllerType - 1;
     }
 
-    private void EnterShed()
+    private void EnterShedPress()
     {
         _view.isActive = false;
         _shedController.Enter();
@@ -102,12 +141,12 @@ public class MainMenuController : BaseController
         _shedController.Exit();
     }
 
-    private void StartBattle()
+    private void StartBattlePress()
     {
         SceneManager.LoadScene(SCENE_AI_NAME);
     }
 
-    private void OpenRewards()
+    private void OpenRewardsPress()
     {
         SceneManager.LoadScene(SCENE_REWARD_NAME);
     }
@@ -123,6 +162,8 @@ public class MainMenuController : BaseController
     protected override void OnDispose()
     {
         _eventsShed.GlobalEventAction -= EventsShedHandler;
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChangedEventHandler;
+        _localizationResources.DataAccessable -= OnLocalizationDataLoad;
     }
 
 }

@@ -27,6 +27,9 @@ public class MainMenuView : MonoBehaviour
     [SerializeField]
     private Button _buttonExit;
 
+    [SerializeField]
+    private Button _buttonLanguage;
+
     [Space]
     [SerializeField]
     private Transform _rootGameObject;
@@ -39,7 +42,16 @@ public class MainMenuView : MonoBehaviour
 
     public TMP_Dropdown DropdownInputSelect => _dropdownInputSelect;
 
-    public void Init(UnityAction startGame, UnityAction<int> changeInputType, UnityAction enterShed, UnityAction startBattle, UnityAction openRewards, UnityAction exitGame)
+    public Sprite ButtonStartImage { set => _buttonStart.image.sprite = value; }
+
+    public void Init(
+        UnityAction startGame,
+        UnityAction<int> changeInputType,
+        UnityAction enterShed,
+        UnityAction startBattle,
+        UnityAction openRewards,
+        UnityAction exitGame,
+        UnityAction changeLanguage)
     {
         _buttonStart.onClick.AddListener(startGame);
         _dropdownInputSelect.onValueChanged.AddListener(changeInputType);
@@ -47,6 +59,7 @@ public class MainMenuView : MonoBehaviour
         _buttonStartBattle.onClick.AddListener(startBattle);
         _buttonReward.onClick.AddListener(openRewards);
         _buttonExit.onClick.AddListener(exitGame);
+        _buttonLanguage.onClick.AddListener(changeLanguage);
     }
 
     protected void OnDestroy()
@@ -57,6 +70,7 @@ public class MainMenuView : MonoBehaviour
         _buttonStartBattle.onClick.RemoveAllListeners();
         _buttonReward.onClick.RemoveAllListeners();
         _buttonExit.onClick.RemoveAllListeners();
+        _buttonLanguage.onClick.RemoveAllListeners();
     }
 
 }
