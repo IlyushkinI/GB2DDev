@@ -34,7 +34,7 @@ public class RewardCellView : MonoBehaviour
     #region Properties
 
     public Sprite Sprite { set => _sprite.sprite = value; }
-    public int Day { set => _daysToGet.text = $"Day {value}"; }
+    public int Day { set => _daysToGet.text = $"{value}"; }
     public int Value { set => _value.text = $"{value}"; }
     public bool ActivateReward
     {

@@ -70,7 +70,7 @@ namespace Reward
 
         private void ChangeTimerView(DateTime dateTime)
         {
-            _textTimer.text = $"Time left - {_timeToReward.Value:T}";
+            _textTimer.text = $"{_timeToReward.Value:T}";
         }
 
         #endregion
