@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: RewardScene
+  m_EditorClassIdentifier: 
+  m_GroupName: RewardScene
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ee28c93c113e2684ab6a0a5bf3d6cad3
+  m_SerializeEntries:
+  - m_GUID: 88285409054818b48a8d1c82264b4059
+    m_Address: Prefabs/Reward/CellReward
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: ce62049215560b2439e70f2988384b70
+    m_Address: Prefabs/Reward/CellStorage
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: 01b26475a2dd33b4a87f252b55fe8f25
+    m_Address: Prefabs/Reward/RewardWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+  - m_GUID: 53831ffd2c1064d07b3fcc10982b1e0d
+    m_Address: Assets/Sprites/Reward/Reward_Coins.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  - m_GUID: 1618cb37bcd5144fd923b9697be57d63
+    m_Address: Assets/Sprites/Reward/Reward_Food.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  - m_GUID: f59401c5c79564fd1ae3bfb0876455a7
+    m_Address: Assets/Sprites/Reward/Reward_Gems.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  - m_GUID: a68193e2aef6b43d4b4e05b967814d88
+    m_Address: Assets/Sprites/Reward/Reward_Background.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  - m_GUID: 7e082cc2cf2a4433d85e388c6bf94234
+    m_Address: Assets/Sprites/Reward/Reward_Iron.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  - m_GUID: 32fb7e0aee1614fe8ac38467a139e9a6
+    m_Address: Assets/Sprites/Reward/Reward_Tools.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  - m_GUID: e0eac6b76fdd842e88a7f8c75ecffaf4
+    m_Address: Assets/Sprites/Reward/Reward_Wood.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprite
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9a2f48dd06354304ca4c708778c21e79, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ee10c976093a8b74ebffd576e4dfb61a, type: 2}
+    - {fileID: 11400000, guid: 07db2a83a9f3e894d8aed88fec70217f, type: 2}
