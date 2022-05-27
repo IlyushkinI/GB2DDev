@@ -59,6 +59,7 @@ public class InventoryController : BaseController, IInventoryController
 
         //_inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
         //AddGameObjects(_inventoryView.gameObject);
+
         _startLoad = DateTime.UtcNow;
         _sheedPrefab = Addressables.InstantiateAsync(sheedPrefab, placeForUI);
         _sheedPrefab.Completed += AddressableLoadHandler;
@@ -108,9 +109,9 @@ public class InventoryController : BaseController, IInventoryController
     private void UpdateInventoryText()
     {
         _inventoryView.SetTextForItemsEffect =
-        "Effects:\n" +
-            $"\tCar speed : {FormatText(_defaultSpeed, _currentSpeed)}\n" +
-            $"\tCar control : {FormatText(_defaultControl, _currentControl)}";
+        "\n" +
+        $"{FormatText(_defaultSpeed, _currentSpeed)}\n" +
+        $"{FormatText(_defaultControl, _currentControl)}";
     }
 
     private string FormatText(float defValue, float curValue)
