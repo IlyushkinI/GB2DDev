@@ -11,16 +11,17 @@ namespace AI
         private readonly string _sceneAI = "AI";
         private readonly string _sceneMainMenu = "Game";
         private readonly AIUIEventSO _eventsUI;
-        
+        private readonly MainController _mainController;
+
         #endregion
 
 
         #region CodeLifeCycles
 
-        public LevelController(AIUIEventSO eventsUI)
+        public LevelController(AIUIEventSO eventsUI, MainController mainController)
         {
             _eventsUI = eventsUI;
-
+            _mainController = mainController;
             _eventsUI.UIEvent += UIEventHandler;
         }
 
@@ -37,6 +38,7 @@ namespace AI
                     SceneManager.LoadScene(_sceneMainMenu);
                     break;
                 case AIUIElement.ButtonRestart:
+                    _mainController.Dispose();
                     SceneManager.LoadScene(_sceneAI);
                     break;
                 default:

@@ -10,6 +10,8 @@ public class InventoryController : BaseController, IInventoryController
 
     #region Fields
 
+    private const bool USING_ADDRESSABLE = false;
+
     private DateTime _startLoad;
     private DateTime _finishLoad;
 
@@ -18,7 +20,7 @@ public class InventoryController : BaseController, IInventoryController
     List<UpgradeItemConfig> _applyUpgradeItems;
 
     private readonly GlobalEventSO _eventsShed;
-    private readonly AsyncOperationHandle _sheedPrefab;
+    private AsyncOperationHandle _sheedPrefab;
     private InventoryModel _inventoryModel;
 
     private Car _car;
@@ -57,15 +59,26 @@ public class InventoryController : BaseController, IInventoryController
 
         _eventsShed = eventsShed;
 
-        //_inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>(_pathToView), placeForUI);
-        //AddGameObjects(_inventoryView.gameObject);
-
-        _startLoad = DateTime.UtcNow;
-        _sheedPrefab = Addressables.InstantiateAsync(sheedPrefab, placeForUI);
-        _sheedPrefab.Completed += AddressableLoadHandler;
+        CreateShed(USING_ADDRESSABLE, placeForUI, sheedPrefab);
 
         _eventsShed.GlobalEventAction += EventUIHandler;
         _eventsShed.GlobalEventDropdown += EventUIHandler;
+    }
+
+    private void CreateShed(bool isAsAddressable, Transform placeForUI, AssetReference sheedPrefab)
+    {
+        if (isAsAddressable)
+        {
+            _startLoad = DateTime.UtcNow;
+            _sheedPrefab = Addressables.InstantiateAsync(sheedPrefab, placeForUI);
+            _sheedPrefab.Completed += AddressableLoadHandler;
+        }
+        else
+        {
+            _inventoryView = GameObject.Instantiate(Resources.Load<InventoryView>("Prefabs/Shed/Shed"), placeForUI);
+            AddGameObjects(_inventoryView.gameObject);
+            ConfigureView();
+        }
     }
 
     private void AddressableLoadHandler(AsyncOperationHandle obj)
@@ -74,10 +87,14 @@ public class InventoryController : BaseController, IInventoryController
         Debug.Log($"Load finish with {_finishLoad.Subtract(_startLoad)}");
 
         _inventoryView = ((GameObject)obj.Result).GetComponent<InventoryView>();
+
+        ConfigureView();
+    }
+
+    private void ConfigureView()
+    {
         _inventoryView.MakeDropdownPanel(EquipedItems);
-
         ConfigureDropdownPanel(_itemsDatabase, _inventoryView);
-
         _inventoryView.isActive = false;
     }
 
@@ -103,7 +120,11 @@ public class InventoryController : BaseController, IInventoryController
     {
         _eventsShed.GlobalEventAction -= EventUIHandler;
         _eventsShed.GlobalEventDropdown -= EventUIHandler;
-        Addressables.ReleaseInstance(_sheedPrefab);
+
+        if (USING_ADDRESSABLE)
+        {
+            Addressables.ReleaseInstance(_sheedPrefab);
+        }
     }
 
     private void UpdateInventoryText()

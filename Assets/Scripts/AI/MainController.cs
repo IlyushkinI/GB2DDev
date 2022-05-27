@@ -19,7 +19,7 @@
             var battleController = new BattleController(eventsUI, enemyController.GetEnemyModel, aiUIController);
             AddController(battleController);
 
-            var levelController = new LevelController(eventsUI);
+            var levelController = new LevelController(eventsUI, this);
             AddController(levelController);
 
             playerController.Subscribe(aiUIController);

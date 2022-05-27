@@ -178,7 +178,7 @@ MonoBehaviour:
   _upgradeSource: {fileID: 11400000, guid: 4b0ac3781b2cd5f40bb67ec9c9e1cd6b, type: 2}
   _abilityItems: []
   _sheedPrefab:
-    m_AssetGUID: 4b57fc348d12f0348816c8c3028a631c
+    m_AssetGUID: f7207c65b801c3d4db2c68e6ea956420
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
