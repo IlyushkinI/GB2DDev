@@ -30,13 +30,19 @@ MonoBehaviour:
     - Locale-ru-RU
     - Preload
   - m_GUID: 8c4c7c2c536d56a4a823c4fc01c18c39
-    m_Address: StringTableUI_AI_ru-RU
+    m_Address: StringTableReward_ru-RU
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru-RU
     - Preload
   - m_GUID: 12f9cebc9d990df4ab11b01c6a215bd7
     m_Address: StringTableShed_ru-RU
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru-RU
+    - Preload
+  - m_GUID: e2a3c92f0743fd54db49f7674c068bbe
+    m_Address: StringTableAI_ru-RU
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru-RU

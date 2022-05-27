@@ -39,7 +39,10 @@ namespace AI
         private GameObject _panelEndGame;
 
         [SerializeField]
-        private TextMeshProUGUI _textEndGame;
+        private TextMeshProUGUI _textWin;
+
+        [SerializeField]
+        private TextMeshProUGUI _textLose;
 
         [Space]
         [SerializeField]
@@ -50,10 +53,10 @@ namespace AI
 
         #region IAIUIView
 
-        public int MoneySet { set => _textDataMoney.text = $"Money :\t{value:D3} {PlayerDataType.Money.ToUnit()}"; }
-        public int HealthSet { set => _textDataHealth.text = $"Health :\t{value:D3} {PlayerDataType.Health.ToUnit()}"; }
-        public int ForceSet { set => _textDataForce.text = $"Force :\t{value:D3} {PlayerDataType.Force.ToUnit()}"; }
-        public float EnemyPowerSet { set => _textDataEnemy.text = $"Enemy power :\t{value:00.0}"; }
+        public int MoneySet { set => _textDataMoney.text = $"{value:D3} {PlayerDataType.Money.ToUnit()}"; }
+        public int HealthSet { set => _textDataHealth.text = $"{value:D3} {PlayerDataType.Health.ToUnit()}"; }
+        public int ForceSet { set => _textDataForce.text = $"{value:D3} {PlayerDataType.Force.ToUnit()}"; }
+        public float EnemyPowerSet { set => _textDataEnemy.text = $"{value:00.0}"; }
         public bool EnableButtonGo
         {
             get => _buttonGo.interactable;
@@ -77,16 +80,8 @@ namespace AI
         public void ShowEndGame(bool isShow, bool isWin)
         {
             _panelEndGame.gameObject.SetActive(isShow);
-            if (isWin)
-            {
-                _textEndGame.text = "WIN";
-                _textEndGame.color = Color.green;
-            }
-            else
-            {
-                _textEndGame.text = "LOSE";
-                _textEndGame.color = Color.red;
-            }
+            _textWin.gameObject.SetActive(isWin);
+            _textLose.gameObject.SetActive(!isWin);
         }
 
         #endregion

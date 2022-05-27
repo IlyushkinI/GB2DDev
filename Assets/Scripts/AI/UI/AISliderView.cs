@@ -54,7 +54,7 @@ namespace AI
 
         private string SetTitle(int value)
         {
-            return $"Crime level : {value}";
+            return $"{value}";
         }
 
         #endregion
